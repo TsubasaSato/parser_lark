@@ -78,4 +78,9 @@ def test_earley_equals_lalr():
 if __name__ == '__main__':
     # test_python_lib()
     # test_earley_equals_lalr()
-    print(python_parser3.parse(_read(sys.argv[1]) + '\n'))
+    tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
+    
+    print("----------tree.data----------\n",tree.data)
+    print("----------tree.childrenn-----\n",tree.children)
+    print("----------tree.pretty()------\n",tree.pretty())
+    print("----------tree.iter_subtrees()\n",tree.iter_subtrees())
