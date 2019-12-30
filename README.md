@@ -5,3 +5,5 @@ learn lark and develop parser for Ryu
 
 ## Useful document URLs
 https://github.com/lark-parser/lark/tree/master/docs
+
+https://lark-parser.readthedocs.io/en/latest/classes/
