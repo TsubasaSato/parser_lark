@@ -16,7 +16,8 @@ class Rect:
         self.bottom = height + top
 
     def print(self):
-        print("Rect:(%d,%d),(%d,%d)\n" % (self.left, self.top, self.right, self.bottom))
+        print("Rect:(%d,%d),(%d,%d)\n" % (self.left, self.top,
+                                          self.right, self.bottom))
 
     def render(self):
         canvas.create_rectangle(self.left, self.top, self.right, self.bottom)
