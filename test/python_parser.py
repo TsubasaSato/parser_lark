@@ -78,4 +78,4 @@ def test_earley_equals_lalr():
 if __name__ == '__main__':
     # test_python_lib()
     # test_earley_equals_lalr()
-    python_parser3.parse(_read(sys.argv[1]) + '\n')
+    print(python_parser3.parse(_read(sys.argv[1]) + '\n'))
