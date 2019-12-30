@@ -18,13 +18,13 @@ class PythonIndenter(Indenter):
     CLOSE_PAREN_types = ['RPAR', 'RSQB', 'RBRACE']
     INDENT_type = '_INDENT'
     DEDENT_type = '_DEDENT'
-    tab_len = 8
+    tab_len = 4 # Original value was 8 !!
 
 kwargs = dict(rel_to=__file__, postlex=PythonIndenter(), start='file_input')
 
-python_parser2 = Lark.open('python2.lark', parser='lalr', **kwargs)
+# python_parser2 = Lark.open('python2.lark', parser='lalr', **kwargs)
 python_parser3 = Lark.open('python3.lark',parser='lalr', **kwargs)
-python_parser2_earley = Lark.open('python2.lark', parser='earley', lexer='standard', **kwargs)
+# python_parser2_earley = Lark.open('python2.lark', parser='earley', lexer='standard', **kwargs)
 
 
 def _read(fn, *args):
@@ -76,6 +76,6 @@ def test_earley_equals_lalr():
 
 
 if __name__ == '__main__':
-    test_python_lib()
+    # test_python_lib()
     # test_earley_equals_lalr()
-    # python_parser3.parse(_read(sys.argv[1]) + '\n')
+    python_parser3.parse(_read(sys.argv[1]) + '\n')
