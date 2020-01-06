@@ -7,7 +7,7 @@ import os, os.path
 from io import open
 import glob, time
 
-from lark import Lark,Tree
+from lark import Lark,Tree,Visitor
 from lark.indenter import Indenter
     
 # __path__ = os.path.dirname(__file__)
@@ -91,12 +91,10 @@ class Tree_2(Tree):
 if __name__ == '__main__':
     # test_python_lib()
     # test_earley_equals_lalr()
-    pre_tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
-    tree=Tree_2(pre_tree)
+    tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
     
     print("----------tree.data----------\n",tree.data)
     print("----------tree.childrenn-----\n",tree.children)
     print("----------tree.pretty()------\n",tree.pretty())
     print("----------Tree2().pretty()------")
-    print(pre_tree.find_data("decorated"))
-    print(tree.find_data_topdown("decorated"))
+    print(tree.find_data("decorated"))
