@@ -97,5 +97,5 @@ if __name__ == '__main__':
     print("----------tree.data----------\n",tree.data)
     print("----------tree.childrenn-----\n",tree.children)
     print("----------tree.pretty()------\n",tree.pretty())
-    
-    #print(Tree_2(tree.find_data_topdown("decorated").pretty()))
+    print("----------Tree2().pretty()------")
+    print(Tree_2(tree.find_data_topdown("decorated")).pretty())
