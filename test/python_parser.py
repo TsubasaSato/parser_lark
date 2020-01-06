@@ -76,9 +76,12 @@ def test_earley_equals_lalr():
 
 # このクラスはTreeクラスの木構造をtopdownに検索できるように追加実装したクラスである
 class Tree_2(Tree):
-    # 木を丸ごとコピーするコンストラクタ
+    # Treeクラスと同様のコンストラクタ
     def __init__(self,data,children,meta=None):
         super().__init__(data,children,meta)
+    # 木を丸ごとコピーするコンストラクタ  
+    def __init__(self,tree):
+        super().__init__(tree.data,tree.children,tree._meta)
         
     def find_pred_topdown(self, pred):
         "Find all nodes where pred(tree) == True with topdown"
