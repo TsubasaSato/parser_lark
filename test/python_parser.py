@@ -79,9 +79,6 @@ class Tree_2(Tree):
     # Treeクラスと同様のコンストラクタ
     def __init__(self,data,children,meta=None):
         super().__init__(data,children,meta)
-    # 木を丸ごとコピーするコンストラクタ  
-    def __init__(self,tree):
-        super().__init__(tree.data,tree.children,tree._meta)
         
     def find_pred_topdown(self, pred):
         "Find all nodes where pred(tree) == True with topdown"
@@ -95,7 +92,7 @@ if __name__ == '__main__':
     # test_python_lib()
     # test_earley_equals_lalr()
     pre_tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
-    tree=Tree_2(pre_tree)
+    tree=Tree_2(pre_tree.data,pre_tree.children,pre_tree._meta)
     print("----------tree.data----------\n",tree.data)
     print("----------tree.childrenn-----\n",tree.children)
     print("----------tree.pretty()------\n",tree.pretty())
