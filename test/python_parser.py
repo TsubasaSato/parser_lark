@@ -91,10 +91,10 @@ class Tree_2(Tree):
 if __name__ == '__main__':
     # test_python_lib()
     # test_earley_equals_lalr()
-    tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
-    
+    pre_tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
+    tree=Tree_2(pre_tree)
     print("----------tree.data----------\n",tree.data)
     print("----------tree.childrenn-----\n",tree.children)
     print("----------tree.pretty()------\n",tree.pretty())
     print("----------Tree2().pretty()------")
-    print(list(tree.find_data("decorated")))
+    print(list(tree.find_data_topdown("decorated")))
