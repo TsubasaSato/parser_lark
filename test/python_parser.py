@@ -98,6 +98,3 @@ if __name__ == '__main__':
     print("----------tree.pretty()------\n",tree.pretty())
     
     print(Tree_2(tree.find_data_topdown("decorated").pretty())
-    
-    
-    
