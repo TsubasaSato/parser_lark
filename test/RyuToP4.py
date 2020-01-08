@@ -22,6 +22,7 @@ class RyuToP4Transformer(Transformer):
     
     #変数宣言
     def expr_stmt(self,args):
+        print(type(args[0]))
         print(getattr(args[0],children))
         print(args[0])
         print(args)
