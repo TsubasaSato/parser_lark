@@ -11,11 +11,21 @@ class Environment():
     def get(self,key):
         return self.var[key]
 """
+
+class T(Transformer):
+    def NAME(self,name):
+        #nameに何が入っているか調べる
+        print(name)
+    
+    
 class RyuToP4Transformer(Transformer):
     
+    def __init__(self):
+        self.vars=dict()
+        
     #変数宣言
     def expr_stmt(self,args):
-        print(type(args[0]))
+        T(visit_tokens=True).transform(args[0])
         print(args[0])
         print(args)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
