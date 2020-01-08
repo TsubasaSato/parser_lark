@@ -25,8 +25,8 @@ class RyuToP4Transformer(Transformer):
         
     #変数宣言
     def expr_stmt(self,args):
-        #Token内の名前が取得可
-        T(visit_tokens=True).transform(args[0])
         print(args[0])
         print(args)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
+    def NAME(self,name):
+        print(name)
