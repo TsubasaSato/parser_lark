@@ -98,6 +98,9 @@ if __name__ == '__main__':
     #print("----------Tree2().pretty()-----")
     #print(Tree_2("decorated",list(tree.find_data_topdown("decorated"))).pretty())
     #print("----------transform(tree)------")
-    print(list(tree.find_data("decorated")))
+    data=list(tree.find_data("decorated"))
+    print(data[0])
+    print("----------{}-----------".format(len(data)))
+    print(data[1])
     print(RyuToP4Transformer().transform(tree))
     
