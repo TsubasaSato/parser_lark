@@ -7,6 +7,8 @@ import os, os.path
 from io import open
 import glob, time
 
+import RyuToP4
+
 from lark import Lark,Tree,Visitor
 from lark.indenter import Indenter
     
@@ -93,8 +95,7 @@ if __name__ == '__main__':
     # test_earley_equals_lalr()
     pre_tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
     tree=Tree_2(pre_tree.data,pre_tree.children,pre_tree._meta)
-    print("----------tree.data----------\n",tree.data)
-    print("----------tree.childrenn-----\n",tree.children)
-    print("----------tree.pretty()------\n",tree.pretty())
     print("----------Tree2().pretty()-----")
     print(Tree_2("decorated",list(tree.find_data_topdown("decorated"))).pretty())
+    print("----------transform(tree)-----")
+    print(RyuToP4Transformer().transform(tree))
