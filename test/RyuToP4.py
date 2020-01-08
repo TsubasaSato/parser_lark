@@ -24,6 +24,6 @@ class RyuToP4Transformer(Transformer):
     def expr_stmt(self,args):
         print(type(args[0]))
         print(args[0].data,args[0].children)
-        print(args[0].children[0])
+        print(args[0].children[1])
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
 
