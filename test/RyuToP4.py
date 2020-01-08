@@ -22,8 +22,8 @@ class RyuToP4Transformer(Transformer):
     
     #変数宣言
     def expr_stmt(self,args):
+        print(getattr(args[0],children)
         print(args[0])
         print(args)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
-    def NAME(self,name):
-        print(name)
+
