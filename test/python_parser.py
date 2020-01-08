@@ -104,5 +104,5 @@ if __name__ == '__main__':
     print("----------{}-----------".format(len(data)))
     #Packet_inハンドラ
     print(list(data[1].find_data("funcdef"))[0])
-    print(RyuToP4Transformer().transform(tree))
+    RyuToP4Transformer().transform(tree)
     
