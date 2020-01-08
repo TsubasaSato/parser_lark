@@ -101,6 +101,6 @@ if __name__ == '__main__':
     data=list(tree.find_data("decorated"))
     print(data[0].pretty())
     print("----------{}-----------".format(len(data)))
-    print(Tree("test2",list(data[1])).pretty())
+    print(data[1].pretty())
     print(RyuToP4Transformer().transform(tree))
     
