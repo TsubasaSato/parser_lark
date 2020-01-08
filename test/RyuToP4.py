@@ -14,5 +14,5 @@ class Environment():
 class RyuToP4Transformer(Transformer):
     
     def expr_stmt(self,args):
-        print(args.pretty())
+        print(Tree("expr_stmt",args).pretty())
         print(args)
