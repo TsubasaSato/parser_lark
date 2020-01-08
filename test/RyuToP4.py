@@ -20,9 +20,6 @@ class T(Transformer):
     
 class RyuToP4Transformer(Transformer):
     
-    def __init__(self):
-        self.vars=dict()
-        
     #変数宣言
     def expr_stmt(self,args):
         print(args[0])
