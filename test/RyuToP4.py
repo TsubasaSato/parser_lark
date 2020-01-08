@@ -13,6 +13,6 @@ class Environment():
 """
 class RyuToP4Transformer(Transformer):
     
+    #変数宣言
     def expr_stmt(self,args):
-        print(Tree("expr_stmt",args).pretty())
-        print(args)
+        print(RyuRoP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
