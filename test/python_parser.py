@@ -7,7 +7,7 @@ import os, os.path
 from io import open
 import glob, time
 
-import RyuToP4
+from RyuToP4 import RyuToP4Transformer
 
 from lark import Lark,Tree,Visitor
 from lark.indenter import Indenter
