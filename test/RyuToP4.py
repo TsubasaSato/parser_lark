@@ -14,7 +14,7 @@ class Environment():
 
 class T(Transformer):
     def NAME(self,name):
-        return name
+        yield name
     
     
 class RyuToP4Transformer(Transformer):
