@@ -22,10 +22,14 @@ class RyuToP4Transformer(Transformer):
     
     #変数宣言
     def expr_stmt(self,args):
-        print("-----args[0].data-----")
         print(args[0].data,args[0].children)
+        print(args[0].data,args[1].children)
         #Tokenの名前取得方法
+        print("len:",len(args))
+        print("--var---args[0].children-----")
         print(args[0].children[0])
+        print("--same node in var level---args[0].children-----")
+        print(args[1].children[0])
 
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
 
