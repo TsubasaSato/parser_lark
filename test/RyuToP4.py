@@ -14,8 +14,7 @@ class Environment():
 
 class T(Transformer):
     def NAME(self,name):
-        #nameに何が入っているか調べる
-        print(name)
+        return name
     
     
 class RyuToP4Transformer(Transformer):
@@ -25,7 +24,8 @@ class RyuToP4Transformer(Transformer):
         
     #変数宣言
     def expr_stmt(self,args):
-        T(visit_tokens=True).transform(args[0])
+        #Token内の名前が取得可
+        print(T(visit_tokens=True).transform(args[0]))
         print(args[0])
         print(args)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
