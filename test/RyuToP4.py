@@ -59,7 +59,7 @@ def funccall_get_list(tree):
     return data
     
 class RyuToP4Transformer(Transformer):
-    env=dict()
+    self.env=dict()
     
     #変数宣言
     def expr_stmt(self,args):
