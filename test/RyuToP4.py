@@ -72,6 +72,9 @@ class RyuToP4Transformer(Transformer):
                 #print(getattr_get_list(args[1]))
                 pass
             elif args[1].data=="funccall":
+                print("---args---")
+                print(args)
+                print("--funccall_get_list--")
                 print(funccall_get_list(args[1]))
             elif args[1].data=="list":
                 pass
