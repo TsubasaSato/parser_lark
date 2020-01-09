@@ -7,6 +7,8 @@ def get_origin_name(dic,name_list):
     print(names)
     while names[0] in dic:
         names[0] = dic[names[0]]
+        print(dic[names[0]])
+        print(names)
         names=sum(names,[])
     return names
 
