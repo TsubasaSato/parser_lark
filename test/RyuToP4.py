@@ -30,7 +30,7 @@ def getattr_get_list(tree):
         data.append(tree.children[1])
         return data
 def arg_get_dict_list(tree):
-    #リストに入った辞書を返す
+    #argumentsを入力、リストに入った辞書を出力
     arg_list=[]
     arg_dict=dict()
     for x in tree.children:
@@ -38,11 +38,14 @@ def arg_get_dict_list(tree):
             arg_list.append(getattr_get_list(x))
         elif x.data=="argvalue":
             arg_dict[x.children[0].children[0]]=x.children[1].children[0]
+        elif x.data=="funccall":
+            arg_list=funccall_get_list(x)
     if arg_dict != dict():
         arg_list.append(arg_dict)
     return arg_list
 
 def funccall_get_list(tree):
+    #関数を呼び出して変数に代入する記述を入力、リストに入った辞書を出力
     data=getattr_get_list(tree.children[0])
     if len(tree.children)>1:
         data.append(arg_get_dict_list(tree.children[1]))
@@ -70,10 +73,11 @@ class RyuToP4Transformer(Transformer):
     """
     def funccall(self,args):
         print("-----Start-------")
-        print(args[0].children)
         if args[0].children[1] =="send_msg":
             print(Tree("Funccall",args).pretty())
+            print(arg_get_dict_list(args[1]))
         print("-----Finished-----")
+        
     def dict_print(self):
         print(self.env)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
