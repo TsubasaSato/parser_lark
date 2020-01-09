@@ -3,6 +3,7 @@ def get_p4_match(dict_value):
     pass
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
+    print(name_list)
     while name_list[0] in dic:
         name_list[0] = dic[name_list[0]]
         name_list=sum(name_list,[])
