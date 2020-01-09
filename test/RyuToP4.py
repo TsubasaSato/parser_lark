@@ -59,25 +59,24 @@ def funccall_get_list(tree):
     return data
     
 class RyuToP4Transformer(Transformer):
+    env=dict()
     
     #変数宣言
     def expr_stmt(self,args):
         print("-----Start-------")
         if args[0].data=="var":
-            #辞書のキーに登録
             if args[1].data=="var":
                 pass
             elif args[1].data=="getattr":
-                #print(getattr_get_list(args[1]))
-                pass
+                env[args[0].children[0]]=getattr_get_list(args[1])
             elif args[1].data=="funccall":
-                #print(funccall_get_list(args[1]))
-                pass
+                env[args[0].children[0]]=funccall_get_list(args[1])
             elif args[1].data=="list":
-                print(funccall_get_list(args[1].children[0]))
+                env[args[0].children[0]]=funccall_get_list(args[1].children[0])
             else:
                 pass
         print("-----Finished-----")
-        
+    def dict_print(self)
+        print(self.env)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
 
