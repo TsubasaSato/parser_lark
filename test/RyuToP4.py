@@ -43,15 +43,15 @@ class RyuToP4Transformer(Transformer):
         if args[0].data=="var":
             #辞書のキーに登録
             if args[1].data=="var":
-                #辞書の値に登録
+                pass
             elif args[1].data=="getattr":
                 print(getattr_get_var(args[1]))
             elif args[1].data=="funccall":
-                #
+                pass
             elif args[1].data=="list":
-                #
+                pass
             else:
-                #エラー
+                pass
         print("-----Finished-----")
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
 
