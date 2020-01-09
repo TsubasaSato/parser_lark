@@ -71,7 +71,7 @@ class RyuToP4Transformer(Transformer):
     def funccall(self,args):
         print("-----Start-------")
         print(args)
-        print(args[0].children[0].pretty())
+        print(Tree("",args).pretty())
         print("-----Finished-----")
     def dict_print(self):
         print(self.env)
