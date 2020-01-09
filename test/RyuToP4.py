@@ -78,7 +78,7 @@ class RyuToP4Transformer(Transformer):
             print(Tree("Funccall",args).pretty())
             print("-----Finished-----")
         else:
-            return Tree("funccall",args[0])
+            return Tree("funccall",args)
         
         
     def dict_print(self):
