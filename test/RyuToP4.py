@@ -110,7 +110,7 @@ class RyuToP4Transformer(Transformer):
         if args[0].children[1] =="send_msg":
             print("-----Start-------")
             print("-----Original Name---inst--")
-            print(print(get_origin_name(self.env,self.env["inst"])))
+            print(print(get_origin_name(self.env,self.env["actions"])))
             print("-----Finished-----")
         else:
             return Tree("funccall",args)
