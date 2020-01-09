@@ -2,10 +2,12 @@ from lark import Tree, Transformer
 def get_p4_match(dict_value):
     pass
 def get_origin_name(dic,name_list):
-    #変数宣言された時の名前に変換、リスト化して出力
+    #変数宣言された時の名前に変換、リスト化して出力、再帰
     if name_list[0] in dic:
         name_list[0] = dic[name_list[0]]
-    return sum(name_list,[])
+        get_origin_name(dic,sum(name_list,[]))
+    else:
+        return sum(name_list,[])
 
 def getattr_get_list(tree):
     """
