@@ -31,7 +31,7 @@ def getattr_get_list(tree):
     """
     if len(tree.children)>1 and tree.children[0].data=="getattr":
         #getattrが続く場合
-        data=getattr_get_var(tree.children[0])
+        data=getattr_get_list(tree.children[0])
         data.append(tree.children[1])
         return data
     else:
