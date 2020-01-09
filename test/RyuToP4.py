@@ -10,7 +10,7 @@ def get_origin_name(dic,name_list):
         names[0] = dic[names[0]]
         print(names)
         for x in names:
-            if type(x) != list():
+            if type(x) != type(list()):
                 names[names.index(x)]=[x]
         print(names)
         names=sum(names,[])
