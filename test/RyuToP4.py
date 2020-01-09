@@ -54,9 +54,8 @@ def arg_get_dict_list(tree):
 def funccall_get_list(tree):
     data=getattr_get_list(tree.children[0])
     if len(tree.children)>1:
-        sub=arg_get_dict_list(tree.children[1])
-        print("arg:",sub)
-    print(data)
+        data.append(arg_get_dict_list(tree.children[1]))
+    return data
     
 class RyuToP4Transformer(Transformer):
     
