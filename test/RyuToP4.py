@@ -111,7 +111,8 @@ class RyuToP4Transformer(Transformer):
     def funccall(self,args):
         if args[0].children[1] =="send_msg":
             print("-----Start-------")
-            print("-----Original Name---inst--")
+            print(args[0].pretty())
+            print("-----Original Name---actions--")
             print(print(get_origin_name(self.env,self.env["actions"])))
             print("-----Finished-----")
         else:
