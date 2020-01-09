@@ -38,10 +38,19 @@ def getattr_get_list(tree):
         data=[]
         data.append(tree.children[0].children[0])
         data.append(tree.children[1])
-        return data    
-def funccall_get_list(tree):
-    pass
+        return data
+def arg_get_dict_list(tree):
+    arg_list=[]
+    for x in tree.children:
+        if x.data=="getattr":
+            arg_list.append(getattr_get_list(x))
+        elif x.data=="argvalue":
+            arg_list.append()
         
+def funccall_get_list(tree):
+    data=getattr_get_list(tree.children[0])
+    
+    
 class RyuToP4Transformer(Transformer):
     
     #変数宣言
