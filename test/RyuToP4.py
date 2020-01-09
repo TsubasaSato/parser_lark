@@ -9,6 +9,8 @@ def get_origin_name(dic,name_list):
         names[0] = dic[names[0]]
         print(names[0])
         print(names)
+        for x in names:
+            print(type(x))
         names=sum(names,[])
     return names
 
