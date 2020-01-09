@@ -39,7 +39,9 @@ class RyuToP4Transformer(Transformer):
         print(args)
         #Tokenの名前取得方法
         print("len:",len(args))
-
+        print(args[0].children)
+        print(args[0].children[0])
+        """
         if args[0].data=="var":
             #辞書のキーに登録
             if args[1].data=="var":
@@ -53,5 +55,6 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         print("-----Finished-----")
+        """
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
 
