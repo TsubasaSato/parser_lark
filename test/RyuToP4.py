@@ -20,7 +20,7 @@ class T(Transformer):
 def getattr_get_var(tree):
     #getattrが来ると思われる部分に配置
     print(tree)
-    if (len(tree[0].children)>1,tree[0].children[0].data=="getattr"):
+    if len(tree[0].children)>1 && tree[0].children[0].data=="getattr":
         #getattrが続く場合
         data=getattr_get_var(tree[0].children[0])
         data.append(tree[0].children[1].data)
@@ -40,15 +40,15 @@ class RyuToP4Transformer(Transformer):
         #Tokenの名前取得方法
         print("len:",len(args))
 
-        if (args[0].data=="var"):
+        if args[0].data=="var":
             #辞書のキーに登録
-            if (args[1].data=="var"):
+            if args[1].data=="var":
                 #辞書の値に登録
-            elif (args[1].data=="getattr"):
+            elif args[1].data=="getattr":
                 print(getattr_get_var(args[1]))
-            elif (args[1].data=="funccall"):
+            elif args[1].data=="funccall":
                 #
-            elif (args[1].data=="list"):
+            elif args[1].data=="list":
                 #
             else:
                 #エラー
