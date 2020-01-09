@@ -69,7 +69,10 @@ class RyuToP4Transformer(Transformer):
         print("-----Finished-----")
     """
     def funccall(self,args):
+        print("-----Start-------")
         print(args)
+        print(args[0].children.pretty())
+        print("-----Finished-----")
     def dict_print(self):
         print(self.env)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
