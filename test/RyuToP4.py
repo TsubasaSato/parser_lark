@@ -112,6 +112,7 @@ class RyuToP4Transformer(Transformer):
             print("-----Start-------")
             print(args[0].pretty())
             print("-----Original Name---actions--")
+            print(self.get_alldicts())
             print(self.env["actions"])
             print(print(get_origin_name(self.env,self.env["actions"])))
             print("-----Finished-----")
