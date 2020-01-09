@@ -76,6 +76,7 @@ def arg_get_dict_list(tree):
             arg_list.append(x.children[0])
         else:
             print("-----Nubmer Here-----")
+            print(x)
     if arg_dict != dict():
         arg_list.append(arg_dict)
     return arg_list
