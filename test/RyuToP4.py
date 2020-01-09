@@ -72,11 +72,8 @@ def arg_get_dict_list(tree):
                 arg_dict[x.children[0].children[0]]=getattr_get_list(x.children[1])
         elif x.data=="funccall":
             arg_list=funccall_get_list(x)
-        elif x.data=="var":
-            arg_list.append(x.children[0])
         else:
-            print("-----Nubmer Here-----")
-            print(x)
+            arg_list.append(x.children[0])
     if arg_dict != dict():
         arg_list.append(arg_dict)
     return arg_list
