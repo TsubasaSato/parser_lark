@@ -109,4 +109,4 @@ if __name__ == '__main__':
     T.print_alldicts()
     T.print_dict("parser")
     T.print_dict("actions")
-    T.print_dict("match_t1")
+    T.print_dict("match")
