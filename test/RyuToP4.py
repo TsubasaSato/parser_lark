@@ -101,17 +101,12 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1].children[0])
             else:
                 pass
-        print(print(get_origin_name(self.env,self.env["inst"])))
         print("-----Finished-----")
     
     def funccall(self,args):
         if args[0].children[1] =="send_msg":
             print("-----Start-------")
-            print("-----Original Name---datapath--")
-            print(get_origin_name(self.env,self.env[args[0].children[0].children[0]]))
-            print("-----Original Name---match_t1--")
-            print(get_origin_name(self.env,self.env["match_t1"]))
-            print(get_origin_name(self.env,self.env["actions"]))
+            print("-----Original Name---inst--")
             print(print(get_origin_name(self.env,self.env["inst"])))
             print("-----Finished-----")
         else:
