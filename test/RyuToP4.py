@@ -74,7 +74,7 @@ def arg_get_dict_list(tree):
             arg_list=funccall_get_list(x)
         elif x.data=="var":
             arg_list.append(x.children[0])
-        elif x.data=="nubmer":
+        else:
             print("-----Nubmer Here-----")
     if arg_dict != dict():
         arg_list.append(arg_dict)
