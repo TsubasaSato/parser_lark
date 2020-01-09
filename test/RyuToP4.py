@@ -80,6 +80,7 @@ class RyuToP4Transformer(Transformer):
             print("-----Original Name---datapath--")
             print(get_origin_name(self.env,self.env[args[0].children[0].children[0]]))
             print("-----Original Name---match_t1--")
+            print(args[1],args[1].children)
             print(get_origin_name(self.env,self.env[args[1].children[3].children[1]]))
             print("-----Finished-----")
         else:
