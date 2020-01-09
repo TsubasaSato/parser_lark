@@ -5,14 +5,11 @@ def get_p4_match(dict_value):
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
     names=name_list
-    print(names)
     while names[0] in dic:
         names[0] = dic[names[0]]
-        print(names)
         for x in names:
             if type(x) != type(list()):
                 names[names.index(x)]=[x]
-        print(names)
         names=sum(names,[])
     return names
 
