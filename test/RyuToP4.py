@@ -32,8 +32,8 @@ def get_p4src_ilist(dict_value):
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
     names=name_list
-    print(names)
-    print(names[0])
+    if len(names[0]) > 1 :
+        names=sum(names,[])
     while names[0] in dic:
         names[0] = dic[names[0]]
         for x in names:
