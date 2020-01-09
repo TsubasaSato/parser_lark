@@ -36,26 +36,22 @@ class RyuToP4Transformer(Transformer):
     #変数宣言
     def expr_stmt(self,args):
         print("-----Start-------")
-        print(args[0].data,args[0].children)
-        print(args[0].data,args[1].children)
+        print(args)
         #Tokenの名前取得方法
         print("len:",len(args))
-        print(getattr_get_var(args))
-        print("-----Finished-----")
-        """
+
         if (args[0].data=="var"):
             #辞書のキーに登録
             if (args[1].data=="var"):
                 #辞書の値に登録
             elif (args[1].data=="getattr"):
-                
+                print(getattr_get_var(args[1]))
             elif (args[1].data=="funccall"):
                 #
             elif (args[1].data=="list"):
                 #
             else:
                 #エラー
-        """
-
+        print("-----Finished-----")
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
 
