@@ -80,8 +80,8 @@ class RyuToP4Transformer(Transformer):
         else:
             return Tree("funccall",args)
         
-    def print_alldicts(self):
-        print(self.env)
+    def get_alldicts(self):
+        return self.env
 
-    def print_dict(self,key):
-        print(self.env[key])
+    def get_dict(self,key):
+        return self.env[key]
