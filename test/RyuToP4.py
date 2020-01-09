@@ -11,15 +11,23 @@ class Environment():
     def get(self,key):
         return self.var[key]
 """
-
-class T(Transformer):
-    def NAME(self,name):
-        print(name)
-        print(type(name))
-
-def getattr_get_var(tree):
-    #getattrが来ると思われる部分に配置
-    print(tree)
+class Match():
+    eth_type
+    eth_src
+    eth_dst
+    ip_proto
+    ipv4_src
+    ipv4_dst
+    tcp_src
+    tcp_dst
+    
+def getattr_get_list(tree):
+    """
+    getattrが来る部分に配置
+    datapath = ev.msg.datapathを
+    [[Tree(var, [Token(NAME, 'ev')]), Token(NAME, 'msg'), Token(NAME, 'datapath')]]
+    Tokenのリストで返す。Tokenオブジェクトはそのままプリントすれば中身の値が出力される。
+    """
     if len(tree.children)>1 and tree.children[0].data=="getattr":
         #getattrが続く場合
         data=getattr_get_var(tree.children[0])
@@ -29,8 +37,9 @@ def getattr_get_var(tree):
         data=[]
         data.append(tree.children[0])
         data.append(tree.children[1])
-        print(tree.children[1])
         return data    
+def funccall_get_list(tree):
+    if 
         
 class RyuToP4Transformer(Transformer):
     
@@ -48,7 +57,7 @@ class RyuToP4Transformer(Transformer):
             if args[1].data=="var":
                 pass
             elif args[1].data=="getattr":
-                print(getattr_get_var(args[1]))
+                print(getattr_get_list(args[1]))
             elif args[1].data=="funccall":
                 pass
             elif args[1].data=="list":
