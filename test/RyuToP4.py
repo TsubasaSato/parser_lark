@@ -1,6 +1,11 @@
 from lark import Tree, Transformer
-def get_p4_match():
-    pass
+def get_p4_match(dict_value):
+    
+def get_origin_name(dic,name_list):
+    #変数宣言された時の名前に変換、リスト化して出力
+    if name_list[0] in dic:
+        name_list[0] = dic[name_list[0]]
+    return sum(name_list,[])
 
 def getattr_get_list(tree):
     """
@@ -70,6 +75,8 @@ class RyuToP4Transformer(Transformer):
             print("-----Start-------")
             print(args[1])
             print(Tree("Funccall",args).pretty())
+            print("-----Original Name-----")
+            print(get_origin_name(self.env,args[0].children[0].chidren[0]))
             print("-----Finished-----")
         else:
             return Tree("funccall",args)
