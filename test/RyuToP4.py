@@ -3,7 +3,6 @@ def get_p4_match(dict_value):
     pass
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
-    print(name_list)
     while name_list[0] in dic:
         name_list[0] = dic[name_list[0]]
         name_list=sum(name_list,[])
@@ -78,7 +77,7 @@ class RyuToP4Transformer(Transformer):
             print(args[1])
             print(Tree("Funccall",args).pretty())
             print("-----Original Name---datapath--")
-            print(get_origin_name(self.env,args[0].children[0].children[0]))
+            print(get_origin_name(self.env,args[0].children[0].children[1]))
             print("-----Original Name---match_t1--")
             print(get_origin_name(self.env,args[1].children[3].children[1]))
             print("-----Finished-----")
