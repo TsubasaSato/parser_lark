@@ -47,7 +47,8 @@ def arg_get_dict_list(tree):
         if x.data=="getattr":
             arg_list.append(getattr_get_list(x))
         elif x.data=="argvalue":
-            arg_list.append(arg_dict[x.children[0].children[0]]=x.children[1].children[0])
+            arg_dict[x.children[0].children[0]]=x.children[1].children[0]
+    arg_list.append(arg_dict)
     return arg_list
 
 def funccall_get_list(tree):
