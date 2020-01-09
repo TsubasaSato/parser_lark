@@ -75,14 +75,12 @@ class RyuToP4Transformer(Transformer):
     def funccall(self,args):
         if args[0].children[1] =="send_msg":
             print("-----Start-------")
-            print(args[1])
-            print(Tree("Funccall",args).pretty())
             print("-----Original Name---datapath--")
             print(get_origin_name(self.env,self.env[args[0].children[0].children[0]]))
             print("-----Original Name---match_t1--")
-            print(Tree("",args[1].children[1]).pretty())
+            print(Tree("",args[1].children[1].children[1]).pretty())
             
-            print(get_origin_name(self.env,self.env[args[1].children[1].children[3].children[1]]))
+            print(get_origin_name(self.env,self.env[args[1].children[1].children[1].children[3].children[1]]))
             print("-----Finished-----")
         else:
             return Tree("funccall",args)
