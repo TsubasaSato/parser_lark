@@ -82,8 +82,9 @@ class RyuToP4Transformer(Transformer):
             print("-----Original Name---datapath--")
             print(get_origin_name(self.env,self.env[args[0].children[0].children[0]]))
             print("-----Original Name---match_t1--")
-            
             print(get_origin_name(self.env,self.env["match_t1"]))
+            print(get_origin_name(self.env,self.env["actions"]))
+            print(print(get_origin_name(self.env,self.env["inst"])))
             print("-----Finished-----")
         else:
             return Tree("funccall",args)
