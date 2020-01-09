@@ -19,6 +19,7 @@ class T(Transformer):
 
 def getattr_get_var(tree):
     #getattrが来ると思われる部分に配置
+    print(tree)
     if (len(tree[0].children)>1,tree[0].children[0].data=="getattr"):
         #getattrが続く場合
         data=getattr_get_var(tree[0].children[0])
