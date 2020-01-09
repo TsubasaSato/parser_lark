@@ -52,6 +52,7 @@ def getattr_get_list(tree):
         print(tree.pretty())
         data=getattr_get_list(tree.children[0])
         data.append(tree.children[1])
+        print(data)
         return data
     else:
         data=[]
