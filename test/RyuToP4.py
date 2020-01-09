@@ -1,11 +1,29 @@
 from lark import Tree, Transformer
-def get_p4_match(dict_value):
+def get_p4src_mlist(dict_value):
     #P4ソースコード
-    P4_source={"eth_type":"","ip_proto":"",}
-    
+    eth_type={"0x0800":"hdr.ipv4.isValid()"}
+    ip_proto={"6":"hdr.tcp.isValid()"}
+    RyuToP4_key={
+        "eth_type":eth_type,
+        "ip_proto":ip_proto,
+        "eth_dst":"hdr.ethernet.dstAddr",
+        "eth_src":"hdr.ethernet.srcAddr",
+        "ipv4_dst":"hdr.ipv4.dstAddr",
+        "ipv4_src":"hdr.ipv4.srcAddr",
+        "tcp_dst":"hdr.tcp.dstPort",
+        "tcp_src":"hdr.tcp.srcPort",
+    }
     OFPMatch=["ev","msg","datapath","ofproto_arser","OFPMatch"]
     #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
     if dict_value[0:5]==OFPMatch:
+        p4src=[]
+        dict=dict_value[5]
+        for x in dict.keys():
+            if x=="eth_type" or x == "ip_proto":
+                p4src.append(RyuToP4_key[x][dict[x]])
+            else:
+                p4src.append("{} == {}".format(RyuToP4_key[x],p4src.append(dict[x])))
+        return p4src
         
 
 def get_origin_name(dic,name_list):
