@@ -100,9 +100,11 @@ if __name__ == '__main__':
     #print("----------transform(tree)------")
     data=list(tree.find_data("decorated"))
     #Switch_featuredハンドラ
-    RyuToP4Transformer().transform(list(data[0].find_data("funcdef"))[0])
+    T=RyuToP4Transformer()
+    T.transform(list(data[0].find_data("funcdef"))[0])
     print("---------------{}----------------".format(len(data)))
     #Packet_inハンドラ
-    RyuToP4Transformer().transform(list(data[1].find_data("funcdef"))[0])
+    T.transform(list(data[1].find_data("funcdef"))[0])
     #RyuToP4Transformer().transform(tree)
+    T.dict_print()
     
