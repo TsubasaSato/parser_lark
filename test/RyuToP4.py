@@ -28,7 +28,8 @@ def getattr_get_var(tree):
     else:
         data=[]
         data.append(tree.children[0])
-        data.append(tree.children[1][0])
+        data.append(tree.children[1])
+        print(tree.children[1])
         return data    
         
 class RyuToP4Transformer(Transformer):
