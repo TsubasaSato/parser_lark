@@ -27,7 +27,8 @@ def get_p4src_mlist(dict_value):
                     p4src.append("{} == {}".format(RyuToP4_key[x],dict[x]))
         return p4src
         
-
+def get_p4src_ilist(dict_value):
+    pass
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
     names=name_list
@@ -100,6 +101,7 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1].children[0])
             else:
                 pass
+        print(print(get_origin_name(self.env,self.env["inst"])))
         print("-----Finished-----")
     
     def funccall(self,args):
