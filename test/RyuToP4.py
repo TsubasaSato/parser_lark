@@ -80,9 +80,8 @@ class RyuToP4Transformer(Transformer):
         else:
             return Tree("funccall",args)
         
-        
     def print_alldicts(self):
         print(self.env)
-        #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
+
     def print_dict(self,key):
         print(self.env[key])
