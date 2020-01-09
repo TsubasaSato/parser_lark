@@ -80,7 +80,7 @@ class RyuToP4Transformer(Transformer):
             print("-----Original Name---match_t1--")
             print(Tree("",args[1].children[0].children[1]).pretty())
             
-            print(get_origin_name(self.env,self.env[args[1].children[0].children[1].children[3].children[1]]))
+            print(get_origin_name(self.env,self.env[args[1].children[0].children[1].children[3].children]))
             print("-----Finished-----")
         else:
             return Tree("funccall",args)
