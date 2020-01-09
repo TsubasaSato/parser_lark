@@ -76,7 +76,7 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         print("-----Finished-----")
-    def dict_print(self):
+    def __del__(self):
         print(self.env)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
 
