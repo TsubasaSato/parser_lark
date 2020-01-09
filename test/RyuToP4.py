@@ -16,17 +16,6 @@ class T(Transformer):
     def NAME(self,name):
         print(name)
         print(type(name))
-    
-def getattr_get_var(tree):
-    #getattrが来ると思われる部分に配置
-    object=[]
-    if (tree[0].data=="getattr"):
-        getattr_get_var(tree.children)
-        if 
-    elif (tree[0].data=="var"):
-        object.append(tree[0].children[0])
-        object.append(tree[1].data)
-    return object
 
 def getattr_get_var(tree):
     #getattrが来ると思われる部分に配置
