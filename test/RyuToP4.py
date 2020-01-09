@@ -61,6 +61,7 @@ def arg_get_dict_list(tree):
     #argumentsを入力、リストに入った辞書を出力
     arg_list=[]
     arg_dict=dict()
+    print(tree.pretty())
     for x in tree.children:
         if x.data=="getattr":
             arg_list.append(getattr_get_list(x))
