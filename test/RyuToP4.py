@@ -1,4 +1,5 @@
 from lark import Tree, Transformer
+
 def get_p4src_mlist(dict_value):
     #P4ソースコード
     eth_type={"0x0800":"hdr.ipv4.isValid()"}
@@ -22,7 +23,7 @@ def get_p4src_mlist(dict_value):
             if x=="eth_type" or x == "ip_proto":
                 p4src.append(RyuToP4_key[x][dict[x]])
             else:
-                p4src.append("{} == {}".format(RyuToP4_key[x],p4src.append(dict[x])))
+                p4src.append("{} == {}".format(RyuToP4_key[x],dict[x]))
         return p4src
         
 
