@@ -55,7 +55,7 @@ class RyuToP4Transformer(Transformer):
     env=dict()
     
     #変数宣言
-    """
+    
     def expr_stmt(self,args):
         print("-----Start-------")
         if args[0].data=="var":
@@ -70,7 +70,7 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         print("-----Finished-----")
-    """
+    
     def funccall(self,args):
         if args[0].children[1] =="send_msg":
             print("-----Start-------")
