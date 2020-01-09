@@ -59,7 +59,7 @@ def funccall_get_list(tree):
     return data
     
 class RyuToP4Transformer(Transformer):
-    self.env=dict()
+    env=dict()
     
     #変数宣言
     def expr_stmt(self,args):
@@ -68,11 +68,11 @@ class RyuToP4Transformer(Transformer):
             if args[1].data=="var":
                 pass
             elif args[1].data=="getattr":
-                env[args[0].children[0]]=getattr_get_list(args[1])
+                self.env[args[0].children[0]]=getattr_get_list(args[1])
             elif args[1].data=="funccall":
-                env[args[0].children[0]]=funccall_get_list(args[1])
+                self.env[args[0].children[0]]=funccall_get_list(args[1])
             elif args[1].data=="list":
-                env[args[0].children[0]]=funccall_get_list(args[1].children[0])
+                self.env[args[0].children[0]]=funccall_get_list(args[1].children[0])
             else:
                 pass
         print("-----Finished-----")
