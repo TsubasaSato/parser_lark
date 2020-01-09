@@ -73,8 +73,8 @@ class RyuToP4Transformer(Transformer):
     """
     def funccall(self,args):
         print("-----Start-------")
-        print(args)
         if args[0].children[1] =="send_msg":
+            print(args)
             print(Tree("Funccall",args).pretty())
             print(arg_get_dict_list(args[1]))
         print("-----Finished-----")
