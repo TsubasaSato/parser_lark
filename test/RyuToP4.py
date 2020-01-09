@@ -49,10 +49,8 @@ def getattr_get_list(tree):
     """
     if len(tree.children)>1 and tree.children[0].data=="getattr":
         #getattrが続く場合
-        print(tree.pretty())
         data=getattr_get_list(tree.children[0])
         data.append(tree.children[1])
-        print(data)
         return data
     else:
         data=[]
@@ -74,6 +72,10 @@ def arg_get_dict_list(tree):
                 arg_dict[x.children[0].children[0]]=getattr_get_list(x.children[1])
         elif x.data=="funccall":
             arg_list=funccall_get_list(x)
+        elif x.data=="var":
+            arg_list.append(x.children[0])
+        elif x.data=="nubmer":
+            print("-----Nubmer Here-----")
     if arg_dict != dict():
         arg_list.append(arg_dict)
     return arg_list
