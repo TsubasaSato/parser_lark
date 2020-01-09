@@ -37,7 +37,10 @@ def arg_get_dict_list(tree):
         if x.data=="getattr":
             arg_list.append(getattr_get_list(x))
         elif x.data=="argvalue":
-            arg_dict[x.children[0].children[0]]=x.children[1].children[0]
+            if not x.children[1].data=="getattr":
+                arg_dict[x.children[0].children[0]]=x.children[1].children[0]
+            else:
+                arg_dict[x.children[0].children[0]]=getattr_get_list(x.children[1])
         elif x.data=="funccall":
             arg_list=funccall_get_list(x)
     if arg_dict != dict():
@@ -46,10 +49,11 @@ def arg_get_dict_list(tree):
 
 def funccall_get_list(tree):
     #関数を呼び出して変数に代入する記述を入力、リストに入った辞書を出力
-    data=getattr_get_list(tree.children[0])
+    object=getattr_get_list(tree.children[0])
     if len(tree.children)>1:
-        data.append(arg_get_dict_list(tree.children[1]))
-    return data
+        #引数を取得
+        object.append(arg_get_dict_list(tree.children[1]))
+    return object
     
 class RyuToP4Transformer(Transformer):
     env=dict()
