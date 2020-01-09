@@ -3,11 +3,10 @@ def get_p4_match(dict_value):
     pass
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
-    if name_list[0] in dic:
+    while name_list[0] in dic:
         name_list[0] = dic[name_list[0]]
-        get_origin_name(dic,sum(name_list,[]))
-    else:
-        return sum(name_list,[])
+        name_list=sum(name_list,[])
+    return name_list
 
 def getattr_get_list(tree):
     """
