@@ -1,6 +1,12 @@
 from lark import Tree, Transformer
 def get_p4_match(dict_value):
-    pass
+    #P4ソースコード
+    P4_source={"eth_type":"","ip_proto":"",}
+    
+    OFPMatch=["ev","msg","datapath","ofproto_arser","OFPMatch"]
+    #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
+    if dict_value[0:5]==OFPMatch:
+        
 
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
