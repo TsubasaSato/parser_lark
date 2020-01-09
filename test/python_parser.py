@@ -108,3 +108,5 @@ if __name__ == '__main__':
     #RyuToP4Transformer().transform(tree)
     for x in T.get_dict("match")[2][0].keys():
         print(x)
+    for x in T.get_dict("match")[2][0].values():
+        print(x)
