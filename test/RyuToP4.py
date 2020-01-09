@@ -62,6 +62,7 @@ class RyuToP4Transformer(Transformer):
     env=dict()
     
     #変数宣言
+    """
     def expr_stmt(self,args):
         print("-----Start-------")
         if args[0].data=="var":
@@ -76,6 +77,9 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         print("-----Finished-----")
+    """
+    def funccall(self,args):
+        print(args)
     def dict_print(self):
         print(self.env)
         #print(RyuToP4Transformer(visit_tokens=True).transform(Tree("expr_stmt",args)))
