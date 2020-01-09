@@ -36,7 +36,7 @@ def getattr_get_list(tree):
         return data
     else:
         data=[]
-        data.append(tree.children[0])
+        data.append(tree.children[0].children[0])
         data.append(tree.children[1])
         return data    
 def funccall_get_list(tree):
