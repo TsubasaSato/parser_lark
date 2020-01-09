@@ -40,16 +40,21 @@ def getattr_get_list(tree):
         data.append(tree.children[1])
         return data
 def arg_get_dict_list(tree):
+    #リストに入った辞書を返す
     arg_list=[]
+    arg_dict=dict()
     for x in tree.children:
         if x.data=="getattr":
             arg_list.append(getattr_get_list(x))
         elif x.data=="argvalue":
-            arg_list.append()
-        
+            arg_list.append(arg_dict[x.children[0].children[0]]=x.children[1].children[0])
+    return arg_list
+
 def funccall_get_list(tree):
     data=getattr_get_list(tree.children[0])
-    
+    sub=arg_get_dict_list(tree.children[1])
+    print(data)
+    print(sub)
     
 class RyuToP4Transformer(Transformer):
     
@@ -69,7 +74,7 @@ class RyuToP4Transformer(Transformer):
             elif args[1].data=="getattr":
                 print(getattr_get_list(args[1]))
             elif args[1].data=="funccall":
-                pass
+                print(funccall_get_list(args[1]))
             elif args[1].data=="list":
                 pass
             else:
