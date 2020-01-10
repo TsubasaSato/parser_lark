@@ -150,7 +150,7 @@ def send_msg(_vars,args_tree):
     if args_tree.children[0].data=="var":
         msg=get_origin_name(_vars,[args_tree.children[0].children[0]])
     elif args_tree.children[0].data=="funccall":
-        msg=get_origin_name(_vars,[funccall_get_list(args_tree.children[0])])
+        msg=get_origin_name(_vars,funccall_get_list(args_tree.children[0]))
     print(msg)
     
     
