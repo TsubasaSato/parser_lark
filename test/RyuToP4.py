@@ -34,6 +34,7 @@ def get_origin_name(dic,name_list):
     print("---Start get_origin_name---")
     names=name_list
     count=0
+    print("---before names[0] = dic[names[0]]---",names)
     while names[0] in dic:
         print("Count is :",count)
         names[0] = dic[names[0]]
