@@ -104,6 +104,8 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1].children[0])
             else:
                 pass
+        if "actions" in self.env:
+            print(get_origin_name(self.env,self.env["actions"]))
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
