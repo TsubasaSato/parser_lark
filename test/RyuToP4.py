@@ -64,7 +64,7 @@ def get_p4src_alist(_vars,name):
                 pass
     return p4src
 
-def get_p4src_ilist(_var,name):
+def get_p4src_ilist(_vars,name):
     p4src=[]
     OFPInstGoto=["ev","msg","datapath","ofproto_parser","OFPInstructionGotoTable"]
     OFPInstActA=["ev","msg","datapath","ofproto_parser","OFPInstructionActions","ofproto","OFPIT_APPLY_ACTIONS"]
