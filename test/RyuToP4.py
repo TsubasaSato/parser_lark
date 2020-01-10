@@ -44,7 +44,7 @@ def get_p4src_alist(_vars,name):
         }
     dict_value=get_origin_name(_vars,name)
     
-    if dict_value[0:5]==OFPActionOutput:
+    if check_same_list(dict_value[0:5],OFPActionOutput):
         if len(dict_value)>5:
             data=dict_value[5:]
             if type(data[0])==type(dict()):
