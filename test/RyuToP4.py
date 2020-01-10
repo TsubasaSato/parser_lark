@@ -25,7 +25,6 @@ def get_p4src_mlist(_vars,name):
     }
     OFPMatch=["ev","msg","datapath","ofproto_parser","OFPMatch"]
     #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
-    print(check_same_list(dict_value[0:5],OFPMatch))
     if check_same_list(dict_value[0:5],OFPMatch):
         if len(dict_value) > 5:
             data=dict_value[5]
@@ -146,7 +145,7 @@ class RyuToP4Transformer(Transformer):
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
             if "match" in self.env:
-                print(get_p4src_mlist(self.env,self.env["match"]))
+                print(get_p4src_mlist(self.env,self.env["match_t1"]))
             if "action" in self.env:
                 print(get_p4src_alist(self.env,self.env["action"]))
             print("-----Finished in funccall----")
