@@ -146,9 +146,9 @@ def funccall_get_list(tree):
 
 def send_msg(args_tree):
     p4src=[]
-    if args_tree.children.data=="var":
+    if args_tree.children[0].data=="var":
         print("var out")
-    elif args_tree.children.data=="funccall":
+    elif args_tree.children[0].data=="funccall":
         print("funccall")
     
     
