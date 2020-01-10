@@ -55,8 +55,8 @@ def get_p4src_alist(_vars,name):
                         var=data[x]
                         print(data[x])
                         print(type(data[x]))
-                        if type(data[x])==type(str()):
-                            print("if type(data[x])==type(str()):")
+                        if data[x]=="in_port"
+                            print("OKOK")
                             var=get_origin_name(_vars,data[x])[-1]
                         p4src.append("{} = {}".format(RyuToP4_key[x],var))
             else:
