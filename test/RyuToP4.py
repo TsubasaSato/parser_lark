@@ -106,13 +106,15 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1].children[0])
             else:
                 pass
-        print(get_origin_name(self.env,self.env["actions"]))
+        if "actions" in self.env:
+            print(get_origin_name(self.env,self.env["actions"]))
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
-            print(get_origin_name(self.env,self.env["actions"]))
+            if "actions in self.env":
+                print(get_origin_name(self.env,self.env["actions"]))
             print("-----Finished in funccall----")
         else:
             return Tree("funccall",args)
