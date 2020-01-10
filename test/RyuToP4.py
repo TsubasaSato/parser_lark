@@ -144,12 +144,14 @@ def funccall_get_list(tree):
         object.append(arg_get_dict_list(tree.children[1]))
     return object
 
-def send_msg(args_tree):
+def send_msg(_vars,args_tree):
     p4src=[]
+    msg=[]
     if args_tree.children[0].data=="var":
-        print("var out")
+        msg=get_origin_name(_vars,args_tree.children[0].children[0])
     elif args_tree.children[0].data=="funccall":
-        print("funccall")
+        msg=funccall_get_list(args_tree.children[0])
+    print(msg)
     
     
 class RyuToP4Transformer(Transformer):
