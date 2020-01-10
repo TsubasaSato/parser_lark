@@ -102,7 +102,7 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1])
             elif args[1].data=="list":
                 self.env[args[0].children[0]]=funccall_get_list(args[1].children[0])
-            elif atgs[1].data=="getitem":
+            elif args[1].data=="getitem":
                 self.env[args[0].children[0]]=funccall_get_list(args[1])
             else:
                 pass
