@@ -41,6 +41,7 @@ def get_p4src_alist(_vars,name):
     OFPActionOutput=["ev","msg","datapath","ofproto_parser","OFPActionOutput"]
     RyuToP4_key={
         "port":"standard_metadata.egress_spec"
+        "in_port":""
         }
     dict_value=get_origin_name(_vars,name)
     print(check_same_list(dict_value[0:5],OFPActionOutput))
@@ -55,8 +56,10 @@ def get_p4src_alist(_vars,name):
                         var=data[x]
                         if type(data[x].value)==type(str()):
                             var=get_origin_name(_vars,[data[x].value])[-1]
-                            #in_portの処理を記述
-                        p4src.append("{} = {}".format(RyuToP4_key[x],var))
+                        if var in RyuToP4_key:
+                            p4src.append("{} = {}".format(RyuToP4_key[x],RyuToP4_key[var]))
+                        else:
+                            p4src.append("{} = {}".format(RyuToP4_key[x],var))
             else:
                 #Packet-Inの処理を記述
                 pass
