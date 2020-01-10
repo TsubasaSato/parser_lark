@@ -55,7 +55,7 @@ def get_p4src_alist(_vars,name):
                         #数字も文字列扱いされている可能性あり、要デバッグ
                         var=data[x]
                         if type(data[x].value)==type(str()):
-                            var=get_origin_name(_vars,[data[x].value])[-1]
+                            var=get_origin_name(_vars,[data[x].value])[-1].value
                         print(var in RyuToP4_key)
                         print(var)
                         if var in RyuToP4_key:
