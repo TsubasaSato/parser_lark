@@ -77,7 +77,7 @@ def get_p4src_ilist(_vars,name):
         p4src.append(dict_value[5])
     elif check_same_list(dict_value[0:7],OFPInstActA) or check_same_list(dict_value[0:7],OFPInstActW):
         #Actionsをget_origin_nameしてActionの取得
-        actions=get_origin_name(_vars,dict_value[-1])
+        actions=get_origin_name(_vars,dict_value[-1].value)
         p4src.append(actions)
     return p4src
 
