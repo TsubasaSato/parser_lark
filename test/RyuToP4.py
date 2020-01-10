@@ -41,7 +41,7 @@ def get_p4src_alist(_vars,name):
     OFPActionOutput=["ev","msg","datapath","ofproto_parser","OFPActionOutput"]
     RyuToP4_key={
         "port":"standard_metadata.egress_spec"
-        "in_port":""
+        "in_port":"standard_metadata.ingress_port"
         }
     dict_value=get_origin_name(_vars,name)
     print(check_same_list(dict_value[0:5],OFPActionOutput))
