@@ -53,7 +53,7 @@ def get_p4src_alist(_vars,name):
                     if x in RyuToP4_key:
                         #数字も文字列扱いされている可能性あり、要デバッグ
                         var=data[x]
-                        print(data[x])
+                        print(str(data[x]))
                         print(type(data[x]))
                         if data[x]=="in_port":
                             print("OKOK")
