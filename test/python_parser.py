@@ -106,8 +106,4 @@ if __name__ == '__main__':
     #Packet_inハンドラ
     T.transform(list(data[1].find_data("funcdef"))[0])
     #RyuToP4Transformer().transform(tree)
-    print(T.get_dict("actions"))
-    for x in T.get_dict("actions")[2][0].keys():
-        print(x)
-    for x in T.get_dict("actions")[2][0].values():
-        print(x)
+    
