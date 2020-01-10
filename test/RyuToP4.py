@@ -48,6 +48,7 @@ def get_p4src_alist(_vars,name):
         if len(dict_value)>5:
             data=dict_value[5:]
             if type(data[0])==type(dict()):
+                data=data[0]
                 for x in data.keys():
                     if x in RyuToP4_key:
                         #数字も文字列扱いされている可能性あり、要デバッグ
@@ -55,6 +56,9 @@ def get_p4src_alist(_vars,name):
                         if type(data[x])==type(str()):
                             var=get_origin_name(_vars,data[x])[-1]
                         p4src.append("{} = {}".format(RyuToP4_key[x],var))
+            else:
+                #Packet-Inの処理を記述
+                pass
     return p4src
 
 def get_p4src_ilist(dict_value):
