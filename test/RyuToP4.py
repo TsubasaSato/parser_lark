@@ -54,8 +54,8 @@ def get_p4src_alist(_vars,name):
                         #数字も文字列扱いされている可能性あり、要デバッグ
                         var=data[x]
                         if type(data[x].value)==type(str()):
-                            print("OKOK")
-                            var=get_origin_name(_vars,data[x])[-1]
+                            var=get_origin_name(_vars,self.data[x])[-1]
+                            #in_portの処理を記述
                         p4src.append("{} = {}".format(RyuToP4_key[x],var))
             else:
                 #Packet-Inの処理を記述
