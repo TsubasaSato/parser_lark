@@ -141,7 +141,8 @@ def funccall_get_list(tree):
         #引数を取得
         object.append(arg_get_dict_list(tree.children[1]))
     return object
-    
+def send_msg(tree):
+    pass
 class RyuToP4Transformer(Transformer):
     env=dict()
     
