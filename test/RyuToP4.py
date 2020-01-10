@@ -139,6 +139,8 @@ class RyuToP4Transformer(Transformer):
                 pass
         if "port" in self.env:
             print(get_origin_name(self.env,self.env["port"]))
+        if "action" in self.env:
+            print(get_p4src_alist(self.env,self.env["actions"]))
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
