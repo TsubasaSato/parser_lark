@@ -1,4 +1,5 @@
 from lark import Tree, Transformer
+import copy
 
 def get_p4src_mlist(dict_value):
     #P4ソースコード
@@ -32,7 +33,7 @@ def get_p4src_ilist(dict_value):
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
     print("---Start get_origin_name---")
-    names=name_list
+    names=copy.deepcopy(name_list)
     print("name_list ID:",id(name_list))
     count=0
     print("---before names[0] = dic[names[0]]---",names)
