@@ -112,6 +112,7 @@ def arg_get_dict_list(tree):
         elif x.data=="subscript":
             item = x.children[0].children[0]
             item.type="NAME"
+            item.value.strip("'")
             arg_list.append(item)
         else:
             arg_list.append(x.children[0])
