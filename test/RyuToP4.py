@@ -114,6 +114,7 @@ def arg_get_dict_list(tree):
     arg_list=[]
     arg_dict=dict()
     for x in tree.children:
+        print(x)
         if x.data=="getattr":
             arg_list.append(getattr_get_list(x))
         elif x.data=="argvalue":
