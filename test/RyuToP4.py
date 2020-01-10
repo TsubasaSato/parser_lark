@@ -73,7 +73,7 @@ def get_p4src_ilist(_vars,name):
     #Ryuの固有関数であるか確認
     if check_same_list(dict_value[0:5],OFPInstGoto):
         #FlowModで指定されたtableIDと同じ番号のエントリをここに配置
-        p4src.append(OFPInstGoto[4],OFPInstGoto[5])
+        p4src.append(dict_value[4],dict_value[5])
     elif check_same_list(dict_value[0:7],OFPInstActA) or check_same_list(dict_value[0:7],OFPInstActW):
         #Actionsをget_origin_nameしてActionの取得
         actions=get_origin_name(_var,dict_value[-1])
