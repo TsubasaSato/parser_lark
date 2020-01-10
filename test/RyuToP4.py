@@ -110,7 +110,9 @@ def arg_get_dict_list(tree):
         elif x.data=="funccall":
             arg_list=funccall_get_list(x)
         elif x.data=="subscript":
-            arg_list.append(x.children[0].children[0])
+            item = x.children[0].children[0]
+            item.strip(')
+            arg_list.append(item)
         else:
             arg_list.append(x.children[0])
     if arg_dict != dict():
