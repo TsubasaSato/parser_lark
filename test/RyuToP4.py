@@ -107,6 +107,7 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         if "actions" in self.env:
+            print("get_origin_name")
             print(get_origin_name(self.env,self.env["actions"]))
         print("-----Finished in expr_stmt---")
     
