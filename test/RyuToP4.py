@@ -1,6 +1,7 @@
 from lark import Tree, Transformer
 import copy
 
+
 def check_same_list(token_list,normal_list):
     for x in range(len(normal_list)):
         if token_list[x]!=normal_list[x]:
@@ -145,6 +146,7 @@ def funccall_get_list(tree):
     return object
 
 def send_msg(_vars,args_tree):
+    code=dict()
     p4src=[]
     msg=[]
     FlowMod=["ev","msg","datapath","ofproto_parser","OFPFlowMod"]
