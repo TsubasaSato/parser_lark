@@ -4,8 +4,8 @@ import copy
 def check_same_list(token_list,normal_list):
     for x in range(len(normal_list)):
         if token_list[x]!=normal_list[x]:
-            return false
-    return true
+            return False
+    return True
 
 def get_p4src_mlist(_vars,name):
     #P4ソースコード
