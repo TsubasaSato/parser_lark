@@ -113,6 +113,7 @@ def arg_get_dict_list(tree):
     #argumentsを入力、リストに入った辞書を出力
     arg_list=[]
     arg_dict=dict()
+    print(tree)
     for x in tree.children:
         print(x)
         if x.data=="getattr":
@@ -144,8 +145,13 @@ def funccall_get_list(tree):
         #引数を取得
         object.append(arg_get_dict_list(tree.children[1]))
     return object
-def send_msg(tree):
-    pass
+
+def send_msg(args_tree):
+    p4src=[]
+    if args_tree.children:
+        pass
+    
+    
 class RyuToP4Transformer(Transformer):
     env=dict()
     
@@ -169,6 +175,7 @@ class RyuToP4Transformer(Transformer):
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
+        #packet.Packet()とsend_msg()用に分けて考える
         #datapath.send_msgにしておく
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
