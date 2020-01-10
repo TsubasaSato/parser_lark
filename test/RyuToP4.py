@@ -138,8 +138,10 @@ class RyuToP4Transformer(Transformer):
     def funccall(self,args):
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
-            print(get_p4src_mlist(self.env,self.env["match"]))
-            print(get_p4src_alist(self.env,self.env["action"]))
+            if "match" in self.env:
+                print(get_p4src_mlist(self.env,self.env["match"]))
+            if "action" in self.env:
+                print(get_p4src_alist(self.env,self.env["action"]))
             print("-----Finished in funccall----")
         else:
             return Tree("funccall",args)
