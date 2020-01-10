@@ -32,22 +32,13 @@ def get_p4src_ilist(dict_value):
     pass
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
-    print("---Start get_origin_name---")
     names=copy.deepcopy(name_list)
-    print("name_list ID:",id(name_list))
-    count=0
-    print("---before names[0] = dic[names[0]]---",names)
     while names[0] in dic:
-        print("Count is :",count,"names ID :",id(names))
         names[0] = dic[names[0]]
         for x in names:
             if type(x) != type(list()):
                 names[names.index(x)]=[x]
-        print("before sum:",names,count)
         names=sum(names,[])
-        print("after sum:",names,count)
-        count =count+1
-    print("---Finished get_origin_name---")
     return names
 
 def getattr_get_list(tree):
@@ -90,9 +81,6 @@ def arg_get_dict_list(tree):
 def funccall_get_list(tree):
     #関数を呼び出して変数に代入する記述を入力、リストに入った辞書を出力
     object=getattr_get_list(tree.children[0])
-    print("-----funccall_get_list------")
-    print(object)
-    print("-----funccall_get_list------")
     if len(tree.children)>1:
         #引数を取得
         object.append(arg_get_dict_list(tree.children[1]))
