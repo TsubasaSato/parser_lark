@@ -20,12 +20,12 @@ def get_p4src_mlist(dict_value):
     #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
     if dict_value[0:5]==OFPMatch:
         if len(dict_value) > 5:
-            dict=dict_value[5]
-            for x in dict.keys():
+            data=dict_value[5]
+            for x in data.keys():
                 if x=="eth_type" or x == "ip_proto":
-                    p4src.append(RyuToP4_key[x][dict[x]])
+                    p4src.append(RyuToP4_key[x][data[x]])
                 else:
-                    p4src.append("{} == {}".format(RyuToP4_key[x],dict[x]))
+                    p4src.append("{} == {}".format(RyuToP4_key[x],data[x]))
     return p4src
         
 def get_p4src_ilist(dict_value):
