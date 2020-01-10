@@ -147,7 +147,7 @@ class RyuToP4Transformer(Transformer):
             if "match" in self.env:
                 print(get_p4src_mlist(self.env,self.env["match_t1"]))
             if "action" in self.env:
-                print(get_p4src_alist(self.env,self.env["action"]))
+                print(get_p4src_alist(self.env,self.env["actions"]))
             print("-----Finished in funccall----")
         else:
             return Tree("funccall",args)
