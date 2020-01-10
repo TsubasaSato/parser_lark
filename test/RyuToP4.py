@@ -1,11 +1,12 @@
 from lark import Tree, Transformer
 import copy
 
-def get_p4src_mlist(dict_value):
+def get_p4src_mlist(_vars,name):
     #P4ソースコード
     p4src=[]
     eth_type={"0x0800":"hdr.ipv4.isValid()"}
     ip_proto={"6":"hdr.tcp.isValid()"}
+    dict_value=get_origin_name(_vars,name)
     RyuToP4_key={
         "eth_type":eth_type,
         "ip_proto":ip_proto,
@@ -27,7 +28,29 @@ def get_p4src_mlist(dict_value):
                 else:
                     p4src.append("{} == {}".format(RyuToP4_key[x],data[x]))
     return p4src
-        
+
+def get_p4src_alist(_vars,name):
+    #OFPActionOutput:スイッチの出力ポートを決定するActionのみ可
+    p4src=[]
+    OFPActionOutput=["ev","msg","datapath","ofproto_parser","OFPActionOutput"]
+    RyuToP4_key={
+        "port":"standard_metadata.egress_spec"
+        }
+    dict_value=get_origin_name(_vars,name)
+    
+    if dict_value[0:5]==OFPActionOutput:
+        if len(dict_value)>5:
+            data=dict_value[5:]
+            if type(data[0])==type(dict()):
+                for x in data.keys():
+                    if x in RyuToP4_key:
+                        #数字も文字列扱いされている可能性あり、要デバッグ
+                        var=data[x]
+                        if type(data[x])==type(str()):
+                            var=get_origin_name(_vars,data[x])[-1]
+                        p4src.append("{} = {}".format(RyuToP4_key[x],var))
+    return p4src
+
 def get_p4src_ilist(dict_value):
     pass
 def get_origin_name(dic,name_list):
