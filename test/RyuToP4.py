@@ -81,7 +81,7 @@ def funccall_get_list(tree):
     #関数を呼び出して変数に代入する記述を入力、リストに入った辞書を出力
     object=getattr_get_list(tree.children[0])
     print("-----funccall_get_list------")
-    print(obeject)
+    print(object)
     print("-----funccall_get_list------")
     if len(tree.children)>1:
         #引数を取得
