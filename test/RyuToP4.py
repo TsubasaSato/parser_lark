@@ -3,6 +3,7 @@ import copy
 
 def get_p4src_mlist(dict_value):
     #P4ソースコード
+    p4src=[]
     eth_type={"0x0800":"hdr.ipv4.isValid()"}
     ip_proto={"6":"hdr.tcp.isValid()"}
     RyuToP4_key={
@@ -18,7 +19,6 @@ def get_p4src_mlist(dict_value):
     OFPMatch=["ev","msg","datapath","ofproto_arser","OFPMatch"]
     #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
     if dict_value[0:5]==OFPMatch:
-        p4src=[]
         if len(dict_value) > 5:
             dict=dict_value[5]
             for x in dict.keys():
@@ -26,7 +26,7 @@ def get_p4src_mlist(dict_value):
                     p4src.append(RyuToP4_key[x][dict[x]])
                 else:
                     p4src.append("{} == {}".format(RyuToP4_key[x],dict[x]))
-        return p4src
+    return p4src
         
 def get_p4src_ilist(dict_value):
     pass
