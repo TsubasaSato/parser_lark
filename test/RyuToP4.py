@@ -55,7 +55,7 @@ def get_p4src_alist(_vars,name):
                         #数字も文字列扱いされている可能性あり、要デバッグ
                         var=get_origin_name(_vars,[data[x].value])[-1]
                         if type(var)!=type(str()):
-                            v=str(var.value)
+                            v=var.value
                             p4src.append("{} = {}".format(RyuToP4_key[x],RyuToP4_key[v]))
                         else:
                             p4src.append("{} = {}".format(RyuToP4_key[x],var))
