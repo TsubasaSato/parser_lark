@@ -148,8 +148,10 @@ def funccall_get_list(tree):
 
 def send_msg(args_tree):
     p4src=[]
-    if args_tree.children:
-        pass
+    if args_tree.children.data=="var":
+        print("var out")
+    elif args_tree.children.data=="funccall":
+        print("funccall")
     
     
 class RyuToP4Transformer(Transformer):
@@ -179,7 +181,7 @@ class RyuToP4Transformer(Transformer):
         #datapath.send_msgにしておく
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
-            print(arg_get_dict_list(args[1].children[0]))
+            send_msg(args[1])
             """
             if "match" in self.env:
                 print(get_p4src_mlist(self.env,self.env["match_t1"]))
