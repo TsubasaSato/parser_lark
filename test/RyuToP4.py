@@ -43,8 +43,8 @@ def get_p4src_alist(_vars,name):
         "port":"standard_metadata.egress_spec",
         "in_port":"standard_metadata.ingress_port",
         }
+    #Ryuの固有関数であるか確認
     dict_value=get_origin_name(_vars,name)
-    print(check_same_list(dict_value[0:5],OFPActionOutput))
     if check_same_list(dict_value[0:5],OFPActionOutput):
         if len(dict_value)>5:
             data=dict_value[5:]
@@ -64,8 +64,22 @@ def get_p4src_alist(_vars,name):
                 pass
     return p4src
 
-def get_p4src_ilist(dict_value):
-    pass
+def get_p4src_ilist(_var,name):
+    p4src=[]
+    OFPInstGoto=["ev","msg","datapath","ofproto_parser","OFPInstructionGotoTable"]
+    OFPInstActA=["ev","msg","datapath","ofproto_parser","OFPInstructionActions","ofproto","OFPIT_APPLY_ACTIONS"]
+    OFPInstActW=["ev","msg","datapath","ofproto_parser","OFPInstructionActions","ofproto","OFPIT_WRITE_ACTIONS"]
+    dict_value=get_origin_name(_vars,name)
+    #Ryuの固有関数であるか確認
+    if chech_same_list(dict_value[0:5],OFPInstGoto):
+        #FlowModで指定されたtableIDと同じ番号のエントリをここに配置
+        p4src.append(OFPInstGoto[4],OFPInstGoto[5])
+    elif chech_same_list(dict_value[0:7],OFPInstActA) or chech_same_list(dict_value[0:7],OFPInstActW):
+        #Actionsをget_origin_nameしてActionの取得
+        actions=get_origin_name(_var,dict_value[-1])
+        p4src.append(actions)
+    return p4src
+
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
     names=copy.deepcopy(name_list)
@@ -147,10 +161,6 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1])
             else:
                 pass
-        if "port" in self.env:
-            print(get_origin_name(self.env,self.env["port"]))
-        if "actions" in self.env:
-            print(get_p4src_alist(self.env,self.env["actions"]))
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
@@ -160,6 +170,8 @@ class RyuToP4Transformer(Transformer):
                 print(get_p4src_mlist(self.env,self.env["match_t1"]))
             if "actions" in self.env:
                 print(get_p4src_alist(self.env,self.env["actions"]))
+            if "inst" in self.env:
+                print(get_p4src_alist(self.env,self.env["inst"]))
             print("-----Finished in funccall----")
         else:
             return Tree("funccall",args)
