@@ -19,6 +19,8 @@ def get_p4src_mlist(_vars,name):
     }
     OFPMatch=["ev","msg","datapath","ofproto_arser","OFPMatch"]
     #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
+    print(dict_value[0:5]==OFPMatch)
+    print(dict_value[0:5])
     if dict_value[0:5]==OFPMatch:
         if len(dict_value) > 5:
             data=dict_value[5]
