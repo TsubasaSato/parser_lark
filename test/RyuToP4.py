@@ -1,6 +1,12 @@
 from lark import Tree, Transformer
 import copy
 
+def check_same_list(token_list,normal_list):
+    for x in range(len(normal_list)):
+        if token_list[x]!=normal_list[x]:
+            return false
+    return true
+
 def get_p4src_mlist(_vars,name):
     #P4ソースコード
     p4src=[]
@@ -19,12 +25,7 @@ def get_p4src_mlist(_vars,name):
     }
     OFPMatch=["ev","msg","datapath","ofproto_arser","OFPMatch"]
     #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
-    if OFPMatch[0]==dict_value[0]:
-        print("OK")
-    print(dict_value[0:5],type(dict_value[0]))
-    
-    return 
-    if dict_value[0:5]==OFPMatch:
+    if check_same_list(dict_value[0:5],OFPMatch):
         if len(dict_value) > 5:
             data=dict_value[5]
             for x in data.keys():
