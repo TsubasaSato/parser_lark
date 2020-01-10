@@ -139,7 +139,7 @@ class RyuToP4Transformer(Transformer):
                 pass
         if "port" in self.env:
             print(get_origin_name(self.env,self.env["port"]))
-        if "action" in self.env:
+        if "actions" in self.env:
             print(get_p4src_alist(self.env,self.env["actions"]))
         print("-----Finished in expr_stmt---")
     
@@ -148,7 +148,7 @@ class RyuToP4Transformer(Transformer):
             print("-----Start in funccall-------")
             if "match" in self.env:
                 print(get_p4src_mlist(self.env,self.env["match_t1"]))
-            if "action" in self.env:
+            if "actions" in self.env:
                 print(get_p4src_alist(self.env,self.env["actions"]))
             print("-----Finished in funccall----")
         else:
