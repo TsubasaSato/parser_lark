@@ -109,7 +109,7 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         if "port" in self.env:
-            print(type(get_origin_name(self.env,self.env["port"])[-1]["port"]))
+            print(get_origin_name(self.env,self.env["port"])[-1])
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
