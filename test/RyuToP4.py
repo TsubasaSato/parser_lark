@@ -94,7 +94,7 @@ class RyuToP4Transformer(Transformer):
     #変数宣言
     
     def expr_stmt(self,args):
-        print("-----Start-------")
+        print("-----Start in expr_stmt------")
         if args[0].data=="var":
             if args[1].data=="var":
                 pass
@@ -106,17 +106,14 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1].children[0])
             else:
                 pass
-        print("-----Finished-----")
+        print(get_origin_name(self.env,self.env["actions"]))
+        print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
         if args[0].children[1] =="send_msg":
-            print("-----Start-------")
-            print(args[0].pretty())
-            print("-----Original Name---actions--")
-            print(self.get_alldicts())
-            print(self.env["actions"])
-            print(print(get_origin_name(self.env,self.env["actions"])))
-            print("-----Finished-----")
+            print("-----Start in funccall-------")
+            print(get_origin_name(self.env,self.env["actions"]))
+            print("-----Finished in funccall----")
         else:
             return Tree("funccall",args)
         
