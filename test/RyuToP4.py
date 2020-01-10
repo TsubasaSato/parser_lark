@@ -23,9 +23,9 @@ def get_p4src_mlist(_vars,name):
         "tcp_dst":"hdr.tcp.dstPort",
         "tcp_src":"hdr.tcp.srcPort",
     }
-    OFPMatch=["ev","msg","datapath","ofproto_arser","OFPMatch"]
+    OFPMatch=["ev","msg","datapath","ofproto_parser","OFPMatch"]
     #Ryuの固有関数:ev.msg.datapath.ofproto_parser.OFPMatch()であるか確認
-    print(check_same_list(dict_value[0:5],OFPMatch))
+    print(dict_value[0]==OFPMatch[0] and dict_value[1]==OFPMatch[1])
     if check_same_list(dict_value[0:5],OFPMatch):
         if len(dict_value) > 5:
             data=dict_value[5]
