@@ -147,12 +147,19 @@ def funccall_get_list(tree):
 def send_msg(_vars,args_tree):
     p4src=[]
     msg=[]
+    FlowMod=["ev","msg","datapath","ofproto_parser","OFPFlowMod"]
+    PacketOut=["ev","msg","datapath","ofproto_parser","OFPPacketOut"]
+    
     if args_tree.children[0].data=="var":
         msg=get_origin_name(_vars,[args_tree.children[0].children[0]])
     elif args_tree.children[0].data=="funccall":
         msg=get_origin_name(_vars,funccall_get_list(args_tree.children[0]))
-    print(msg)
-    
+    if check_same_list(msg[0:5],FlowMod):
+        #FlowModの記述
+        print(msg)
+    elif check_same_list(msg[0:5],PacketOut):
+        #PacketOutの記述
+        print(msg)
     
 class RyuToP4Transformer(Transformer):
     env=dict()
