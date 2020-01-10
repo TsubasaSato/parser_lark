@@ -54,6 +54,7 @@ def get_p4src_alist(_vars,name):
                         #数字も文字列扱いされている可能性あり、要デバッグ
                         var=data[x]
                         print(data[x])
+                        print(type(data[x]))
                         if type(data[x])==type(str()):
                             print("if type(data[x])==type(str()):")
                             var=get_origin_name(_vars,data[x])[-1]
