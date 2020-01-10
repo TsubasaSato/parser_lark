@@ -128,8 +128,10 @@ def arg_get_dict_list(tree):
             item.type="NAME"
             item.value=item.value.strip("'")
             arg_list.append(item)
-        else:
+        elif x.data=="var":
             arg_list.append(x.children[0])
+        else:
+            pass
     if arg_dict != dict():
         arg_list.append(arg_dict)
     return arg_list
@@ -169,7 +171,7 @@ class RyuToP4Transformer(Transformer):
         #datapath.send_msgにしておく
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
-            print(funccall_get_list(args[1].children[0]))
+            print(arg_get_dict_list(args[1].children[0]))
             """
             if "match" in self.env:
                 print(get_p4src_mlist(self.env,self.env["match_t1"]))
