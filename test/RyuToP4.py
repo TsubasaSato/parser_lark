@@ -33,10 +33,11 @@ def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
     print("---Start get_origin_name---")
     names=name_list
+    print("name_list ID:",id(name_list))
     count=0
     print("---before names[0] = dic[names[0]]---",names)
     while names[0] in dic:
-        print("Count is :",count)
+        print("Count is :",count,"names ID :",id(names))
         names[0] = dic[names[0]]
         for x in names:
             if type(x) != type(list()):
