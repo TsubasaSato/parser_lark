@@ -31,13 +31,20 @@ def get_p4src_ilist(dict_value):
     pass
 def get_origin_name(dic,name_list):
     #変数宣言された時の名前に変換、リスト化して出力、再帰
+    print("---Start get_origin_name---")
     names=name_list
+    count=0
     while names[0] in dic:
+        print("Count is :",count)
         names[0] = dic[names[0]]
         for x in names:
             if type(x) != type(list()):
                 names[names.index(x)]=[x]
+        print("before sum:",names,count)
         names=sum(names,[])
+        print("after sum:",names,count)
+        count =count+1
+    print("---Finished get_origin_name---")
     return names
 
 def getattr_get_list(tree):
