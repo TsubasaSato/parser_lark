@@ -103,9 +103,9 @@ if __name__ == '__main__':
     T=RyuToP4Transformer()
     for x in dir(T):
         print(x)
-    T.visit_topdown(list(data[0].find_data("funcdef"))[0])
+    T.visit(list(data[0].find_data("funcdef"))[0])
     print("---------------{}----------------".format(len(data)))
     #Packet_inハンドラ
-    T.visit_topdown(list(data[1].find_data("funcdef"))[0])
+    T.visit(list(data[1].find_data("funcdef"))[0])
     print(T.flowmod.get_code())
     #RyuToP4Transformer().transform(tree)
