@@ -1,12 +1,47 @@
 from lark import Tree, Transformer
 import copy
 
-
+def flowmod(flow_list):
+    
+    
 def check_same_list(token_list,normal_list):
     for x in range(len(normal_list)):
         if token_list[x]!=normal_list[x]:
             return False
     return True
+
+class FlowMod():
+    entries=dict()
+    src_1="""if ({match}) {{
+                {inst}
+                }}"""
+    src_2="""else if ({match}) {{
+                {inst}
+                }}"""
+    p4src=[]
+        
+    def set_entry(self,table_id,priority,match,instructions):
+        if table_id in self.entries:
+            self.entries[table_id].append([int(priority),match,instructions])
+        else:
+            self.entries[table_id]=list()
+            self.entries[table_id].append([int(priority),match,instructions])
+    def get_code(self):
+        table_ids=self.entries.keys()
+        for x in table_ids:
+            self.entries[x].sort(key=lambda x:x[0],reverse=True)
+            count=1
+            for y in self.entries[x]:
+                if count==1:
+                    self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
+                else:
+                    self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
+                count=count+1
+            
+        return self.p4src
+    
+#instがgotoだった時の処理を記述する必要
+#packetInの時の処理を記述
 
 def get_p4src_mlist(_vars,name):
     #P4ソースコード
@@ -145,7 +180,7 @@ def funccall_get_list(tree):
         object.append(arg_get_dict_list(tree.children[1]))
     return object
 
-def send_msg(_vars,args_tree):
+def send_msg(_vars,args_tree,flowmod):
     code=dict()
     p4src=[]
     msg=[]
@@ -157,15 +192,15 @@ def send_msg(_vars,args_tree):
     elif args_tree.children[0].data=="funccall":
         msg=get_origin_name(_vars,funccall_get_list(args_tree.children[0]))
     if check_same_list(msg[0:5],FlowMod):
-        #FlowModの記述
-        print(msg)
+        t_id,p,m,i=msg[6]["table_id"],msg[6]["priority"],msg[6]["match"],msg[6]["instructions"]
+        flowmod.set_entry(t_id,p,get_p4src_mlist(_vars,m),get_p4src_ilist(_vars,i))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
         print(msg)
     
 class RyuToP4Transformer(Transformer):
     env=dict()
-    
+    flowmod=FlowMod()
     #変数宣言
     
     def expr_stmt(self,args):
@@ -190,16 +225,7 @@ class RyuToP4Transformer(Transformer):
         #datapath.send_msgにしておく
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
-            send_msg(self.env,args[1])
-            """
-            if "match" in self.env:
-                print(get_p4src_mlist(self.env,self.env["match_t1"]))
-            if "actions" in self.env:
-                print(get_p4src_alist(self.env,self.env["actions"]))
-            if "inst" in self.env:
-                print(get_p4src_ilist(self.env,self.env["inst"]))
-            """
-            print("-----Finished in funccall----")
+            send_msg(self.env,args[1],self.flowmod)
         else:
             return Tree("funccall",args)
         
