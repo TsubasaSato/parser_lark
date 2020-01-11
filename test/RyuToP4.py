@@ -231,8 +231,9 @@ class RyuToP4Transformer(Transformer):
         else:
             return Tree("funccall",args)
     def if_stmt(self,args):
+        print("-----Start in if_stmt---")
         print(get_origin_name(self.env,[args[0].children[0]]))
-        
+        print("-----Finished in expr_stmt---")
     def get_alldicts(self):
         return self.env
 
