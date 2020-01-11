@@ -198,6 +198,7 @@ def send_msg(_vars,args_tree,flowmod):
         flowmod.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
+        pass
     
 class RyuToP4Transformer(Transformer):
     env=dict()
