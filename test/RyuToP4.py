@@ -74,12 +74,6 @@ def get_p4src_packet(_vars,name):
     pkt_proto=["packet","Packet",[{"data":["msg","data"]}],"get_protocol"]
     pkt_has_flags=["packet","Packet",[{"data":["msg","data"]}],"get_protocol",
                    ["tcp","tcp"],"has_flags"]
-    print("--------dict_value-------")
-    print(dict_value)
-    print(check_same_list(dict_value[0:6],pkt_has_flags))
-    print(check_same_list(dict_value[0:4],pkt_proto))
-    print(check_same_list(dict_value[0:2],pkt))
-    print("--------F dict_value-------")
     if check_same_list(dict_value[0:6],pkt_has_flags):
         #has_flags
         p4src.append(func[dict_value[5]][dict_value[7]])
@@ -284,14 +278,11 @@ class RyuToP4Transformer(Transformer):
             return Tree("funccall",args)
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
-        print("@args@",args)
-        print("@args[0].children[0]@",args[0].children[0])
         #リストにnotを入れる
         if args[0].data=="not":
             if args[0].children[0].data=="var":
                 print(get_p4src_packet(self.env,[args[0].children[0].children[0]]))
         elif args[0].data=="funccall":
-            print("funccall_get_list:",funccall_get_list(args[0]))
             print(get_p4src_packet(self.env,funccall_get_list(args[0])))
         elif args[0].data=="var":
             print(get_p4src_packet(self.env,[args[0].children[0]]))
