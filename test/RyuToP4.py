@@ -200,7 +200,10 @@ def arg_get_dict_list(tree):
         if x.data=="getattr":
             arg_list.append(getattr_get_list(x))
         elif x.data=="argvalue":
-            if x.children[1].data!="getattr":
+            if x.children[1].data=="expr":
+                arg_dict[x.children[0].children[0]]=[getattr_get_list(x.children[1].children[0]),
+                                                     getattr_get_list(x.children[1].children[1])]
+            elif x.children[1].data!="getattr":
                 arg_dict[x.children[0].children[0]]=x.children[1].children[0]
             else:
                 arg_dict[x.children[0].children[0]]=getattr_get_list(x.children[1])
@@ -214,8 +217,6 @@ def arg_get_dict_list(tree):
         elif x.data=="var":
             arg_list.append(x.children[0])
         else:
-            print("---arg_get_dict_list:else---")
-            print(x)
             arg_list.append(x.children[0])
     if arg_dict != dict():
         arg_list.append(arg_dict)
