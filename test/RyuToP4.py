@@ -286,7 +286,7 @@ class RyuToP4Transformer(Transformer):
         if args[0].children[0].data=="var":
             print(get_p4src_packet(self.env,[args[0].children[0].children[0]]))
         elif args[0].children[0].data=="funccall":
-            print(get_p4src_packet(self.env,[funccall_get_list(args[0].children[0]])))
+            print(get_p4src_packet(self.env,[funccall_get_list(args[0].children[0])]))
         print("-----Finished in expr_stmt---")
     def get_alldicts(self):
         return self.env
