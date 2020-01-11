@@ -189,6 +189,7 @@ def send_msg(_vars,args_tree,flowmod):
     elif args_tree.children[0].data=="funccall":
         msg=get_origin_name(_vars,funccall_get_list(args_tree.children[0]))
     if check_same_list(msg[0:5],FlowMod):
+        print(msg)
         print(msg[6])
         print(msg[6]["table_id"])
         t_id,p,m,i=msg[6]["table_id"],msg[6]["priority"],msg[6]["match"],msg[6]["instructions"]
