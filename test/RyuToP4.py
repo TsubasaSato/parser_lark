@@ -2,16 +2,19 @@ from lark import Tree, Transformer
 import copy
     
 def check_same_list(token_list,normal_list):
-    for x in range(len(normal_list)):
-        if type(token_list[x])==type(list()):
-            if not check_same_list(token_list[x],normal_list[x]):
-                return false
-        elif type(token_list[x])==type(dict()):
-            if not check_same_list([token_list[x].keys()],[normal_list[x].values()]):
-                return false
-        else:
-            if token_list[x]!=normal_list[x]:
-                return False
+    if type(token_list)==type(dict()):
+        if not check_same_list(token_list.keys(),normal_list.keys()):
+            return False
+        elif not check_same_list(token_list.values(),normal_list.values()):
+            return False
+    else:
+        for x in range(len(normal_list)):
+            if type(token_list[x])==type(list()):
+                if not check_same_list(token_list[x],normal_list[x]):
+                    return False
+            else:
+                if token_list[x]!=normal_list[x]:
+                    return False
     return True
 
 class FlowMod():
