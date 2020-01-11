@@ -155,7 +155,7 @@ def arg_get_dict_list(tree):
         if x.data=="getattr":
             arg_list.append(getattr_get_list(x))
         elif x.data=="argvalue":
-            if not x.children[1].data=="getattr":
+            if x.children[1].data!="getattr":
                 arg_dict[x.children[0].children[0]]=x.children[1].children[0]
             else:
                 arg_dict[x.children[0].children[0]]=getattr_get_list(x.children[1])
@@ -220,6 +220,9 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1])
             else:
                 pass
+        if "pkt" in self.env:
+            print(self.env["pkt"])
+            print(get_origin_name(self.env,[self.env["pkt"]]))
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
