@@ -221,8 +221,9 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         if "pkt_ethernet" in self.env:
-            print(self.env["pkt"])
             print(get_origin_name(self.env,self.env["pkt_ethernet"]))
+        if "pkt_in" in self.env:
+            print(get_origin_name(self.env,self.env["pkt_in"]))
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
