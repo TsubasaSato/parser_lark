@@ -1,8 +1,5 @@
 from lark import Tree, Transformer
 import copy
-
-def flowmod(flow_list):
-    
     
 def check_same_list(token_list,normal_list):
     for x in range(len(normal_list)):
