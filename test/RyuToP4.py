@@ -26,16 +26,6 @@ class Message():
     src_1="""if ({match}) {{\n    {inst}\n    }}\n"""
     src_2="""else if ({match}) {{\n    {inst}\n    }}\n"""
     p4src_f=[]
-    proto={
-        "ethernet":ethernet,
-        "ipv4":ipv4,
-        "tcp":tcp,
-    }
-    ethernet={
-        "dst":"hdr.ethernet.dstAddr",
-        "src":"",
-    }
-        
     
     
     def set_pktout(self,act,data):
