@@ -74,7 +74,7 @@ def get_p4src_packet(_vars,name):
                    ["tcp","tcp"],"has_flags"]
     if check_same_list(dict_value[0:6],pkt_has_flags):
         #has_flags
-        p4src.append(func[dict_value[5][dict_value[6][1]])
+        p4src.append(func[dict_value[5]][dict_value[6][1]])
     elif check_same_list(dict_value[0:4],pkt_proto):
         #pkt_proto
         p4src.append(proto[dict_value[4][0]])
