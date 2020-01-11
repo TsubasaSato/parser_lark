@@ -222,7 +222,7 @@ def funccall_get_list(tree):
         object.append(arg_get_dict_list(tree.children[1]))
     return object
 
-def send_msg(_vars,args_tree,msg):
+def send_msg(_vars,args_tree,_msg):
     code=dict()
     p4src=[]
     msg=[]
@@ -235,7 +235,7 @@ def send_msg(_vars,args_tree,msg):
         msg=get_origin_name(_vars,funccall_get_list(args_tree.children[0]))
     if check_same_list(msg[0:5],FlowMod):
         t_id,p,m,i=msg[5]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
-        msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
+        _msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
         pass
