@@ -1,4 +1,4 @@
-from lark import Tree, Transformer
+from lark import Tree, Visitor
 import copy
     
 def check_same_list(token_list,normal_list):
@@ -240,7 +240,7 @@ def send_msg(_vars,args_tree,flowmod):
         #PacketOutの記述
         pass
     
-class RyuToP4Transformer(Transformer):
+class RyuToP4Transformer(Visitor):
     env=dict()
     flowmod=FlowMod()
     #変数宣言
