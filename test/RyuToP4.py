@@ -32,7 +32,7 @@ class Message():
         pass
     def get_pktout_code(self):
         pass
-    def fset_entry(self,table_id,priority,match,instructions):
+    def set_entry(self,table_id,priority,match,instructions):
         if len(match)>1:
             match=[" && ".join(match)]
         print(match,instructions)
@@ -41,7 +41,7 @@ class Message():
         else:
             self.entries[table_id]=list()
             self.entries[table_id].append([int(priority),match,instructions])
-    def fget_code(self):
+    def get_code(self):
         table_ids=self.entries.keys()
         for x in table_ids:
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
