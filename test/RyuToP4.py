@@ -283,7 +283,7 @@ class RyuToP4Transformer(Transformer):
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
         print(args[0].children[0])
-        if args[0].children[0].data=="var"
+        if args[0].children[0].data=="var":
             print(get_p4src_packet(self.env,[args[0].children[0].children[0]]))
         elif args[0].children[0].data=="funccall":
             print(get_p4src_packet(self.env,[funccall_get_list(args[0].children[0]])))
