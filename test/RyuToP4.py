@@ -223,6 +223,7 @@ class RyuToP4Transformer(Transformer):
         if "pkt_ethernet" in self.env:
             print(get_origin_name(self.env,self.env["pkt_ethernet"]))
         if "pkt_in" in self.env:
+            print("-------------------")
             print(get_origin_name(self.env,self.env["pkt_in"]))
         print("-----Finished in expr_stmt---")
     
