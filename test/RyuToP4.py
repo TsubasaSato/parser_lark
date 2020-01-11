@@ -51,9 +51,37 @@ class FlowMod():
                 count=count+1
             
         return self.p4src
-    
-#instがgotoだった時の処理を記述する必要
-#packetInの時の処理を記述
+
+def get_p4src_packet(_vars,name):
+    func={
+        "get_protocol":proto,
+        "has_flags":flags
+        }
+    proto={
+        "tcp":"hdr.tcp.isValid()",
+        "ipv4":"hdr.ipv4.isValid()",
+        "ethernet":"hdr.ethernet.isValid()",
+        }
+    flags={
+        "TCP_SYN":"hdr.tcp.syn==1",
+        "TCP_RST":"hdr.tcp.rst==1",
+        }
+    p4src=[]
+    dict_value=get_origin_name(_vars,name)
+    pkt=["packet","Packet"]
+    pkt_proto=["packet","Packet",[{"data":["msg","data"]}],"get_protocol"]
+    pkt_has_flags=["packet","Packet",[{"data":["msg","data"]}],"get_protocol",
+                   ["tcp","tcp"],"has_flags"]
+    if check_same_list(dict_value[0:6],pkt_has_flags):
+        #has_flags
+        p4src.append(func[dict_value[5][dict_value[6][1]])
+    elif check_same_list(dict_value[0:4],pkt_proto):
+        #pkt_proto
+        p4src.append(proto[dict_value[4][0]])
+    elif check_same_list(dict_value[0:2],pkt):
+        #pkt
+        pass
+    return p4src
 
 def get_p4src_mlist(_vars,name):
     #P4ソースコード
@@ -247,7 +275,7 @@ class RyuToP4Transformer(Transformer):
             return Tree("funccall",args)
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
-        print(get_origin_name(self.env,[args[0].children[0]]))
+        print(get_p4src_packet(self.env,[args[0].children[0]]))
         print("-----Finished in expr_stmt---")
     def get_alldicts(self):
         return self.env
