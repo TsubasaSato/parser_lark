@@ -9,6 +9,8 @@ def check_same_list(token_list,normal_list):
 
 class FlowMod():
     entries=dict()
+    src_inst="""{inst}
+                """
     src_1="""if ({match}) {{
                 {inst}
                 }}"""
@@ -30,12 +32,15 @@ class FlowMod():
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
-                print(y)
-                if count==1:
-                    # formatの実引数をデバッグ
-                    self.p4src.append(self.src_1.format(match=y[1],inst=y[2][0]))
+                #matchが空ならif文を作成しない
+                if y[1]:
+                    if count==1:
+                        # formatの実引数をデバッグ
+                        self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
+                    else:
+                        self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
                 else:
-                    self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
+                    self.p4src.append(self.src_inst.format(inst=y[2][0]))
                 count=count+1
             
         return self.p4src
