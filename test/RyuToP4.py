@@ -21,12 +21,26 @@ def check_same_list(token_list,normal_list):
 
 class Message():
     entries=dict()
+    pkt_out=list()
     src_inst="""    {inst}\n"""
     src_1="""if ({match}) {{\n    {inst}\n    }}\n"""
     src_2="""else if ({match}) {{\n    {inst}\n    }}\n"""
-    p4src=[]
+    p4src_f=[]
+    proto={
+        "ethernet":ethernet,
+        "ipv4":ipv4,
+        "tcp":tcp,
+    }
+    ethernet={
+        "dst":"hdr.ethernet.dstAddr",
+        "src":""
+    
+    
+    def set_pktout(self,act,data):
         
-    def set_entry(self,table_id,priority,match,instructions):
+    def get_pktout_code(self):
+    
+    def fset_entry(self,table_id,priority,match,instructions):
         if len(match)>1:
             match=[" && ".join(match)]
         print(match,instructions)
@@ -35,7 +49,7 @@ class Message():
         else:
             self.entries[table_id]=list()
             self.entries[table_id].append([int(priority),match,instructions])
-    def get_code(self):
+    def fget_code(self):
         table_ids=self.entries.keys()
         for x in table_ids:
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
@@ -45,14 +59,13 @@ class Message():
                 if y[1]:
                     if count==1:
                         # formatの実引数をデバッグ
-                        self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
+                        self.p4src_f.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
                     else:
-                        self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
+                        self.p4src_f.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
                 else:
-                    self.p4src.append(self.src_inst.format(inst=y[2][0]))
+                    self.p4src_f.append(self.src_inst.format(inst=y[2][0]))
                 count=count+1
-            
-        return self.p4src
+        return self.p4src_f
 
 def get_p4src_packet(_vars,name):
     proto={
