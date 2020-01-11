@@ -30,9 +30,10 @@ class FlowMod():
             count=1
             for y in self.entries[x]:
                 if count==1:
-                    self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
+                    # formatの実引数をデバッグ
+                    self.p4src.append(self.src_1.format(match=y[1],inst=y[2]))
                 else:
-                    self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
+                    self.p4src.append(self.src_2.format(match=y[1],inst=y[2]))
                 count=count+1
             
         return self.p4src
