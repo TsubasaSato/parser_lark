@@ -20,6 +20,8 @@ class FlowMod():
     p4src=[]
         
     def set_entry(self,table_id,priority,match,instructions):
+        if len(match)>1:
+            match=" && ".join(match)
         print(match,instructions)
         if table_id in self.entries:
             self.entries[table_id].append([int(priority),match,instructions])
