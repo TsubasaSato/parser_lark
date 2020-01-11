@@ -53,10 +53,6 @@ class FlowMod():
         return self.p4src
 
 def get_p4src_packet(_vars,name):
-    func={
-        "get_protocol":proto,
-        "has_flags":flags
-        }
     proto={
         "tcp":"hdr.tcp.isValid()",
         "ipv4":"hdr.ipv4.isValid()",
@@ -65,6 +61,10 @@ def get_p4src_packet(_vars,name):
     flags={
         "TCP_SYN":"hdr.tcp.syn==1",
         "TCP_RST":"hdr.tcp.rst==1",
+        }
+    func={
+        "get_protocol":proto,
+        "has_flags":flags
         }
     p4src=[]
     dict_value=get_origin_name(_vars,name)
