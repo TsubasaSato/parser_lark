@@ -102,8 +102,8 @@ if __name__ == '__main__':
     #Switch_featuredハンドラ
     T=RyuToP4Transformer()
     T.transform(list(data[0].find_data("funcdef"))[0])
-    print(T.flowmod.get_code())
     print("---------------{}----------------".format(len(data)))
     #Packet_inハンドラ
     T.transform(list(data[1].find_data("funcdef"))[0])
+    print(T.flowmod.get_code())
     #RyuToP4Transformer().transform(tree)
