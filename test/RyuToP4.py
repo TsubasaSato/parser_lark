@@ -282,12 +282,13 @@ class RyuToP4Transformer(Transformer):
             return Tree("funccall",args)
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
+        print("@args@",args[0])
         print(args[0].children[0])
         if args[0].children[0].data=="var":
             print(get_p4src_packet(self.env,[args[0].children[0].children[0]]))
         elif args[0].children[0].data=="funccall":
             print(get_p4src_packet(self.env,[funccall_get_list(args[0].children[0])]))
-        print("-----Finished in expr_stmt---")
+        print("-----Finished in if_stmt---")
     def get_alldicts(self):
         return self.env
 
