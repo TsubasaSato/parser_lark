@@ -230,6 +230,8 @@ class RyuToP4Transformer(Transformer):
             send_msg(self.env,args[1],self.flowmod)
         else:
             return Tree("funccall",args)
+    def if_stmt(self,args):
+        print(get_origin_name(self.env,[args[0].children[0].children[0]]))
         
     def get_alldicts(self):
         return self.env
