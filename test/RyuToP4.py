@@ -277,7 +277,7 @@ class RyuToP4Transformer(Transformer):
         if args[0].children[1]=="add_protocol":
             print("add_protocol")
             self.env[args[0].children[0].children[0]].append(funccall_get_list(args[1]))
-            print(self.env[args[0].children[0].children[0])
+            print(self.env[args[0].children[0].children[0]))
         else:
             return Tree("funccall",args)
     def if_stmt(self,args):
