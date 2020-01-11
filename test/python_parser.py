@@ -96,9 +96,9 @@ if __name__ == '__main__':
     tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
     #tree=Tree_2(pre_tree.data,pre_tree.children,pre_tree._meta)
     #print("----------Tree2().pretty()-----")
-    print(tree.pretty())
+    #print(tree.pretty())
     #print("----------transform(tree)------")
-    """
+
     data=list(tree.find_data("decorated"))
     
     #Switch_featuredハンドラ
@@ -107,5 +107,5 @@ if __name__ == '__main__':
     print("---------------{}----------------".format(len(data)))
     #Packet_inハンドラ
     T.transform(list(data[1].find_data("funcdef"))[0])
-    """
+  
 
