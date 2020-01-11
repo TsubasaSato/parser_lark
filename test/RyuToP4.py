@@ -2,6 +2,8 @@ from lark import Tree, Transformer
 import copy
     
 def check_same_list(token_list,normal_list):
+    if len(token_list)!=len(normal_list):
+        return False
     if type(token_list)==type(dict()):
         if not check_same_list(token_list.keys(),normal_list.keys()):
             return False
