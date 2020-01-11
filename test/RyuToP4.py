@@ -240,7 +240,7 @@ def send_msg(_vars,args_tree,flowmod):
         #PacketOutの記述
         pass
     
-class RyuToP4Transformer(Visitor):
+class RyuToP4Transformer(Interpreter):
     env=dict()
     flowmod=FlowMod()
     #変数宣言
