@@ -9,14 +9,9 @@ def check_same_list(token_list,normal_list):
 
 class FlowMod():
     entries=dict()
-    src_inst="""{inst}\n
-                """
-    src_1="""if ({match}) {{
-                {inst}
-                }}\n"""
-    src_2="""else if ({match}) {{
-                {inst}
-                }}\n"""
+    src_inst="""    {inst}\n"""
+    src_1="""if ({match}) {{\n    {inst}\n    }}\n"""
+    src_2="""else if ({match}) {{\n    {inst}\n    }}\n"""
     p4src=[]
         
     def set_entry(self,table_id,priority,match,instructions):
