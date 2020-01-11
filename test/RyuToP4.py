@@ -37,9 +37,9 @@ class Message():
     
     
     def set_pktout(self,act,data):
-        
+        pass
     def get_pktout_code(self):
-    
+        pass
     def fset_entry(self,table_id,priority,match,instructions):
         if len(match)>1:
             match=[" && ".join(match)]
