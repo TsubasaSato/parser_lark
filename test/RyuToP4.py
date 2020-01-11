@@ -3,8 +3,15 @@ import copy
     
 def check_same_list(token_list,normal_list):
     for x in range(len(normal_list)):
-        if token_list[x]!=normal_list[x]:
-            return False
+        if type(token_list[x])==type(list()):
+            if not check_same_list(token_list[x],normal_list[x]):
+                return false
+        elif type(token_list[x])==type(dict()):
+            if not check_same_list([token_list[x].keys()],[normal_list[x].values()]):
+                return false
+        else:
+            if token_list[x]!=normal_list[x]:
+                return False
     return True
 
 class FlowMod():
