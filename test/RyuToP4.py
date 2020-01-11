@@ -189,7 +189,7 @@ def send_msg(_vars,args_tree,flowmod):
     elif args_tree.children[0].data=="funccall":
         msg=get_origin_name(_vars,funccall_get_list(args_tree.children[0]))
     if check_same_list(msg[0:5],FlowMod):
-        t_id,p,m,i=msg[6]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
+        t_id,p,m,i=msg[5]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
         flowmod.set_entry(t_id,p,get_p4src_mlist(_vars,m),get_p4src_ilist(_vars,i))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
