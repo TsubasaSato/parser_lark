@@ -101,11 +101,9 @@ if __name__ == '__main__':
     data=list(tree.find_data("decorated"))
     #Switch_featuredハンドラ
     T=RyuToP4Transformer()
-    for x in dir(T):
-        print(x)
-    T.visit(list(data[0].find_data("funcdef"))[0])
+    T.transform(list(data[0].find_data("funcdef"))[0])
     print("---------------{}----------------".format(len(data)))
     #Packet_inハンドラ
-    T.visit(list(data[1].find_data("funcdef"))[0])
+    T.transform(list(data[1].find_data("funcdef"))[0])
     print(T.flowmod.get_code())
     #RyuToP4Transformer().transform(tree)
