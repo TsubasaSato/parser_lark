@@ -33,7 +33,9 @@ class Message():
     }
     ethernet={
         "dst":"hdr.ethernet.dstAddr",
-        "src":""
+        "src":"",
+    }
+        
     
     
     def set_pktout(self,act,data):
