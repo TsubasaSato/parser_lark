@@ -19,7 +19,7 @@ def check_same_list(token_list,normal_list):
                     return False
     return True
 
-class FlowMod():
+class Message():
     entries=dict()
     src_inst="""    {inst}\n"""
     src_1="""if ({match}) {{\n    {inst}\n    }}\n"""
@@ -242,7 +242,7 @@ def send_msg(_vars,args_tree,_msg):
     
 class RyuToP4Transformer(Transformer):
     env=dict()
-    flowmod=FlowMod()
+    message=Message()
     #変数宣言
     
     def expr_stmt(self,args):
@@ -273,7 +273,7 @@ class RyuToP4Transformer(Transformer):
         #datapath.send_msgにしておく
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
-            send_msg(self.env,args[1],self.flowmod)
+            send_msg(self.env,args[1],self.message)
         if args[0].children[1]=="add_protocol":
             print("add_protocol")
             self.env[args[0].children[0].children[0]].append(arg_get_dict_list(args[1]))
