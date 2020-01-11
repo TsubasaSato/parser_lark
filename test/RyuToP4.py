@@ -222,7 +222,7 @@ def funccall_get_list(tree):
         object.append(arg_get_dict_list(tree.children[1]))
     return object
 
-def send_msg(_vars,args_tree,flowmod):
+def send_msg(_vars,args_tree,msg):
     code=dict()
     p4src=[]
     msg=[]
@@ -235,7 +235,7 @@ def send_msg(_vars,args_tree,flowmod):
         msg=get_origin_name(_vars,funccall_get_list(args_tree.children[0]))
     if check_same_list(msg[0:5],FlowMod):
         t_id,p,m,i=msg[5]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
-        flowmod.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
+        msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
         pass
@@ -275,7 +275,9 @@ class RyuToP4Transformer(Transformer):
             print("-----Start in funccall-------")
             send_msg(self.env,args[1],self.flowmod)
         if args[0].children[1]=="add_protocol":
-            print("add_protocol HERE")
+            print("add_protocol")
+            print(self.env[args[0].children[0])
+            #self.env[args[0].children[0]].append(funccall_get_list(args[1]))
         else:
             return Tree("funccall",args)
     def if_stmt(self,args):
