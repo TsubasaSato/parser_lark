@@ -72,6 +72,12 @@ def get_p4src_packet(_vars,name):
     pkt_proto=["packet","Packet",[{"data":["msg","data"]}],"get_protocol"]
     pkt_has_flags=["packet","Packet",[{"data":["msg","data"]}],"get_protocol",
                    ["tcp","tcp"],"has_flags"]
+    print("--------dict_value-------")
+    print(dict_value)
+    print(check_same_list(dict_value[0:6],pkt_has_flags))
+    print(check_same_list(dict_value[0:4],pkt_proto))
+    print(check_same_list(dict_value[0:2],pkt))
+    print("--------F dict_value-------")
     if check_same_list(dict_value[0:6],pkt_has_flags):
         #has_flags
         p4src.append(func[dict_value[5]][dict_value[6][1]])
@@ -259,10 +265,9 @@ class RyuToP4Transformer(Transformer):
             else:
                 pass
         if "pkt_ethernet" in self.env:
-            print(get_origin_name(self.env,self.env["pkt_ethernet"]))
+            #print(get_origin_name(self.env,self.env["pkt_ethernet"]))
         if "pkt_in" in self.env:
-            print("-------------------")
-            print(get_origin_name(self.env,self.env["pkt_in"]))
+            #print(get_origin_name(self.env,self.env["pkt_in"]))
         print("-----Finished in expr_stmt---")
     
     def funccall(self,args):
