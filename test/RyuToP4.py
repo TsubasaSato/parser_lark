@@ -1,4 +1,4 @@
-from lark.visitors import Tree, Visitor, Transformer
+from lark.visitors import Tree, Interpreter, Transformer
 import copy
     
 def check_same_list(token_list,normal_list):
