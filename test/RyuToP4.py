@@ -167,7 +167,7 @@ def arg_get_dict_list(tree):
         elif x.data=="var":
             arg_list.append(x.children[0])
         else:
-            pass
+            arg_list.append(x.children[0])
     if arg_dict != dict():
         arg_list.append(arg_dict)
     return arg_list
