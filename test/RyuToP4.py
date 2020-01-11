@@ -30,9 +30,10 @@ class FlowMod():
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
+                print(y)
                 if count==1:
                     # formatの実引数をデバッグ
-                    self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
+                    self.p4src.append(self.src_1.format(match=y[1],inst=y[2][0]))
                 else:
                     self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
                 count=count+1
@@ -108,7 +109,6 @@ def get_p4src_ilist(_vars,name):
     #Ryuの固有関数であるか確認
     if check_same_list(dict_value[0:5],OFPInstGoto):
         #FlowModで指定されたtableIDと同じ番号のエントリをここに配置
-        print(dict_value)
         p4src.append(dict_value[4])
         p4src.append(dict_value[5])
     elif check_same_list(dict_value[0:7],OFPInstActA) or check_same_list(dict_value[0:7],OFPInstActW):
