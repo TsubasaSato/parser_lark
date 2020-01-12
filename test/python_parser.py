@@ -96,7 +96,6 @@ if __name__ == '__main__':
     tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
     
     T=RyuToP4Transformer()
-    print(tree.pretty())
     T.transform(tree)
     
     print(T.message.get_code())
