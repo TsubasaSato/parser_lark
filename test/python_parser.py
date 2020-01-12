@@ -94,24 +94,8 @@ if __name__ == '__main__':
     # test_python_lib()
     # test_earley_equals_lalr()
     tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
-    #tree=Tree_2(pre_tree.data,pre_tree.children,pre_tree._meta)
-    #print("----------Tree2().pretty()-----")
-    #print(tree.pretty())
-    #print("----------transform(tree)------")
     
-    #Switch_featuredハンドラ
     T=RyuToP4Transformer()
     T.transform(tree)
-    """
-    handler=data[0].children[0].children[0].children[1].children[0].children[1]
-    T.set_handler_name(handler)
-    T.transform(list(data[0].find_data("funcdef"))[0])
-    print("---------------{}----------------".format(len(data)))
-    #Packet_inハンドラ
-    handler=data[1].children[0].children[0].children[1].children[0].children[1]
-    T.set_handler_name(handler)
-    T.transform(list(data[1].find_data("funcdef"))[0])
-    """
-    print(T.get_alldicts())
+    
     print(T.message.get_code())
-
