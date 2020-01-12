@@ -355,14 +355,12 @@ def send_msg(_vars,args_tree,_msg):
     if check_same_list(msg[0:5],FlowMod):
         #FlowModの変換処理
         t_id,p,m,i=msg[5]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
-        print("_msg.handler_name:",_msg.handler_name)
         if _msg.handler_name==handler[0]:
             _msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
         elif _msg.handler_name==handler[1]:
             _msg.set_pktin_entry(t_id,p,get_p4src_hlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの変換処理
-        print("get_p4src_pktout:",get_p4src_pktout(_vars,get_p4src_alist(_vars,[msg[5]["actions"]]),get_origin_name(_vars,[msg[5]["data"]])))
         _msg.set_p4src_pktin(get_p4src_pktout(_vars,get_p4src_alist(_vars,[msg[5]["actions"]]),get_origin_name(_vars,[msg[5]["data"]])))
     
 class RyuToP4Transformer(Transformer):
@@ -409,20 +407,6 @@ class RyuToP4Transformer(Transformer):
             self.env[args[0].children[0].children[0]].append(arg_get_dict_list(args[1]))
         else:
             return Tree("funccall",args)
-        
-        if "match" in self.env:
-            print(get_origin_name(self.env,self.env["match"]))
-    def get_p4src_iflist(args):
-        con=[]
-        if args[0].data=="not":
-            con.append("!")
-            if args[0].children[0].data=="var":
-                con.append(get_p4src_packet(self.env,[args[0].children[0].children[0]])[0])
-        elif args[0].data=="funccall":
-            con.append(get_p4src_packet(self.env,funccall_get_list(args[0]))[0])
-        elif args[0].data=="var":
-            con.append(get_p4src_packet(self.env,[args[0].children[0]])[0])
-        print(con)
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
         get_p4src_iflist(self.env,args)
