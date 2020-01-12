@@ -335,6 +335,7 @@ def send_msg(_vars,args_tree,_msg):
     msg=[]
     FlowMod=["ev","msg","datapath","ofproto_parser","OFPFlowMod"]
     PacketOut=["ev","msg","datapath","ofproto_parser","OFPPacketOut"]
+    handler=["EventOFPSwitchFeatures","EventOFPPacketIn"]
     
     if args_tree.children[0].data=="var":
         msg=get_origin_name(_vars,[args_tree.children[0].children[0]])
@@ -343,9 +344,9 @@ def send_msg(_vars,args_tree,_msg):
     if check_same_list(msg[0:5],FlowMod):
         #FlowModの変換処理
         t_id,p,m,i=msg[5]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
-        if _msg.handler_name=="":
+        if _msg.handler_name==handler[0]:
             _msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
-        elif _msg.handler_name=="":
+        elif _msg.handler_name==handler[1]:
             _msg.set_pktin_entry(t_id,p,get_p4src_hlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの変換処理
