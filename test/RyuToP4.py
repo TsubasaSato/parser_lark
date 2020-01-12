@@ -190,6 +190,7 @@ def get_p4src_packet(_vars,name):
 
 def get_p4src_iflist(_vars,args):
     con=[]
+    print("args[0].pretty()",args[0].pretty())
     if args[0].data=="not":
         con.append("!")
         if args[0].children[0].data=="var":
