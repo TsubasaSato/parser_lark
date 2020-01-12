@@ -54,19 +54,24 @@ class Message():
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
-                if len(y)==4:
-                    #pktin内で生成されたエントリ
-                    print("y[2][0]",y[2][0])
-                    print("y[2][0][0]",y[2][0][0])
-                    self.p4src.append(self.src_h.format(y[3],y[1],y[2][0][0]))
-                elif y[1]:
-                    #matchが空ならif文を作成しない
-                    if count==1:
-                        self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
+                if y[2][0]:
+                    #instが空ならif文を作成しない
+                    if len(y)==4:
+                        #pktin内で生成されたエントリ
+                        print("y[2][0]",y[2][0])
+                        print("y[2][0][0]",y[2][0][0])
+                        self.p4src.append(self.src_h.format(y[3],y[1],y[2][0][0]))
+                    elif y[1]:
+                        #matchが空ならif文を作成しない
+                        if count==1:
+                            self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0][0]))
+                        else:
+                            self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0][0]))
                     else:
-                        self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
+                        self.p4src.append(self.src_inst.format(inst=y[2][0]))
                 else:
-                    self.p4src.append(self.src_inst.format(inst=y[2][0]))
+                    self.p4src.append(self.src_inst.format())
+                    
                 count=count+1
         return self.p4src
 
