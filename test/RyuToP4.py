@@ -110,7 +110,7 @@ def get_p4src_pktout(_vars,actions,data):
                     if y in proto[x[1]]:
                         #辞書の値が変数なら変数を解析    
                         if type(dic[y])==type(list):
-                            if y=="bits":
+                            if y.value=="bits":
                                 for z in dic[y]:
                                      p4src.append("{};\n".format(proto[x[1]][y][z][1]))
                             else:
