@@ -26,7 +26,7 @@ class Message():
     src_2="else if ({match}) {{\n    {inst}\n    }}\n"
     src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
     src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
-    p4src=dict()
+    p4srcd=dict()
     p4src_pktin=[]
     count=0
     handler_name=""
@@ -65,19 +65,19 @@ class Message():
                     inline.append(y[2][0][1])
                 if len(y)==4:
                     #pktin内で生成されたエントリ
-                    self.p4src[x].append(self.src_h.format(y[3],y[1],y[2][0][0]))
+                    self.p4srcd[x].append(self.src_h.format(y[3],y[1],y[2][0][0]))
                 elif y[1]:
                     #matchが空ならif文を作成しない
                     if count==1:
-                        self.p4src[x].append(self.src_1.format(match=y[1][0],inst=y[2][0][0]))
+                        self.p4srcd[x].append(self.src_1.format(match=y[1][0],inst=y[2][0][0]))
                     else:
-                        self.p4src[x].append(self.src_2.format(match=y[1][0],inst=y[2][0][0]))
+                        self.p4srcd[x].append(self.src_2.format(match=y[1][0],inst=y[2][0][0]))
                 else:
-                    self.p4src[x].append(self.src_inst.format(inst=y[2][0][0]))
+                    self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
         print(inline)
         #p4src辞書をすべて結合してreturn
-        return self.p4src
+        return self.p4srcd
 
 def get_p4src_hlist(_vars,name):
     #P4ソースコード
