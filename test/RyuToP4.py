@@ -198,7 +198,7 @@ def get_p4src_iflist(_vars,args):
         con.append(get_p4src_packet(_vars,funccall_get_list(args[0]))[0])
     elif args[0].data=="var":
         con.append(get_p4src_packet(_vars,[args[0].children[0]])[0])
-    
+    return con
 
 def get_p4src_mlist(_vars,name):
     #P4ソースコード
@@ -426,7 +426,7 @@ class RyuToP4Transformer(Transformer):
             if x.data=="funccall" or x.data=="not":
                 #条件式が入る
                 print("conditinal exp")
-                print(get_p4src_iflist(self.env,x[0]))
+                print(get_p4src_iflist(self.env,x.children))
             elif x.data=="suite":
                 for y in x.children:
                     if y.data=="expr_stmt":
