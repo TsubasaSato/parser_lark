@@ -21,17 +21,23 @@ def check_same_list(token_list,normal_list):
 
 class Message():
     entries=dict()
-    pkt_out=list()
-    src_inst="""    {inst}\n"""
-    src_1="""if ({match}) {{\n    {inst}\n    }}\n"""
-    src_2="""else if ({match}) {{\n    {inst}\n    }}\n"""
-    p4src_f=[]
+    src_inst="    {inst}\n"
+    src_1="if ({match}) {{\n    {inst}\n    }}\n"
+    src_2="else if ({match}) {{\n    {inst}\n    }}\n"
+    src_h="bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\n"
+    src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
+    p4src=[]
+    p4src_pktin=[]
+    count=0
+    def set_p4src_pktin(self,src):
+        p4src_pktin.append(src)
     
-    
-    def set_pktout(self,act,data):
-        pass
-    def get_pktout_code(self):
-        pass
+    def set_pktin_entry(self,table_id,priority,match,instructions):
+        if table_id in self.entries:
+            self.entries[table_id].append([int(priority),match,instructions,self.count])
+            self.set_p4src_pktin(src_hh.format(self.count,match))
+            self.count=self.count+1
+        
     def set_entry(self,table_id,priority,match,instructions):
         if len(match)>1:
             match=[" && ".join(match)]
@@ -50,13 +56,13 @@ class Message():
                 if y[1]:
                     if count==1:
                         # formatの実引数をデバッグ
-                        self.p4src_f.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
+                        self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
                     else:
-                        self.p4src_f.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
+                        self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
                 else:
-                    self.p4src_f.append(self.src_inst.format(inst=y[2][0]))
+                    self.p4src.append(self.src_inst.format(inst=y[2][0]))
                 count=count+1
-        return self.p4src_f
+        return self.p4src
 
 def get_p4src_hlist(_vars,name):
     #P4ソースコード
