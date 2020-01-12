@@ -195,6 +195,7 @@ def get_p4src_iflist(_vars,args):
         print("args[0].children[0].data:",args[0].children[0].data)
         if args[0].children[0].data=="var":
             print("[args[0].children[0].children[0]]:",[args[0].children[0].children[0]])
+            print("get_p4src_packet(_vars,[args[0].children[0].children[0]]):",get_p4src_packet(_vars,[args[0].children[0].children[0]]))
             con.append(get_p4src_packet(_vars,[args[0].children[0].children[0]])[0])
     elif args[0].data=="funccall":
         con.append(get_p4src_packet(_vars,funccall_get_list(args[0]))[0])
