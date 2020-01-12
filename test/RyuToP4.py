@@ -412,9 +412,9 @@ class RyuToP4Transformer(Transformer):
         if args[1].data=="suite":
             for x in args[1].children:
                 if x.data=="expr_stmt":
-                    _expr_stmt(x.children[0])
+                    self._expr_stmt(x.children[0])
                 elif x.data=="funccall":
-                    _funccall(x.children[0])
+                    self._funccall(x.children[0])
                 elif x.data=="return_stmt":
                     print("return_stmt HERE")
         #get_p4src_iflist(self.env,args)
@@ -424,9 +424,9 @@ class RyuToP4Transformer(Transformer):
         if args[1].data=="suite":
             for x in args[1].children:
                 if x.data=="expr_stmt":
-                    _expr_stmt(x.children[0])
+                    self._expr_stmt(x.children[0])
                 elif x.data=="funccall":
-                    _funccall(x.children[0])
+                    self._funccall(x.children[0])
                 elif x.data=="return_stmt":
                     print("return_stmt HERE")
         #get_p4src_iflist(self.env,args)
