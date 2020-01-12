@@ -66,7 +66,7 @@ class Message():
                     else:
                         self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0][0]))
                 else:
-                    self.p4src.append(self.src_inst.format(inst=y[2][0]))
+                    self.p4src.append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
         return self.p4src
 
