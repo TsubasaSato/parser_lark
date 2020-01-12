@@ -154,7 +154,9 @@ def get_p4src_pktout(_vars,actions,data):
                         else:
                             p4src.append("{} = {};\n".format(proto[x[1]][y],dic[y]))
     return p4src    
-    
+
+
+
 def get_p4src_packet(_vars,name):
     proto={
         "tcp":"hdr.tcp.isValid()",
@@ -185,6 +187,18 @@ def get_p4src_packet(_vars,name):
         #pkt
         pass
     return p4src
+
+def get_p4src_iflist(args):
+    con=[]
+    if args[0].data=="not":
+        con.append("!")
+        if args[0].children[0].data=="var":
+            con.append(get_p4src_packet(self.env,[args[0].children[0].children[0]])[0])
+    elif args[0].data=="funccall":
+        con.append(get_p4src_packet(self.env,funccall_get_list(args[0]))[0])
+    elif args[0].data=="var":
+        con.append(get_p4src_packet(self.env,[args[0].children[0]])[0])
+    print(con)
 
 def get_p4src_mlist(_vars,name):
     #P4ソースコード
@@ -398,29 +412,24 @@ class RyuToP4Transformer(Transformer):
         
         if "match" in self.env:
             print(get_origin_name(self.env,self.env["match"]))
+    def get_p4src_iflist(args):
+        con=[]
+        if args[0].data=="not":
+            con.append("!")
+            if args[0].children[0].data=="var":
+                con.append(get_p4src_packet(self.env,[args[0].children[0].children[0]])[0])
+        elif args[0].data=="funccall":
+            con.append(get_p4src_packet(self.env,funccall_get_list(args[0]))[0])
+        elif args[0].data=="var":
+            con.append(get_p4src_packet(self.env,[args[0].children[0]])[0])
+        print(con)
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
-        #リストにnotを入れる
-        if args[0].data=="not":
-            if args[0].children[0].data=="var":
-                print(get_p4src_packet(self.env,[args[0].children[0].children[0]]))
-        elif args[0].data=="funccall":
-            print(get_p4src_packet(self.env,funccall_get_list(args[0])))
-        elif args[0].data=="var":
-            print(get_p4src_packet(self.env,[args[0].children[0]]))
-        
+        get_p4src_iflist(args)
         print("-----Finished in if_stmt---")
     def elif_stmt(self,args):
         print("-----Start in elif_stmt---")
-        #リストにnotを入れる
-        if args[0].data=="not":
-            if args[0].children[0].data=="var":
-                print(get_p4src_packet(self.env,[args[0].children[0].children[0]]))
-        elif args[0].data=="funccall":
-            print(get_p4src_packet(self.env,funccall_get_list(args[0])))
-        elif args[0].data=="var":
-            print(get_p4src_packet(self.env,[args[0].children[0]]))
-        
+        get_p4src_iflist(args)
         print("-----Finished in elif_stmt---")
     def get_alldicts(self):
         return self.env
