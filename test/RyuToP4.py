@@ -382,6 +382,9 @@ class RyuToP4Transformer(Transformer):
             elif x.data=="funccall":
                 self._funccall(x.children)
             elif x.data=="compound_stmt":
+                print("conpound_stmt")
+                for y in x.children:
+                    print(y)
                 if x.children[0].data=="if_stmt":
                     self._if_stmt(x.children[0].children)
                 elif x.children[0].data=="elif_stmt":
