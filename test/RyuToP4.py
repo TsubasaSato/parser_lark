@@ -56,7 +56,8 @@ class Message():
             for y in self.entries[x]:
                 if len(y)==4:
                     #pktin内で生成されたエントリ
-                    print("y[2][0]",y[2][0][0])
+                    print("y[2][0]",y[2][0])
+                    print("y[2][0][0]",y[2][0][0])
                     self.p4src.append(self.src_h.format(y[3],y[1],y[2][0][0]))
                 elif y[1]:
                     #matchが空ならif文を作成しない
