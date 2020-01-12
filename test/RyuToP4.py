@@ -141,8 +141,6 @@ def get_p4src_pktout(_vars,actions,data):
                     #変換可能な引数のみを変換する
                     if y in proto[x[1]]:
                         #辞書の値が変数なら変数を解析
-                        print("dic[y]:",dic[y])
-                        print("type(dic[y]):",type(dic[y]))
                         if type(dic[y])==type(list()):
                             if y.value=="bits":
                                 for z in dic[y]:
@@ -150,9 +148,6 @@ def get_p4src_pktout(_vars,actions,data):
                             else:
                                 #プロトコルを調べる
                                 p=get_origin_name(_vars,[dic[y][0]])
-                                print("protocol is :",p)
-                                print("dic[y][1]:",dic[y][1])
-                                print("values[p[4][0]][dic[y][1]]:",values[p[4][0]][dic[y][1]])
                                 p4src.append("{} = {};\n".format(proto[x[1]][y],values[p[4][0]][dic[y][1]]))
                         else:
                             p4src.append("{} = {};\n".format(proto[x[1]][y],dic[y]))
