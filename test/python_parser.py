@@ -104,12 +104,14 @@ if __name__ == '__main__':
     #Switch_featuredハンドラ
     T=RyuToP4Transformer()
     handler=data[0].children[0].children[0].children[1].children[0].children[1]
+    print(handler)
     T.set_handler_name(handler)
-    T.transform(list(data[0].find_data("funcdef"))[0])
+    #T.transform(list(data[0].find_data("funcdef"))[0])
     print("---------------{}----------------".format(len(data)))
     #Packet_inハンドラ
     handler=data[0].children[0].children[0].children[1].children[0].children[1]
+    print(handler)
     T.set_handler_name(handler)
-    T.transform(list(data[1].find_data("funcdef"))[0])
+    #T.transform(list(data[1].find_data("funcdef"))[0])
     print(T.message.get_code())
 
