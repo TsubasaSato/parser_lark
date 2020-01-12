@@ -50,7 +50,8 @@ class Message():
             self.entries[table_id].append([int(priority),match,instructions])
     def get_code(self):
         table_ids=self.entries.keys()
-        inline=dict()
+        inline=list()
+        p4fullsrc=""
         for x in table_ids:
             self.p4srcd[x]=list()
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
@@ -58,12 +59,12 @@ class Message():
             for y in self.entries[x]:
                 if y[2][0][0]=="OFPP_CONTROLLER":
                     #InstructionにPacketInが指定されていたらpktinのコードを埋め込む
-                    y[2][0][0]="{{0[{}]}}".format(len(inline.keys()))
-                    inline[x]="OFPP_CONTROLLER"
+                    y[2][0][0]="{{}}"
+                    inline.append("OFPP_CONTROLLER")
                 elif y[2][0][0]=="OFPInstructionGotoTable":
                     #InstructionにOFPInstructionGotoTableが指定されていたら同じTableIDのエントリを埋め込む
-                    y[2][0][0]="{{0[{}]}}".format(len(inline.keys()))
-                    inline[x]=y[2][0][1]
+                    y[2][0][0]="{{}}"
+                    inline.append(y[2][0][1])
                 if len(y)==4:
                     #pktin内で生成されたエントリ
                     self.p4srcd[x].append(self.src_h.format(y[3],y[1],y[2][0][0]))
@@ -76,7 +77,8 @@ class Message():
                 else:
                     self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
-        print(inline)
+        for x in p4srcd.keys():
+            p4fullsrc+=p4srcd[x].format()
         #p4src辞書をすべて結合してreturn
         return self.p4srcd
 
