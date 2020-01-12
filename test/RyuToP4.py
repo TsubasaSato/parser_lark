@@ -188,16 +188,16 @@ def get_p4src_packet(_vars,name):
         pass
     return p4src
 
-def get_p4src_iflist(args):
+def get_p4src_iflist(_vars,args):
     con=[]
     if args[0].data=="not":
         con.append("!")
         if args[0].children[0].data=="var":
-            con.append(get_p4src_packet(self.env,[args[0].children[0].children[0]])[0])
+            con.append(get_p4src_packet(_vars,[args[0].children[0].children[0]])[0])
     elif args[0].data=="funccall":
-        con.append(get_p4src_packet(self.env,funccall_get_list(args[0]))[0])
+        con.append(get_p4src_packet(_vars,funccall_get_list(args[0]))[0])
     elif args[0].data=="var":
-        con.append(get_p4src_packet(self.env,[args[0].children[0]])[0])
+        con.append(get_p4src_packet(_vars,[args[0].children[0]])[0])
     print(con)
 
 def get_p4src_mlist(_vars,name):
@@ -425,11 +425,11 @@ class RyuToP4Transformer(Transformer):
         print(con)
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
-        get_p4src_iflist(args)
+        get_p4src_iflist(self.env,args)
         print("-----Finished in if_stmt---")
     def elif_stmt(self,args):
         print("-----Start in elif_stmt---")
-        get_p4src_iflist(args)
+        get_p4src_iflist(self.env,args)
         print("-----Finished in elif_stmt---")
     def get_alldicts(self):
         return self.env
