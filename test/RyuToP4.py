@@ -35,7 +35,6 @@ class Message():
     def set_entry(self,table_id,priority,match,instructions):
         if len(match)>1:
             match=[" && ".join(match)]
-        print(match,instructions)
         if table_id in self.entries:
             self.entries[table_id].append([int(priority),match,instructions])
         else:
@@ -247,7 +246,9 @@ def send_msg(_vars,args_tree,_msg):
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
         print("data in send_msg")
-        print(get_origin_name(self.env,msg))
+        print(get_origin_name(_vars,msg))
+        print("-------same??---------")
+        print(msg)
         pass
     
 class RyuToP4Transformer(Transformer):
