@@ -38,7 +38,7 @@ class Message():
     def set_pktin_entry(self,table_id,priority,match,instructions):
         if table_id in self.entries:
             self.entries[table_id].append([int(priority),match,instructions,self.count])
-            self.set_p4src_pktin(src_hh.format(self.count,match))
+            self.set_p4src_pktin(self.src_hh.format(self.count,match))
             self.count=self.count+1
         
     def set_entry(self,table_id,priority,match,instructions):
