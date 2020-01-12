@@ -114,11 +114,7 @@ def get_p4src_pktout(_vars,actions,data):
                         if type(dic[y])==type(list()):
                             if y.value=="bits":
                                 for z in dic[y]:
-                                    print("IN for z in dic[y]:")
-                                    print("proto[x[1]]:",proto[x[1]])
-                                    print("proto[x[1]][y]:",proto[x[1]][y])
-                                    print("proto[x[1]][y][z]:",proto[x[1]][y][z])
-                                    p4src.append("{};\n".format(proto[x[1]][y][z][1]))
+                                    p4src.append("{};\n".format(proto[x[1]][y][z[1]]))
                             else:
                                 #プロトコルを調べる
                                 p=get_origin_name(_vars,[dic[y][0]])
