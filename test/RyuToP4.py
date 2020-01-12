@@ -106,17 +106,19 @@ def get_p4src_pktout(_vars,actions,data):
                     p4src.append(tcp_reg)
                 dic=x[2][0]
                 for y in dic.keys():
-                    #辞書の値が変数なら変数を解析
-                    if dic[y]==type(list):
-                        if y=="bits":
-                            for z in dic[y]:
-                                 p4src.append("{};\n".format(proto[x[1]][y][z][1]))
+                    #変換可能な引数のみを変換する
+                    if dic[y] in proto[x[1]]:
+                        #辞書の値が変数なら変数を解析    
+                        if type(dic[y])==type(list):
+                            if y=="bits":
+                                for z in dic[y]:
+                                     p4src.append("{};\n".format(proto[x[1]][y][z][1]))
+                            else:
+                                #プロトコルを調べる
+                                p=get_origin_name(_vars,dic[y][0])[4][0]
+                                p4src.append("{} = {};\n".format(proto[x[1]][y],values[p][dic[y][1]]))
                         else:
-                            #プロトコルを調べる
-                            p=get_origin_name(_vars,dic[y][0])[4][0]
-                            p4src.append("{} = {};\n".format(proto[x[1]][y],values[p][dic[y][1]]))
-                    else:
-                        p4src.append("{} = {};\n".format(proto[x[1]][y],dic[y]))
+                            p4src.append("{} = {};\n".format(proto[x[1]][y],dic[y]))
     return p4src    
     
 def get_p4src_packet(_vars,name):
