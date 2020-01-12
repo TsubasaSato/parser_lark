@@ -378,6 +378,7 @@ class RyuToP4Transformer(Transformer):
         return self.message.handler_name
     
     def decorated(self,args):
+        print(args[0].pretty())
         self.set_handler_name(args[0].children[0].children[0].children[1].children[0].children[1])
         for x in args[1].children[2].children:
             if x.data=="expr_stmt":
