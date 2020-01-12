@@ -374,7 +374,7 @@ class RyuToP4Transformer(Transformer):
     def get_handler_name(self):
         return self.message.handler_name
     
-    def expr_stmt(self,args):
+    def _expr_stmt(self,args):
         print("-----Start in expr_stmt------")
         if args[0].data=="var":
             if args[1].data=="var":
@@ -397,7 +397,7 @@ class RyuToP4Transformer(Transformer):
             pass
         print("-----Finished in expr_stmt---")
     
-    def funccall(self,args):
+    def _funccall(self,args):
         #packet.Packet()とsend_msg()用に分けて考える
         #datapath.send_msgにしておく
         if args[0].children[1] =="send_msg":
@@ -410,10 +410,27 @@ class RyuToP4Transformer(Transformer):
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
         get_p4src_iflist(self.env,args)
+        if args[1].data=="suite":
+            for x in args[1].children:
+                if x.data=="expr_stmt":
+                    _expr_stmt(x.children[0])
+                elif x.data=="funccall":
+                    _funccall(x.children[0])
+                elif x.data=="return_stmt":
+                    print("return_stmt HERE")
         print("-----Finished in if_stmt---")
     def elif_stmt(self,args):
         print("-----Start in elif_stmt---")
         get_p4src_iflist(self.env,args)
+        if args[1].data=="suite":
+            for x in args[1].children:
+                if x.data=="expr_stmt":
+                    _expr_stmt(x.children[0])
+                elif x.data=="funccall":
+                    _funccall(x.children[0])
+                elif x.data=="return_stmt":
+                    print("return_stmt HERE")
+        print("-----Finished in if_stmt---")
         print("-----Finished in elif_stmt---")
     def get_alldicts(self):
         return self.env
