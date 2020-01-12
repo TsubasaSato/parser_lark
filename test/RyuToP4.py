@@ -382,14 +382,7 @@ class RyuToP4Transformer(Transformer):
             elif x.data=="funccall":
                 self._funccall(x.children)
             elif x.data=="compound_stmt" and x.children[0].data == "if_stmt":
-                for y in x.children:
-                    print(y.data)
-                """
-                if x.children[0].data=="if_stmt":
-                        self._if_stmt(x.children[0].children)
-                elif x.children[0].data=="elif_stmt":
-                    self._elif_stmt(x.children[0].children)
-                """
+                self._if_stmt(x.children[0].children)
             else:
                 print("Don't know {} node.".format(x.data))
     def _expr_stmt(self,args):
@@ -427,15 +420,18 @@ class RyuToP4Transformer(Transformer):
             return Tree("funccall",args)
     def _if_stmt(self,args):
         print("-----Start in if_stmt---")
-        if args[1].data=="suite":
-            for x in args[1].children:
-                if x.data=="expr_stmt":
-                    self._expr_stmt(x.children)
-                elif x.data=="funccall":
-                    self._funccall(x.children)
-                elif x.data=="return_stmt":
-                    print("return_stmt HERE")
-        print(get_p4src_iflist(self.env,args))
+        for x in args:
+            if x.data=="funccall":
+                #条件式が入る
+            elif x.data=="suite":
+                for y in x.children:
+                    if y.data=="expr_stmt":
+                        self._expr_stmt(y.children)
+                    elif y.data=="funccall":
+                        self._funccall(y.children)
+                    elif y.data=="return_stmt":
+                        print("return_stmt HERE")
+        #print(get_p4src_iflist(self.env,args))
         print("-----Finished in if_stmt---")
     def _elif_stmt(self,args):
         print("-----Start in elif_stmt---")
@@ -447,7 +443,7 @@ class RyuToP4Transformer(Transformer):
                     self._funccall(x.children)
                 elif x.data=="return_stmt":
                     print("return_stmt HERE")
-        print(get_p4src_iflist(self.env,args))
+        #print(get_p4src_iflist(self.env,args))
         print("-----Finished in elif_stmt---")
     def get_alldicts(self):
         return self.env
