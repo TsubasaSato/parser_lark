@@ -381,14 +381,15 @@ class RyuToP4Transformer(Transformer):
                 self._expr_stmt(x.children)
             elif x.data=="funccall":
                 self._funccall(x.children)
-            elif x.data=="compound_stmt":
-                print("conpound_stmt")
+            elif x.data=="compound_stmt" and x.children[0].data == "if_stmt":
                 for y in x.children:
-                    print(y)
+                    print(y.data)
+                """
                 if x.children[0].data=="if_stmt":
-                    self._if_stmt(x.children[0].children)
+                        self._if_stmt(x.children[0].children)
                 elif x.children[0].data=="elif_stmt":
                     self._elif_stmt(x.children[0].children)
+                """
             else:
                 print("Don't know {} node.".format(x.data))
     def _expr_stmt(self,args):
