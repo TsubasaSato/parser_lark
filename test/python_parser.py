@@ -98,11 +98,11 @@ if __name__ == '__main__':
     #print("----------Tree2().pretty()-----")
     #print(tree.pretty())
     #print("----------transform(tree)------")
-
-    data=list(tree.find_data("decorated"))
     
     #Switch_featuredハンドラ
     T=RyuToP4Transformer()
+    T.transform(tree)
+    """
     handler=data[0].children[0].children[0].children[1].children[0].children[1]
     T.set_handler_name(handler)
     T.transform(list(data[0].find_data("funcdef"))[0])
@@ -111,6 +111,7 @@ if __name__ == '__main__':
     handler=data[1].children[0].children[0].children[1].children[0].children[1]
     T.set_handler_name(handler)
     T.transform(list(data[1].find_data("funcdef"))[0])
+    """
     print(T.get_alldicts())
     print(T.message.get_code())
 
