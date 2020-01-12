@@ -107,7 +107,7 @@ def get_p4src_pktout(_vars,actions,data):
                 dic=x[2][0]
                 for y in dic.keys():
                     #変換可能な引数のみを変換する
-                    if dic[y] in proto[x[1]]:
+                    if y in proto[x[1]]:
                         #辞書の値が変数なら変数を解析    
                         if type(dic[y])==type(list):
                             if y=="bits":
