@@ -382,13 +382,13 @@ class RyuToP4Transformer(Transformer):
         self.set_handler_name(args[0].children[0].children[1].children[0].children[1])
         for x in args[1].children[2].children:
             if x.data=="expr_stmt":
-                _expr_stmt(x.children)
+                self._expr_stmt(x.children)
             elif x.data=="funccall":
-                _funccall(x.children)
+                self._funccall(x.children)
             elif x.data=="if_stmt":
-                _if_stmt(x.children)
+                self._if_stmt(x.children)
             elif x.data=="elif_stmt":
-                _elif_stmt(x.children)
+                self._elif_stmt(x.children)
             else:
                 print("Don't know {} node.".format(x.data))
     def _expr_stmt(self,args):
