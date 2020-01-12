@@ -87,7 +87,8 @@ def get_p4src_hlist(_vars,name):
         if len(dict_value) > 5:
             data=dict_value[5]
             for x in data.keys():
-                p4src.append(RyuToP4_key[x])
+                if x!="eth_type" or x != "ip_proto":
+                    p4src.append(RyuToP4_key[x])
     return [",".join(p4src)]
     
 def get_p4src_pktout(_vars,actions,data):
