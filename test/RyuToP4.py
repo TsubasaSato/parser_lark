@@ -59,9 +59,9 @@ class Message():
         return self.p4src_f
 
 def get_p4src_pktout(_vars,actions,data):
-    eth_reg="bit<48> eth_dst=hdr.ethernet.dstAddr;\n    bit<48> eth_src=hdr.ethernet.srcAddr;\n"
-    ip_reg="bit<32> ipv4_dst=hdr.ipv4.dstAddr;\n    bit<32> ipv4_src=hdr.ipv4.srcAddr;\n"
-    tcp_reg="bit<16> tcp_dst=hdr.tcp.dstPort;\n    bit<16> tcp_src=hdr.tcp.srcPort;\n"
+    eth_reg="bit<48> eth_dst = hdr.ethernet.dstAddr;\nbit<48> eth_src = hdr.ethernet.srcAddr;\n"
+    ip_reg="bit<32> ipv4_dst = hdr.ipv4.dstAddr;\nbit<32> ipv4_src = hdr.ipv4.srcAddr;\n"
+    tcp_reg="bit<16> tcp_dst = hdr.tcp.dstPort;\nbit<16> tcp_src = hdr.tcp.srcPort;\n"
     
     ethernet={
         "dst":"hdr.ethernet.dstAddr",
@@ -93,7 +93,7 @@ def get_p4src_pktout(_vars,actions,data):
         "tcp":{"src_port":"tcp_src","dst_port":"tcp_dst"},
         }
     p4src=[]
-    p4src.append(actions)
+    p4src.append(actions[0])
     
     if data[-1]=="data":
         for x in data:
@@ -206,9 +206,9 @@ def get_p4src_alist(_vars,name):
                         var=get_origin_name(_vars,[data[x].value])[-1]
                         if type(var)!=type(str()):
                             if var.value in RyuToP4_key:
-                                p4src.append("{} = {}".format(RyuToP4_key[x],RyuToP4_key[var.value]))
+                                p4src.append("{} = {};\n".format(RyuToP4_key[x],RyuToP4_key[var.value]))
                         else:
-                            p4src.append("{} = {}".format(RyuToP4_key[x],var))
+                            p4src.append("{} = {};\n".format(RyuToP4_key[x],var))
             else:
                 #Packet-Inの処理を記述
                 pass
