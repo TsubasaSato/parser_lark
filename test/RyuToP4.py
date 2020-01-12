@@ -361,7 +361,7 @@ class RyuToP4Transformer(Transformer):
         self.message.handler_name=name
         
     def get_handler_name(self):
-        return self.message.handler_name=name
+        return self.message.handler_name
     
     def expr_stmt(self,args):
         print("-----Start in expr_stmt------")
