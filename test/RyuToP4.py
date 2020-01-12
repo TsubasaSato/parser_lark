@@ -24,8 +24,7 @@ class Message():
     src_inst="    {inst}\n"
     src_1="if ({match}) {{\n    {inst}\n    }}\n"
     src_2="else if ({match}) {{\n    {inst}\n    }}\n"
-    src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\n
-                reg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
+    src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
     src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
     p4src=[]
     p4src_pktin=[]
@@ -89,7 +88,7 @@ def get_p4src_hlist(_vars,name):
             for x in data.keys():
                 if not (x=="eth_type" or x == "ip_proto"):
                     p4src.append(RyuToP4_key[x])
-    return [",".join(p4src)]
+    return " , ".join(p4src)
     
 def get_p4src_pktout(_vars,actions,data):
     eth_reg="bit<48> eth_dst = hdr.ethernet.dstAddr;\nbit<48> eth_src = hdr.ethernet.srcAddr;\n"
