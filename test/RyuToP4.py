@@ -57,11 +57,11 @@ class Message():
             for y in self.entries[x]:
                 if y[2][0][0]=="OFPP_CONTROLLER":
                     #InstructionにPacketInが指定されていたらpktinのコードを埋め込む
-                    y[2][0][0]={0[len(inline)]}
+                    y[2][0][0]="{{0[{}]}}".format(len(inline))
                     inline.append("OFPP_CONTROLLER")
                 elif y[2][0][0]=="OFPInstructionGotoTable":
                     #InstructionにOFPInstructionGotoTableが指定されていたら同じTableIDのエントリを埋め込む
-                    y[2][0][0]={0[len(inline)]}
+                    y[2][0][0]="{{0[{}]}}".format(len(inline))
                     inline.append(y[2][0][1])
                 if len(y)==4:
                     #pktin内で生成されたエントリ
