@@ -117,7 +117,7 @@ def get_p4src_pktout(_vars,actions,data):
                                      p4src.append("{};\n".format(proto[x[1]][y][z][1]))
                             else:
                                 #プロトコルを調べる
-                                p=get_origin_name(_vars,dic[y][0])
+                                p=get_origin_name(_vars,[dic[y][0]])
                                 print("protocol is :",p)
                                 print("dic[y][1]:",dic[y][1])
                                 print("values[p[4][0]][dic[y][1]]:",values[p[4][0]][dic[y][1]])
