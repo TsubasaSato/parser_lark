@@ -101,4 +101,4 @@ if __name__ == '__main__':
     
     print(T.message.get_code())
     print("----------")
-    print(T.message.prsrc_pktin)
+    print(T.message.p4src_pktin)
