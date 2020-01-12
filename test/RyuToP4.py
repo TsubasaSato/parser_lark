@@ -26,7 +26,7 @@ class Message():
     src_2="else if ({match}) {{\n    {inst}\n    }}\n"
     src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
     src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
-    p4src=[]
+    p4src=dict()
     p4src_pktin=[]
     count=0
     handler_name=""
@@ -50,30 +50,33 @@ class Message():
             self.entries[table_id].append([int(priority),match,instructions])
     def get_code(self):
         table_ids=self.entries.keys()
+        inline=list()
         for x in table_ids:
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
                 if y[2][0][0]=="OFPP_CONTROLLER":
                     #InstructionにPacketInが指定されていたらpktinのコードを埋め込む
-                    y[2][0][0]=self.p4src_pktin
-                    print("y[2][0][0]:",y[2][0][0])
+                    y[2][0][0]={0[len(inline)]}
+                    inline.append("OFPP_CONTROLLER")
                 elif y[2][0][0]=="OFPInstructionGotoTable":
                     #InstructionにOFPInstructionGotoTableが指定されていたら同じTableIDのエントリを埋め込む
-                    y[2][0][0]=self.entries[y[2][0][1]]
-                    print("y[2][0][0]:",y[2][0][0])
+                    y[2][0][0]={0[len(inline)]}
+                    inline.append(y[2][0][1])
                 if len(y)==4:
                     #pktin内で生成されたエントリ
-                    self.p4src.append(self.src_h.format(y[3],y[1],y[2][0][0]))
+                    self.p4src[x].append(self.src_h.format(y[3],y[1],y[2][0][0]))
                 elif y[1]:
                     #matchが空ならif文を作成しない
                     if count==1:
-                        self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0][0]))
+                        self.p4src[x].append(self.src_1.format(match=y[1][0],inst=y[2][0][0]))
                     else:
-                        self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0][0]))
+                        self.p4src[x].append(self.src_2.format(match=y[1][0],inst=y[2][0][0]))
                 else:
-                    self.p4src.append(self.src_inst.format(inst=y[2][0][0]))
+                    self.p4src[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
+        print(inline)
+        #p4src辞書をすべて結合してreturn
         return self.p4src
 
 def get_p4src_hlist(_vars,name):
