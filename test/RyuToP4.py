@@ -52,6 +52,7 @@ class Message():
         table_ids=self.entries.keys()
         inline=list()
         for x in table_ids:
+            p4srcd[x]=list()
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
