@@ -417,7 +417,7 @@ class RyuToP4Transformer(Transformer):
                     self._funccall(x.children)
                 elif x.data=="return_stmt":
                     print("return_stmt HERE")
-        #get_p4src_iflist(self.env,args)
+        print(get_p4src_iflist(self.env,args))
         print("-----Finished in if_stmt---")
     def elif_stmt(self,args):
         print("-----Start in elif_stmt---")
@@ -429,7 +429,7 @@ class RyuToP4Transformer(Transformer):
                     self._funccall(x.children)
                 elif x.data=="return_stmt":
                     print("return_stmt HERE")
-        #get_p4src_iflist(self.env,args)
+        print(get_p4src_iflist(self.env,args))
         print("-----Finished in elif_stmt---")
     def get_alldicts(self):
         return self.env
