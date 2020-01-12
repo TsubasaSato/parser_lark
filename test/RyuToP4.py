@@ -30,6 +30,8 @@ class Message():
     p4src=[]
     p4src_pktin=[]
     count=0
+    handler_name=""
+    
     def set_p4src_pktin(self,src):
         p4src_pktin.append(src)
     
@@ -341,7 +343,10 @@ def send_msg(_vars,args_tree,_msg):
     if check_same_list(msg[0:5],FlowMod):
         #FlowModの変換処理
         t_id,p,m,i=msg[5]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
-        _msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
+        if _msg.handler_name=="":
+            _msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
+        elif _msg.handler_name=="":
+            _msg.set_pktin_entry(t_id,p,get_p4src_hlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの変換処理
         _msg.set_p4src_pktin(get_p4src_pktout(_vars,get_p4src_alist(_vars,[msg[5]["actions"]]),get_origin_name(_vars,[msg[5]["data"]])))
@@ -350,6 +355,12 @@ class RyuToP4Transformer(Transformer):
     env=dict()
     message=Message()
     #変数宣言
+    
+    def set_handler_name(self,name):
+        self.message.handler_name=name
+        
+    def get_handler_name(self):
+        return self.message.handler_name=name
     
     def expr_stmt(self,args):
         print("-----Start in expr_stmt------")
