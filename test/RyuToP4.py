@@ -253,8 +253,7 @@ def get_p4src_alist(_vars,name):
                         else:
                             p4src.append("{} = {};\n".format(RyuToP4_key[x],var))
             else:
-                #Packet-Inの処理を記述
-                pass
+                print("PacketIN:",data)
     return p4src
 
 def get_p4src_ilist(_vars,name):
