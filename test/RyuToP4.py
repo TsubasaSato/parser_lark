@@ -420,6 +420,8 @@ class RyuToP4Transformer(Transformer):
             return Tree("funccall",args)
     def _if_stmt(self,args):
         print("-----Start in if_stmt---")
+        #if < 2 , elif > 1
+        count=0
         for x in args:
             if x.data=="funccall":
                 #条件式が入る
@@ -432,20 +434,14 @@ class RyuToP4Transformer(Transformer):
                         self._funccall(y.children)
                     elif y.data=="return_stmt":
                         print("return_stmt HERE")
+                    else:
+                        print(y.data)
+            elif x.data=="not":
+                print("not conditibal exp")
+            count=count+1
         #print(get_p4src_iflist(self.env,args))
         print("-----Finished in if_stmt---")
-    def _elif_stmt(self,args):
-        print("-----Start in elif_stmt---")
-        if args[1].data=="suite":
-            for x in args[1].children:
-                if x.data=="expr_stmt":
-                    self._expr_stmt(x.children)
-                elif x.data=="funccall":
-                    self._funccall(x.children)
-                elif x.data=="return_stmt":
-                    print("return_stmt HERE")
-        #print(get_p4src_iflist(self.env,args))
-        print("-----Finished in elif_stmt---")
+        
     def get_alldicts(self):
         return self.env
 
