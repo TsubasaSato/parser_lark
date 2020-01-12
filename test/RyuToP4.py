@@ -438,6 +438,7 @@ class RyuToP4Transformer(Transformer):
                         print("return_stmt HERE")
                     else:
                         print(y.data)
+                self.message.set_p4src_pktin("}}\n")
             count=count+1
         print("-----Finished in if_stmt---")
         
