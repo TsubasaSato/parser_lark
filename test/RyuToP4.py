@@ -426,7 +426,7 @@ class RyuToP4Transformer(Transformer):
             if x.data=="funccall" or x.data=="not":
                 #条件式が入る
                 print("conditinal exp")
-                print(get_p4src_iflist(self.env,x))
+                print(get_p4src_iflist(self.env,x.children))
             elif x.data=="suite":
                 for y in x.children:
                     if y.data=="expr_stmt":
