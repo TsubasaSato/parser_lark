@@ -111,5 +111,6 @@ if __name__ == '__main__':
     handler=data[1].children[0].children[0].children[1].children[0].children[1]
     T.set_handler_name(handler)
     T.transform(list(data[1].find_data("funcdef"))[0])
+    print(T.get_alldicts())
     print(T.message.get_code())
 
