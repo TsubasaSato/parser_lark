@@ -307,10 +307,7 @@ def send_msg(_vars,args_tree,_msg):
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
         print("data in send_msg")
-        print(msg[5]["actions"])
-        print(get_p4src_alist(_vars,[msg[5]["actions"]]))
-        print(get_origin_name(_vars,[msg[5]["data"]]))
-        print(get_p4src_pktout(_vars,get_p4src_alist(_vars,msg[5]["actions"]),get_origin_name(_vars,msg[5]["data"])))
+        print(get_p4src_pktout(_vars,get_p4src_alist(_vars,[msg[5]["actions"]]),get_origin_name(_vars,[msg[5]["data"]])))
     
 class RyuToP4Transformer(Transformer):
     env=dict()
