@@ -403,9 +403,6 @@ class RyuToP4Transformer(Transformer):
         if "pkt_ethernet" in self.env:
             #print(get_origin_name(self.env,self.env["pkt_ethernet"]))
             pass
-        if "pkt_in" in self.env:
-            #print(get_origin_name(self.env,self.env["pkt_in"]))
-            pass
         print("-----Finished in expr_stmt---")
     
     def _funccall(self,args):
@@ -419,14 +416,18 @@ class RyuToP4Transformer(Transformer):
         else:
             return Tree("funccall",args)
     def _if_stmt(self,args):
+        ifstmt="if ({}) {{\n"
+        elifstmt="elif ({}) {{\n"
         print("-----Start in if_stmt---")
-        #if < 2 , elif > 1
         count=0
         for x in args:
             if x.data=="funccall" or x.data=="not":
                 #条件式が入る
                 print("conditinal exp")
-                print(get_p4src_iflist(self.env,[Tree(x.data,x.children)]))
+                if count < 2:
+                    self.message.set_p4src_pktin(ifstmt.format(" ".join(get_p4src_iflist(self.env,[Tree(x.data,x.children)]))))
+                else:
+                    self.message.set_p4src_pktin(elifstmt.format(" ".join(get_p4src_iflist(self.env,[Tree(x.data,x.children)]))))
             elif x.data=="suite":
                 for y in x.children:
                     if y.data=="expr_stmt":
