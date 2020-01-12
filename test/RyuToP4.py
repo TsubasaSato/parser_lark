@@ -24,7 +24,8 @@ class Message():
     src_inst="    {inst}\n"
     src_1="if ({match}) {{\n    {inst}\n    }}\n"
     src_2="else if ({match}) {{\n    {inst}\n    }}\n"
-    src_h="bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\n"
+    src_h="bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\n
+                reg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"
     src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
     p4src=[]
     p4src_pktin=[]
@@ -52,10 +53,12 @@ class Message():
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
-                #matchが空ならif文を作成しない
-                if y[1]:
+                if len(y)==4:
+                    #pktin内で生成されたエントリ
+                    self.p4src.append(self.src_h.format(y[3],y[1],y[2]))
+                elif y[1]:
+                    #matchが空ならif文を作成しない
                     if count==1:
-                        # formatの実引数をデバッグ
                         self.p4src.append(self.src_1.format(match=y[1][0],inst=y[2][0]))
                     else:
                         self.p4src.append(self.src_2.format(match=y[1][0],inst=y[2][0]))
