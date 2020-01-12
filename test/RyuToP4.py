@@ -435,10 +435,10 @@ class RyuToP4Transformer(Transformer):
                     elif y.data=="funccall":
                         self._funccall(y.children)
                     elif y.data=="return_stmt":
-                        print("return_stmt HERE")
+                        self.message.set_p4src_pktin("    exit;\n")
                     else:
                         print(y.data)
-                self.message.set_p4src_pktin("}}\n")
+                self.message.set_p4src_pktin("}\n")
             count=count+1
         print("-----Finished in if_stmt---")
         
