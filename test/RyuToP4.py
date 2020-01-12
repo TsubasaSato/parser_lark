@@ -58,6 +58,27 @@ class Message():
                 count=count+1
         return self.p4src_f
 
+def get_p4src_hlist(_vars,name):
+    #P4ソースコード
+    p4src=[]
+    dict_value=get_origin_name(_vars,name)
+    RyuToP4_key={
+        "eth_dst":"hdr.ethernet.dstAddr",
+        "eth_src":"hdr.ethernet.srcAddr",
+        "ipv4_dst":"hdr.ipv4.dstAddr",
+        "ipv4_src":"hdr.ipv4.srcAddr",
+        "tcp_dst":"hdr.tcp.dstPort",
+        "tcp_src":"hdr.tcp.srcPort",
+    }
+    OFPMatch=["ev","msg","datapath","ofproto_parser","OFPMatch"]
+    #Ryuの固有関数であるか確認
+    if check_same_list(dict_value[0:5],OFPMatch):
+        if len(dict_value) > 5:
+            data=dict_value[5]
+            for x in data.keys():
+                p4src.append(RyuToP4_key[x])
+    return [",".join(p4src)]
+    
 def get_p4src_pktout(_vars,actions,data):
     eth_reg="bit<48> eth_dst = hdr.ethernet.dstAddr;\nbit<48> eth_src = hdr.ethernet.srcAddr;\n"
     ip_reg="bit<32> ipv4_dst = hdr.ipv4.dstAddr;\nbit<32> ipv4_src = hdr.ipv4.srcAddr;\n"
