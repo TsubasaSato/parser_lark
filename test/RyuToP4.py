@@ -87,7 +87,7 @@ def get_p4src_hlist(_vars,name):
         if len(dict_value) > 5:
             data=dict_value[5]
             for x in data.keys():
-                if x!="eth_type" or x != "ip_proto":
+                if not (x=="eth_type" or x == "ip_proto"):
                     p4src.append(RyuToP4_key[x])
     return [",".join(p4src)]
     
