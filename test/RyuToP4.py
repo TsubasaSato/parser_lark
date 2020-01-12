@@ -423,9 +423,10 @@ class RyuToP4Transformer(Transformer):
         #if < 2 , elif > 1
         count=0
         for x in args:
-            if x.data=="funccall":
+            if x.data=="funccall" or x.data=="not":
                 #条件式が入る
                 print("conditinal exp")
+                print(get_p4src_iflist(self.env,x))
             elif x.data=="suite":
                 for y in x.children:
                     if y.data=="expr_stmt":
@@ -436,10 +437,7 @@ class RyuToP4Transformer(Transformer):
                         print("return_stmt HERE")
                     else:
                         print(y.data)
-            elif x.data=="not":
-                print("not conditibal exp")
             count=count+1
-        #print(get_p4src_iflist(self.env,args))
         print("-----Finished in if_stmt---")
         
     def get_alldicts(self):
