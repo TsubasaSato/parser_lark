@@ -377,6 +377,19 @@ class RyuToP4Transformer(Transformer):
     def get_handler_name(self):
         return self.message.handler_name
     
+    def decorated(self,args):
+        set_handler_name(args[0].children[0].children[0].children[1].children[0].children[1])
+        for x in args[1].children[2].children:
+            if x.data=="expr_stmt":
+                _expr_stmt(x.children)
+            elif x.data=="funccall":
+                _funccall(x.children)
+            elif x.data=="if_stmt":
+                _if_stmt(x.children)
+            elif x.data=="elif_stmt":
+                _elif_stmt(x.children)
+            else:
+                print("Don't know {} node.".format(x.data))
     def _expr_stmt(self,args):
         print("-----Start in expr_stmt------")
         if args[0].data=="var":
@@ -410,7 +423,7 @@ class RyuToP4Transformer(Transformer):
             self.env[args[0].children[0].children[0]].append(arg_get_dict_list(args[1]))
         else:
             return Tree("funccall",args)
-    def if_stmt(self,args):
+    def _if_stmt(self,args):
         print("-----Start in if_stmt---")
         if args[1].data=="suite":
             for x in args[1].children:
@@ -422,7 +435,7 @@ class RyuToP4Transformer(Transformer):
                     print("return_stmt HERE")
         print(get_p4src_iflist(self.env,args))
         print("-----Finished in if_stmt---")
-    def elif_stmt(self,args):
+    def _elif_stmt(self,args):
         print("-----Start in elif_stmt---")
         if args[1].data=="suite":
             for x in args[1].children:
