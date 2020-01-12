@@ -344,12 +344,14 @@ def send_msg(_vars,args_tree,_msg):
     if check_same_list(msg[0:5],FlowMod):
         #FlowModの変換処理
         t_id,p,m,i=msg[5]["table_id"],msg[5]["priority"],msg[5]["match"],msg[5]["instructions"]
+        print("_msg.handler_name:",_msg.handler_name)
         if _msg.handler_name==handler[0]:
             _msg.set_entry(t_id,p,get_p4src_mlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
         elif _msg.handler_name==handler[1]:
             _msg.set_pktin_entry(t_id,p,get_p4src_hlist(_vars,[m]),get_p4src_ilist(_vars,[i]))
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの変換処理
+        print("get_p4src_pktout:",get_p4src_pktout(_vars,get_p4src_alist(_vars,[msg[5]["actions"]]),get_origin_name(_vars,[msg[5]["data"]])))
         _msg.set_p4src_pktin(get_p4src_pktout(_vars,get_p4src_alist(_vars,[msg[5]["actions"]]),get_origin_name(_vars,[msg[5]["data"]])))
     
 class RyuToP4Transformer(Transformer):
