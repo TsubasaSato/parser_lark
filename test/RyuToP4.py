@@ -350,12 +350,13 @@ class RyuToP4Transformer(Transformer):
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
             send_msg(self.env,args[1],self.message)
-        if args[0].children[1]=="add_protocol":
-            print("add_protocol")
+        elif args[0].children[1]=="add_protocol":
             self.env[args[0].children[0].children[0]].append(arg_get_dict_list(args[1]))
-            print(self.env[args[0].children[0].children[0]])
         else:
             return Tree("funccall",args)
+        
+        if "match" in self.env:
+            print(get_origin_name(self.env,self.env["match"]))
     def if_stmt(self,args):
         print("-----Start in if_stmt---")
         #リストにnotを入れる
