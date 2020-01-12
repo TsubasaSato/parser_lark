@@ -309,7 +309,7 @@ def send_msg(_vars,args_tree,_msg):
         print("data in send_msg")
         print(msg[5:])
         print(get_p4src_alist(_vars,msg[5]["actions"]))
-        print(get_origin_name(_vars,msg[6]["data"]))
+        print(get_origin_name(_vars,msg[5]["data"]))
         print(get_p4src_pktout(_vars,get_p4src_alist(_vars,msg[5]["actions"]),get_origin_name(_vars,msg[6]["data"])))
     
 class RyuToP4Transformer(Transformer):
