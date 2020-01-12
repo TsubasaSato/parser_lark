@@ -198,7 +198,7 @@ def get_p4src_iflist(_vars,args):
         con.append(get_p4src_packet(_vars,funccall_get_list(args[0]))[0])
     elif args[0].data=="var":
         con.append(get_p4src_packet(_vars,[args[0].children[0]])[0])
-    print(con)
+    
 
 def get_p4src_mlist(_vars,name):
     #P4ソースコード
