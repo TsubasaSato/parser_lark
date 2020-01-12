@@ -54,8 +54,7 @@ class Message():
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
-                if not y[2][0]:
-                    y[2][0].append("PacketIN here")
+                print("y[2][0]:",y[2][0])
                 if len(y)==4:
                     #pktin内で生成されたエントリ
                     self.p4src.append(self.src_h.format(y[3],y[1],y[2][0][0]))
@@ -253,7 +252,8 @@ def get_p4src_alist(_vars,name):
                         else:
                             p4src.append("{} = {};\n".format(RyuToP4_key[x],var))
             else:
-                print("PacketIN:",data)
+                #OFPP_CONTROLLERの時
+                p4src.append(data[1])
     return p4src
 
 def get_p4src_ilist(_vars,name):
