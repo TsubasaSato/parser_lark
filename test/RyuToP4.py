@@ -253,7 +253,7 @@ def get_p4src_alist(_vars,name):
                             p4src.append("{} = {};\n".format(RyuToP4_key[x],var))
             else:
                 #OFPP_CONTROLLERの時
-                p4src.append(data[1])
+                p4src.append(data[1].value)
     return p4src
 
 def get_p4src_ilist(_vars,name):
@@ -265,8 +265,7 @@ def get_p4src_ilist(_vars,name):
     #Ryuの固有関数であるか確認
     if check_same_list(dict_value[0:5],OFPInstGoto):
         #FlowModで指定されたtableIDと同じ番号のエントリをここに配置
-        p4src.append(dict_value[4])
-        p4src.append(dict_value[5])
+        p4src.append([dict_value[4],dict_value[5]])
     elif check_same_list(dict_value[0:7],OFPInstActA) or check_same_list(dict_value[0:7],OFPInstActW):
         #Actionsをget_origin_nameしてActionの取得
         actions=get_p4src_alist(_vars,[dict_value[-1]])
