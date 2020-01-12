@@ -423,6 +423,7 @@ class RyuToP4Transformer(Transformer):
         for x in args:
             if x.data=="funccall":
                 #条件式が入る
+                print("conditinal exp")
             elif x.data=="suite":
                 for y in x.children:
                     if y.data=="expr_stmt":
