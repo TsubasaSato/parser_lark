@@ -58,6 +58,67 @@ class Message():
                 count=count+1
         return self.p4src_f
 
+def get_p4src_pktout(_vars,actions,data):
+    eth_reg="bit<48> eth_dst=hdr.ethernet.dstAddr;\n    bit<48> eth_src=hdr.ethernet.srcAddr;\n"
+    ip_reg="bit<32> ipv4_dst=hdr.ipv4.dstAddr;\n    bit<32> ipv4_src=hdr.ipv4.srcAddr;\n"
+    tcp_reg="bit<16> tcp_dst=hdr.tcp.dstPort;\n    bit<16> tcp_src=hdr.tcp.srcPort;\n"
+    
+    ethernet={
+        "dst":"hdr.ethernet.dstAddr",
+        "src":"hdr.ethernet.srcAddr",
+        }
+    ipv4={
+        "dst":"hdr.ipv4.dstAddr",
+        "src":"hdr.ipv4.srcAddr",
+        }
+    flags={
+        "TCP_SYN":"hdr.tcp.syn = 1",
+        "TCP_ACK":"hdr.tcp.ack = 1",
+        }
+    tcp={
+        "src_port":"hdr.tcp.srcPort",
+        "dst_port":"hdr.tcp.dstPort",
+        "ack":"hdr.tcp.ackNo",
+        "seq":"hdr.tcp.seqNo",
+        "bits":flags,
+        }
+    proto={
+        "ethernet":ethernet,
+        "ipv4":ipv4,
+        "tcp":tcp,
+        }
+    values={
+        "ethernet":{"src":"eth_src","dst":"eth_dst"},
+        "ipv4":{"src":"ipv4_src","dst":"ipv4_dst"},
+        "tcp":{"src_port":"tcp_src","dst_port":"tcp_dst"},
+        }
+    p4src=[]
+    p4src.append(actions)
+    
+    if data[-1]=="data":
+        for x in data:
+            if type(x)==type(list()):
+                if x[1]=="ethernet":
+                    p4src.append(eth_reg)
+                elif x[1]=="ipv4":
+                    p4src.append(ip_reg)
+                elif x[1]=="tcp":
+                    p4src.append(tcp_reg)
+                dic=x[2][0]
+                for y in dic.keys():
+                    #辞書の値が変数なら変数を解析
+                    if dic[y]==type(list):
+                        if y=="bits":
+                            for z in dic[y]:
+                                 p4src.append("{};\n".format(proto[x[1]][y][z][1]))
+                        else:
+                            #プロトコルを調べる
+                            p=get_origin_name(_vars,dic[y][0])[4][0]
+                            p4src.append("{} = {};\n".format(proto[x[1]][y],values[p][dic[y][1]]))
+                    else:
+                        p4src.append("{} = {};\n".format(proto[x[1]][y],dic[y]))
+    return p4src    
+    
 def get_p4src_packet(_vars,name):
     proto={
         "tcp":"hdr.tcp.isValid()",
@@ -246,10 +307,7 @@ def send_msg(_vars,args_tree,_msg):
     elif check_same_list(msg[0:5],PacketOut):
         #PacketOutの記述
         print("data in send_msg")
-        print(get_origin_name(_vars,msg))
-        print("-------same??---------")
-        print(msg)
-        pass
+        print(get_p4src_pktout(_vars,get_p4src_alist(_vars,msg[5]["actions"]),get_origin_name(_vars,msg[6]["data"]))))
     
 class RyuToP4Transformer(Transformer):
     env=dict()
