@@ -192,10 +192,7 @@ def get_p4src_iflist(_vars,args):
     con=[]
     if args[0].data=="not":
         con.append("!")
-        print("args[0].children[0].data:",args[0].children[0].data)
         if args[0].children[0].data=="var":
-            print("[args[0].children[0].children[0]]:",[args[0].children[0].children[0]])
-            print("get_p4src_packet(_vars,[args[0].children[0].children[0]]):",get_p4src_packet(_vars,[args[0].children[0].children[0]]))
             con.append(get_p4src_packet(_vars,[args[0].children[0].children[0]])[0])
     elif args[0].data=="funccall":
         con.append(get_p4src_packet(_vars,funccall_get_list(args[0]))[0])
@@ -378,7 +375,6 @@ class RyuToP4Transformer(Transformer):
         return self.message.handler_name
     
     def decorated(self,args):
-        print(args[0].pretty())
         self.set_handler_name(args[0].children[0].children[1].children[0].children[1])
         for x in args[1].children[2].children:
             if x.data=="expr_stmt":
