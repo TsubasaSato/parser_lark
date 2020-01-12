@@ -376,6 +376,7 @@ class RyuToP4Transformer(Transformer):
     
     def _expr_stmt(self,args):
         print("-----Start in expr_stmt------")
+        print(args)
         if args[0].data=="var":
             if args[1].data=="var":
                 pass
@@ -400,6 +401,7 @@ class RyuToP4Transformer(Transformer):
     def _funccall(self,args):
         #packet.Packet()とsend_msg()用に分けて考える
         #datapath.send_msgにしておく
+        print(args)
         if args[0].children[1] =="send_msg":
             print("-----Start in funccall-------")
             send_msg(self.env,args[1],self.message)
