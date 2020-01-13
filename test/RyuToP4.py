@@ -86,12 +86,12 @@ class Message():
             print("---------------------------------")
             print("self.p4srcd[{}]".format(x),self.p4srcd[x])
             print("---------------------------------")
-
+        """
         for x in self.p4srcd.keys():
             p4fullsrc+=self.p4srcd[x]
-
+        """
         #p4src辞書をすべて結合してreturn
-        return p4fullsrc
+        return self.p4srcd[0]
 
 def get_p4src_hlist(_vars,name):
     #P4ソースコード
