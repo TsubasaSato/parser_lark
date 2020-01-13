@@ -79,10 +79,8 @@ class Message():
                     self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
         
-        print("-----self.p4srcd------")
         for x in self.p4srcd.keys():
             p4fullsrc+="".join(self.p4srcd[x])
-        print("----------------------")
 
         #p4src辞書をすべて結合してreturn
         return p4fullsrc
@@ -416,9 +414,6 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1])
             else:
                 pass
-        if "pkt_ethernet" in self.env:
-            #print(get_origin_name(self.env,self.env["pkt_ethernet"]))
-            pass
         print("-----Finished in expr_stmt---")
     
     def _funccall(self,args):
@@ -439,7 +434,6 @@ class RyuToP4Transformer(Transformer):
         for x in args:
             if x.data=="funccall" or x.data=="not":
                 #条件式が入る
-                print("conditinal exp")
                 if count < 2:
                     self.message.set_p4src_pktin(ifstmt.format(" ".join(get_p4src_iflist(self.env,[Tree(x.data,x.children)]))))
                 else:
@@ -453,7 +447,6 @@ class RyuToP4Transformer(Transformer):
                     elif y.data=="return_stmt":
                         self.message.set_p4src_pktin("    exit;\n")
                     else:
-                        print(y.data)
                 self.message.set_p4src_pktin("}\n")
             count=count+1
         print("-----Finished in if_stmt---")
