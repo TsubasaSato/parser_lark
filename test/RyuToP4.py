@@ -27,13 +27,12 @@ class Message():
     src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
     src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
     p4srcd=dict()
-    p4src_pktin=[]
+    p4src_pktin=""
     count=0
     handler_name=""
     
     def set_p4src_pktin(self,src):
-        self.p4src_pktin.append(src)
-        self.p4src_pktin="".join(self.p4src_pktin)
+        self.p4src_pktin += src
     
     def set_pktin_entry(self,table_id,priority,match,instructions):
         if table_id in self.entries:
