@@ -66,21 +66,23 @@ class Message():
                 elif y[2][0][0]=="OFPInstructionGotoTable":
                     #InstructionにOFPInstructionGotoTableが指定されていたら同じTableIDのエントリを埋め込む
                     y[2][0][0]=self.p4srcd[y[2][0][1]]
+                    
                 if len(y)==4:
                     #pktin内で生成されたエントリ
-                    self.p4srcd[x].append(self.src_h.format(y[3],y[1],y[2][0][0]))
+                    self.p4srcd[x]+=self.src_h.format(y[3],y[1],y[2][0][0])
                 elif y[1]:
                     #matchが空ならif文を作成しない
                     if count==1:
-                        self.p4srcd[x].append(self.src_1.format(match=y[1][0],inst=y[2][0][0]))
+                        self.p4srcd[x]+=self.src_1.format(match=y[1][0],inst=y[2][0][0])
                     else:
-                        self.p4srcd[x].append(self.src_2.format(match=y[1][0],inst=y[2][0][0]))
+                        self.p4srcd[x]+=self.src_2.format(match=y[1][0],inst=y[2][0][0])
                 else:
-                    self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
+                    print("for y in self.entries[x] else")
+                    self.p4srcd[x]+=self.src_inst.format(inst=y[2][0][0])
                 count=count+1
         
         for x in self.p4srcd.keys():
-            p4fullsrc+="".join(self.p4srcd[x])
+            p4fullsrc+=self.p4srcd[x]
 
         #p4src辞書をすべて結合してreturn
         return p4fullsrc
