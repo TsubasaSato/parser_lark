@@ -81,7 +81,7 @@ class Message():
         
         print("-----self.p4srcd------")
         for x in self.p4srcd.keys():
-            print(self.p4srcd[x])
+            p4fullsrc+="".join(self.p4srcd[x])
         print("----------------------")
 
         #p4src辞書をすべて結合してreturn
