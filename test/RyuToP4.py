@@ -56,9 +56,6 @@ class Message():
         table_ids=self.entries.keys()
         inline=list()
         p4fullsrc=""
-        
-        print("p4src_pktin",self.p4src_pktin)
-        
         for x in table_ids:
             self.p4srcd[x]=list()
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
@@ -66,8 +63,7 @@ class Message():
             for y in self.entries[x]:
                 if y[2][0][0]=="OFPP_CONTROLLER":
                     #InstructionにPacketInが指定されていたらpktinのコードを埋め込む
-                    y[2][0][0]="%s"
-                    inline.append("OFPP_CONTROLLER")
+                    y[2][0][0]=self.p4src_pktin
                 elif y[2][0][0]=="OFPInstructionGotoTable":
                     #InstructionにOFPInstructionGotoTableが指定されていたら同じTableIDのエントリを埋め込む
                     y[2][0][0]="%s"
@@ -85,10 +81,7 @@ class Message():
                     self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
         for x in range(len(inline)):
-            if inline[x] == "OFPP_CONTROLLER":
-                inline[x]=self.p4src_pktin
-            else:
-                inline[x]="".join(self.p4srcd[inline[x]])
+            inline[x]="".join(self.p4srcd[inline[x]])
             print("inline[{}]".format(x),inline[x])
             print("----------")
         print("self.p4srcd")
