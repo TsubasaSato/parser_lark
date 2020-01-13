@@ -56,7 +56,7 @@ class Message():
         table_ids=self.entries.keys()
         inline=list()
         p4fullsrc=""
-        for x in table_ids:
+        for x in reversed(table_ids):
             self.p4srcd[x]=list()
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
@@ -66,8 +66,7 @@ class Message():
                     y[2][0][0]=self.p4src_pktin
                 elif y[2][0][0]=="OFPInstructionGotoTable":
                     #InstructionにOFPInstructionGotoTableが指定されていたら同じTableIDのエントリを埋め込む
-                    y[2][0][0]="%s"
-                    inline.append(y[2][0][1])
+                    y[2][0][0]=self.p4srcd[y[2][0][1]]
                 if len(y)==4:
                     #pktin内で生成されたエントリ
                     self.p4srcd[x].append(self.src_h.format(y[3],y[1],y[2][0][0]))
@@ -80,18 +79,12 @@ class Message():
                 else:
                     self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
-        for x in range(len(inline)):
-            inline[x]="".join(self.p4srcd[inline[x]])
-            print("inline[{}]".format(x),inline[x])
-            print("----------")
-        print("self.p4srcd")
-        print(self.p4srcd)
         
+        print("-----self.p4srcd------")
         for x in self.p4srcd.keys():
-            print(self.p4srcd)
-            self.p4srcd[x]="".join(self.p4srcd[x]) % inline[int(x.value)]
-        
-        print("self.p4srcd",self.p4srcd)
+            print(self.p4srcd[x])
+        print("----------------------")
+
         #p4src辞書をすべて結合してreturn
         return p4fullsrc
 
