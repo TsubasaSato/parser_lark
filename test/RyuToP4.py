@@ -91,7 +91,7 @@ class Message():
             p4fullsrc+=self.p4srcd[x]
         """
         #p4src辞書をすべて結合してreturn
-        return self.p4srcd[0]
+        return self.p4srcd["0"]
 
 def get_p4src_hlist(_vars,name):
     #P4ソースコード
