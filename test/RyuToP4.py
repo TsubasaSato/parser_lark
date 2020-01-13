@@ -79,9 +79,9 @@ class Message():
                 count=count+1
         for x in range(len(inline)):
             if inline[x] == "OFPP_CONTROLLER":
-                inline[x]=self.p4src_pktin
+                inline[x]="".join(self.p4src_pktin)
             else:
-                inline[x]=self.p4srcd[inline[x]]
+                inline[x]="".join(self.p4srcd[inline[x]])
         for x in self.p4srcd.keys():
             print(inline[int(x.value)])
             print(p4fullsrc)
