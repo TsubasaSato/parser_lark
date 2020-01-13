@@ -56,7 +56,7 @@ class Message():
         inline=list()
         p4fullsrc=""
         for x in reversed(list(self.entries.keys())):
-            self.p4srcd[x]=list()
+            self.p4srcd[x]=""
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
