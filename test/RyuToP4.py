@@ -33,6 +33,7 @@ class Message():
     
     def set_p4src_pktin(self,src):
         self.p4src_pktin.append(src)
+        self.p4src_pktin="".join(self.p4src_pktin)
     
     def set_pktin_entry(self,table_id,priority,match,instructions):
         if table_id in self.entries:
@@ -79,7 +80,7 @@ class Message():
                 count=count+1
         for x in range(len(inline)):
             if inline[x] == "OFPP_CONTROLLER":
-                inline[x]="".join(self.p4src_pktin)
+                inline[x]=self.p4src_pktin
             else:
                 inline[x]="".join(self.p4srcd[inline[x]])
         print("inline:",inline)
