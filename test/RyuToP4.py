@@ -77,13 +77,16 @@ class Message():
                 else:
                     self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
-        """
+        for x in range(len(inline)):
+            if inline[x] == "OFPP_CONTROLLER":
+                inline[x]=self.p4src_pktin
+            else:
+                inline[x]=self.p4srcd[inline[x]]
         for x in p4srcd.keys():
-            p4fullsrc+=p4srcd[x].format()
-        """
+            p4fullsrc+="".join(p4srcd[x]).format(inline[int(x.value)])
+        
         #p4src辞書をすべて結合してreturn
-        print("inline",inline)
-        return self.p4srcd
+        return p4fullsrc
 
 def get_p4src_hlist(_vars,name):
     #P4ソースコード
