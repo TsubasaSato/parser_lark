@@ -88,8 +88,11 @@ class Message():
                 inline[x]="".join(self.p4srcd[inline[x]])
             print("inline[{}]".format(x),inline[x])
             print("----------")
-
+        print("self.p4srcd")
+        print(self.p4srcd)
+        
         for x in self.p4srcd.keys():
+            print(self.p4srcd)
             self.p4srcd[x]="".join(self.p4srcd[x]) % inline[int(x.value)]
         
         print("self.p4srcd",self.p4srcd)
