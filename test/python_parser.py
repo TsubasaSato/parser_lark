@@ -99,5 +99,4 @@ if __name__ == '__main__':
     T.transform(tree)
     
     print(T.message.get_code())
-    print("----------")
-    print(T.message.p4src_pktin)
+
