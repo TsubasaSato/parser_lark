@@ -21,7 +21,7 @@ def check_same_list(token_list,normal_list):
 
 class Message():
     entries=dict()
-    src_inst="    {inst}\n"
+    src_inst="{inst}\n"
     src_1="if ({match}) {{\n    {inst}\n    }}\n"
     src_2="else if ({match}) {{\n    {inst}\n    }}\n"
     src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
@@ -80,8 +80,10 @@ class Message():
                     print("for y in self.entries[x] else")
                     self.p4srcd[x]+=self.src_inst.format(inst=y[2][0][0])
                 count=count+1
-        
-        print("self.p4srcd",self.p4srcd)
+            print("---------------------------------")
+            print("self.p4srcd[{}]".format(x),self.p4srcd[x])
+            print("---------------------------------")
+
         for x in self.p4srcd.keys():
             p4fullsrc+=self.p4srcd[x]
 
