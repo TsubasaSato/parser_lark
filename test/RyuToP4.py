@@ -26,6 +26,9 @@ class Message():
     src_2="else if ({match}) {{\n{inst}\n}}\n"
     src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
     src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
+    src_r="register<bit<1>>(65536) reg{};\n"
+    reg_list=[]
+    p4ctrlsrc="{}\napply{{\n{}\n}}"
     p4srcd=dict()
     p4src_pktin=""
     count=0
@@ -68,6 +71,7 @@ class Message():
                 if len(y)==4:
                     #pktin内で生成されたエントリ
                     #P4のControlブロック上部でレジスタ宣言を行う
+                    self.reg_list.append(src_r.format(y[3]))
                     self.p4srcd[x]+=self.src_h.format(y[3],y[1],y[2][0][0])
                 elif y[1]:
                     #matchが空ならif文を作成しない
@@ -79,7 +83,7 @@ class Message():
                     print("for y in self.entries[x] else")
                     self.p4srcd[x]+=self.src_inst.format(inst=y[2][0][0])
                 count=count+1
-        return self.p4srcd["0"]
+        return self.p4ctrlsrc.format("".join(self.reg_list),self.p4srcd["0"])
 
 def get_p4src_hlist(_vars,name):
     #P4ソースコード
