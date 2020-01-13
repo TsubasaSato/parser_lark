@@ -86,6 +86,8 @@ class Message():
                 inline[x]=self.p4src_pktin
             else:
                 inline[x]="".join(self.p4srcd[inline[x]])
+            print("inline[{}]".format(x),inline[x])
+            print("----------")
 
         for x in self.p4srcd.keys():
             self.p4srcd[x]="".join(self.p4srcd[x]) % inline[int(x.value)]
