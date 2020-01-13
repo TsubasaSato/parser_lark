@@ -82,8 +82,8 @@ class Message():
                 inline[x]=self.p4src_pktin
             else:
                 inline[x]=self.p4srcd[inline[x]]
-        for x in p4srcd.keys():
-            p4fullsrc+="".join(p4srcd[x]).format(inline[int(x.value)])
+        for x in self.p4srcd.keys():
+            p4fullsrc+="".join(self.p4srcd[x]).format(inline[int(x.value)])
         
         #p4src辞書をすべて結合してreturn
         return p4fullsrc
