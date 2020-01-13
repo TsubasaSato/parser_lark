@@ -424,7 +424,7 @@ class RyuToP4Transformer(Transformer):
             return Tree("funccall",args)
     def _if_stmt(self,args):
         ifstmt="if ({}) {{\n"
-        elifstmt="elif ({}) {{\n"
+        elifstmt="else if ({}) {{\n"
         print("-----Start in if_stmt---")
         count=0
         for x in args:
