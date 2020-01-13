@@ -79,15 +79,17 @@ class Message():
                 count=count+1
         for x in range(len(inline)):
             if inline[x] == "OFPP_CONTROLLER":
-                print("self.p4src_pktin",self.p4src_pktin)
                 inline[x]=self.p4src_pktin
             else:
                 inline[x]="".join(self.p4srcd[inline[x]])
+        print("inline:",inline)
+        """
         for x in self.p4srcd.keys():
             print(inline[int(x.value)])
             print(p4fullsrc)
             print(self.p4srcd[x])
-            p4fullsrc+="".join(self.p4srcd[x]) % inline[int(x.value)]     
+            p4fullsrc+="".join(self.p4srcd[x]) % inline[int(x.value)]
+        """
         #p4src辞書をすべて結合してreturn
         return p4fullsrc
 
