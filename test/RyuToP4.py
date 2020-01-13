@@ -53,10 +53,9 @@ class Message():
             self.entries[table_id]=list()
             self.entries[table_id].append([int(priority),match,instructions])
     def get_code(self):
-        table_ids=self.entries.keys()
         inline=list()
         p4fullsrc=""
-        for x in reversed(table_ids):
+        for x in reversed(self.entries.keys()):
             self.p4srcd[x]=list()
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
