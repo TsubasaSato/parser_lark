@@ -23,8 +23,8 @@ class Message():
     entries=dict()
     src_inst="{inst}\n"
     src_1="if ({match}) {{\n{inst}\nexit;\n}}\n"
-    src_2="else if ({match}) {{\n{inst}\n}}\n"
-    src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n    {2}\n    }}\n"""
+    src_2="else if ({match}) {{\n{inst}exit;\n\n}}\n"
+    src_h="""bit<1> OK_{0}_1;\nbit<32> index_{0}_1;\nhash(index_{0}_1,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.read(OK_{0}_1,index_{0}_1);\nif (OK_{0}_1==1){{\n{2}\nexit;\n}}\n"""
     src_hh="bit<1> OK_{0}_0;\nbit<32> index_{0}_0;\nhash(index_{0}_0,HashAlgorithm.crc16,32w0,{{{1}}},32w65536);\nreg{0}.write(index_{0}_0,1w1);\n"
     src_r="register<bit<1>>(65536) reg{};\n"
     reg_list=[]
