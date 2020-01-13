@@ -55,6 +55,7 @@ class Message():
     def get_code(self):
         inline=list()
         p4fullsrc=""
+        print(type(self.entries.keys()))
         for x in reversed(self.entries.keys()):
             self.p4srcd[x]=list()
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
