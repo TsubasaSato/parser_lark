@@ -445,8 +445,8 @@ class RyuToP4Transformer(Transformer):
                     elif y.data=="funccall":
                         self._funccall(y.children)
                     elif y.data=="return_stmt":
-                        self.message.set_p4src_pktin("    exit;\n")
-                self.message.set_p4src_pktin("}\n")
+                        #self.message.set_p4src_pktin("    exit;\n")
+                self.message.set_p4src_pktin("exit;\n}\n")
             count=count+1
         print("-----Finished in if_stmt---")
         
