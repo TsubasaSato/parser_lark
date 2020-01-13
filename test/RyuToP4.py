@@ -60,6 +60,9 @@ class Message():
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
+                print("-------self.entries--------")
+                print(y)
+                print("----Finished--self.entries-")
                 if y[2][0][0]=="OFPP_CONTROLLER":
                     #InstructionにPacketInが指定されていたらpktinのコードを埋め込む
                     y[2][0][0]=self.p4src_pktin
