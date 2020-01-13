@@ -53,16 +53,11 @@ class Message():
             self.entries[table_id]=list()
             self.entries[table_id].append([int(priority),match,instructions])
     def get_code(self):
-        inline=list()
-        p4fullsrc=""
         for x in reversed(list(self.entries.keys())):
             self.p4srcd[x]=""
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
             count=1
             for y in self.entries[x]:
-                print("-------self.entries--------")
-                print(y)
-                print("----Finished--self.entries-")
                 if y[2][0][0]=="OFPP_CONTROLLER":
                     #InstructionにPacketInが指定されていたらpktinのコードを埋め込む
                     y[2][0][0]=self.p4src_pktin
@@ -72,6 +67,7 @@ class Message():
                     
                 if len(y)==4:
                     #pktin内で生成されたエントリ
+                    #P4のControlブロック上部でレジスタ宣言を行う
                     self.p4srcd[x]+=self.src_h.format(y[3],y[1],y[2][0][0])
                 elif y[1]:
                     #matchが空ならif文を作成しない
@@ -83,14 +79,6 @@ class Message():
                     print("for y in self.entries[x] else")
                     self.p4srcd[x]+=self.src_inst.format(inst=y[2][0][0])
                 count=count+1
-            print("---------------------------------")
-            print("self.p4srcd[{}]".format(x),self.p4srcd[x])
-            print("---------------------------------")
-        """
-        for x in self.p4srcd.keys():
-            p4fullsrc+=self.p4srcd[x]
-        """
-        #p4src辞書をすべて結合してreturn
         return self.p4srcd["0"]
 
 def get_p4src_hlist(_vars,name):
