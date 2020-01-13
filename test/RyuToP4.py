@@ -56,6 +56,9 @@ class Message():
         table_ids=self.entries.keys()
         inline=list()
         p4fullsrc=""
+        
+        print("p4src_pktin",self.p4src_pktin)
+        
         for x in table_ids:
             self.p4srcd[x]=list()
             self.entries[x].sort(key=lambda x:x[0],reverse=True)
