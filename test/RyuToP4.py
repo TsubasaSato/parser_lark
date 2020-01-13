@@ -71,7 +71,7 @@ class Message():
                 if len(y)==4:
                     #pktin内で生成されたエントリ
                     #P4のControlブロック上部でレジスタ宣言を行う
-                    self.reg_list.append(src_r.format(y[3]))
+                    self.reg_list.append(self.src_r.format(y[3]))
                     self.p4srcd[x]+=self.src_h.format(y[3],y[1],y[2][0][0])
                 elif y[1]:
                     #matchが空ならif文を作成しない
