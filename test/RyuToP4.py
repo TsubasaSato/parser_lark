@@ -81,6 +81,7 @@ class Message():
                     self.p4srcd[x]+=self.src_inst.format(inst=y[2][0][0])
                 count=count+1
         
+        print("self.p4srcd",self.p4srcd)
         for x in self.p4srcd.keys():
             p4fullsrc+=self.p4srcd[x]
 
