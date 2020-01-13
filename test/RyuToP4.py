@@ -77,9 +77,12 @@ class Message():
                 else:
                     self.p4srcd[x].append(self.src_inst.format(inst=y[2][0][0]))
                 count=count+1
+        """
         for x in p4srcd.keys():
             p4fullsrc+=p4srcd[x].format()
+        """
         #p4src辞書をすべて結合してreturn
+        print("inline",inline)
         return self.p4srcd
 
 def get_p4src_hlist(_vars,name):
