@@ -32,7 +32,11 @@ class Message():
     handler_name=""
     
     def set_p4src_pktin(self,src):
-        self.p4src_pktin += src
+        s=src
+        if type(src)==type(list()):
+            s="".join(s)
+        self.p4src_pktin+=s
+        
     
     def set_pktin_entry(self,table_id,priority,match,instructions):
         if table_id in self.entries:
