@@ -97,6 +97,6 @@ if __name__ == '__main__':
     filepath=sys.argv[2]
     T=RyuToP4Transformer()
     T.transform(tree)
-    T.pydot__tree_to_png(tree,filepath)
+    pydot__tree_to_png(tree,filepath)
     #print(T.message.get_code())
 
