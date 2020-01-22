@@ -95,9 +95,9 @@ if __name__ == '__main__':
     # test_python_lib()
     # test_earley_equals_lalr()
     tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
-    filepath=sys.argv[2]
+
     T=RyuToP4Transformer()
     T.transform(tree)
-    pydot__tree_to_png(tree,filepath)
-    #print(T.message.get_code())
+
+    print(T.message.get_code())
 
