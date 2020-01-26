@@ -3,8 +3,8 @@ import subprocess,time
 data=[]
 for _ in range(100):
     t1=time.time()
-    proc=subprocess.Popen(["python3","./python_parser.py",
-                           "/home/tsubasa/learnP4/TcpSyn_comment.py"],stdout=subprocess.PIPE)
+    proc=subprocess.call(["python3","./python_parser.py",
+                           "/home/tsubasa/learnP4/TcpSyn_comment.py"])
     t2=time.time()
     time.sleep(5)
     proc.terminate()
