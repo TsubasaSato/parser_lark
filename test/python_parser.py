@@ -52,6 +52,7 @@ def program():
     T.transform(tree)
 
     code=T.message.get_code()
+    T=None
     p4src=_read("./P4src.p4")
     with open(r"./src/p4src.p4","w") as f:
         f.write(p4src % code)
