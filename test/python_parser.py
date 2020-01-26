@@ -40,4 +40,4 @@ if __name__ == '__main__':
 
     code=T.message.get_code()
     p4src=_read("./P4src.p4")
-    print(p4src　% code)
+    print(p4src % code)
