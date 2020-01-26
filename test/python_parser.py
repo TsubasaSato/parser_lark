@@ -42,6 +42,7 @@ def get_lines(cmd):
         line = proc.stdout.readline()
         if line == "Adding interface enp1s0f1 as port 2":
             yield line
+    proc.terminate()
     
 if __name__=='__main__':
     
