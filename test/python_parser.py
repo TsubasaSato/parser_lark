@@ -42,7 +42,7 @@ def get_lines(cmd):
     while True:
         line = proc.stdout.readline()
         if line == "Adding interface enp1s0f1 as port 2\n":
-            return line
+            yield line
     
     
 if __name__ == '__main__':
@@ -56,5 +56,5 @@ if __name__ == '__main__':
     with open(r"./src/p4src.p4","w") as f:
         f.write(p4src % code)
     subprocess.call(["p4c","--target","bmv2","--arch","v1model","./src/p4src.p4"])
-    get_lines(["sudo","simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"])
+    print(get_lines(["sudo","simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"]))
     print("Success")
