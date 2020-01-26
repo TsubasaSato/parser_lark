@@ -5,7 +5,7 @@
 import sys
 import os, os.path
 from io import open
-import glob, time
+import glob, time, subprocess
 
 from RyuToP4 import RyuToP4Transformer
 
@@ -42,4 +42,5 @@ if __name__ == '__main__':
     p4src=_read("./P4src.p4")
     with open(r"./src/p4src.p4","w") as f:
         f.write(p4src % code)
-    
+    subprocess.call(["p4c","--target","bmv2","--arch","v1model","./src/p4src.p4"])
+    subprocess.call(["sudo","simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"])
