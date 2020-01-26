@@ -38,11 +38,7 @@ import subprocess
 def get_lines(cmd):
 
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    print(proc)
-    print(proc.communicate())
-    print(proc.stdout())
     while True:
-        print("fdsfdsa")
         line = proc.stdout.readline()
         if line == "Adding interface enp1s0f1 as port 2":
             yield line
@@ -61,7 +57,7 @@ if __name__ == '__main__':
     with open(r"./src/p4src.p4","w") as f:
         f.write(p4src % code)
     subprocess.call(["p4c","--target","bmv2","--arch","v1model","./src/p4src.p4"])
-    get_lines(["sudo","simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"])
+    get_lines(["simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"])
     t2=time.time()
     
     print("parsed time is",t2-t1)
