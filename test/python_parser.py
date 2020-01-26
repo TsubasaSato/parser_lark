@@ -63,7 +63,7 @@ def program():
     
 if __name__=='__main__':
     data=[]
-    for x in 100:
+    for _ in range(100):
         data.append(program())
     print("min/avg/max:{min(data)}/{sum(data)/len(data)}/{max(data)}".format(data))
         
