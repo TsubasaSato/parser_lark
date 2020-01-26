@@ -65,6 +65,7 @@ if __name__=='__main__':
     data=[]
     for _ in range(100):
         data.append(program())
-        time.sleep(5)
+        time.sleep(3)
+        print("slept")
     print("min/avg/max:{}/{}/{}".format(min(data),sum(data)/len(data),max(data)))
         
