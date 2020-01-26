@@ -38,6 +38,8 @@ import subprocess
 def get_lines(cmd):
 
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    print(proc.communicate())
+    print(proc.stdout())
     while True:
         print("fdsfdsa")
         line = proc.stdout.readline()
