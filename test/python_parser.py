@@ -6,7 +6,6 @@ import sys
 import os, os.path
 from io import open
 import glob, time
-import subprocess
 
 from RyuToP4 import RyuToP4Transformer
 
