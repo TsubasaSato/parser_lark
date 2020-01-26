@@ -38,5 +38,6 @@ if __name__ == '__main__':
     T=RyuToP4Transformer()
     T.transform(tree)
 
-    print(T.message.get_code())
-
+    code=T.message.get_code()
+    p4src=_read("./P4src.p4")
+    print(p4src　% code)
