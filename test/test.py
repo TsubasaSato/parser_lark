@@ -1,4 +1,4 @@
-import subprocess
+import subprocess,time
 
 data=[]
 for _ in range(100):
