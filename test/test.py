@@ -3,7 +3,7 @@ import subprocess
 data=[]
 for _ in range(100):
     proc=subprocess.Popen(["python3","./python_parser.py",
-                           "/home/tsubasa/learnP4/TcpSyn_comment.py"],stdoutsubprocess.PIPE)
+                           "/home/tsubasa/learnP4/TcpSyn_comment.py"],stdout=subprocess.PIPE)
     time.sleep(5)
     print(proc.communicate())
     print("slept")
