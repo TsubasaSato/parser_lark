@@ -80,7 +80,6 @@ class Message():
                     else:
                         self.p4srcd[x]+=self.src_2.format(match=y[1][0],inst=y[2][0][0])
                 else:
-                    print("for y in self.entries[x] else")
                     self.p4srcd[x]+=self.src_inst.format(inst=y[2][0][0])
                 count=count+1
         return self.p4ctrlsrc.format("".join(self.reg_list),self.p4srcd["0"])
@@ -398,9 +397,9 @@ class RyuToP4Transformer(Transformer):
             elif x.data=="compound_stmt" and x.children[0].data == "if_stmt":
                 self._if_stmt(x.children[0].children)
             else:
-                print("Don't know {} node.".format(x.data))
+                pass
+            
     def _expr_stmt(self,args):
-        print("-----Start in expr_stmt------")
         if args[0].data=="var":
             if args[1].data=="var":
                 pass
@@ -414,13 +413,11 @@ class RyuToP4Transformer(Transformer):
                 self.env[args[0].children[0]]=funccall_get_list(args[1])
             else:
                 pass
-        print("-----Finished in expr_stmt---")
-    
+            
     def _funccall(self,args):
         #packet.Packet()とsend_msg()用に分けて考える
         #datapath.send_msgにしておく
         if args[0].children[1] =="send_msg":
-            print("-----Start in funccall-------")
             send_msg(self.env,args[1],self.message)
         elif args[0].children[1]=="add_protocol":
             self.env[args[0].children[0].children[0]].append(arg_get_dict_list(args[1]))
@@ -429,7 +426,6 @@ class RyuToP4Transformer(Transformer):
     def _if_stmt(self,args):
         ifstmt="if ({}) {{\n"
         elifstmt="else if ({}) {{\n"
-        print("-----Start in if_stmt---")
         count=0
         for x in args:
             if x.data=="funccall" or x.data=="not":
@@ -449,7 +445,6 @@ class RyuToP4Transformer(Transformer):
                         pass
                 self.message.set_p4src_pktin("exit;\n}\n")
             count=count+1
-        print("-----Finished in if_stmt---")
         
     def get_alldicts(self):
         return self.env
