@@ -38,6 +38,7 @@ import subprocess
 def get_lines(cmd):
 
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    print(proc)
     print(proc.communicate())
     print(proc.stdout())
     while True:
