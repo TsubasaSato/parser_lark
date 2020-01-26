@@ -38,8 +38,8 @@ import subprocess
 def get_lines(cmd):
 
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    print(proc.stdout.readline())
     while True:
+        print("fdsfdsa")
         line = proc.stdout.readline()
         if line == "Adding interface enp1s0f1 as port 2":
             yield line
