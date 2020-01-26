@@ -41,7 +41,9 @@ def get_lines(cmd):
 
     while True:
         line = proc.stdout.readline()
+        print(line)
         if line == "Adding interface enp1s0f1 as port 2\n":
+            
             yield line
     
     
