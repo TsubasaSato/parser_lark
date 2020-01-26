@@ -6,6 +6,7 @@ import sys
 import os, os.path
 from io import open
 import glob, time
+import subprocess
 
 from RyuToP4 import RyuToP4Transformer
 
@@ -40,4 +41,6 @@ if __name__ == '__main__':
 
     code=T.message.get_code()
     p4src=_read("./P4src.p4")
-    print(p4src % code)
+    with open(r"./p4src.p4","w") as f:
+        f.write(p4src % code)
+    
