@@ -61,7 +61,7 @@ def program():
     t2=time.time()
     
     return t2-t1
-    
+"""
 if __name__=='__main__':
     data=[]
     for _ in range(100):
@@ -69,4 +69,4 @@ if __name__=='__main__':
         time.sleep(3)
         print("slept")
     print("min/avg/max:{}/{}/{}".format(min(data),sum(data)/len(data),max(data)))
-        
+"""
