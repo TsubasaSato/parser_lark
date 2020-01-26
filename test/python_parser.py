@@ -43,8 +43,7 @@ def get_lines(cmd):
         if line == "Adding interface enp1s0f1 as port 2":
             yield line
     
-def program():
-    t1=time.time()
+if __name__=='__main__':
     
     tree=python_parser3.parse(_read(sys.argv[1]) + '\n')
 
@@ -58,15 +57,3 @@ def program():
         f.write(p4src % code)
     subprocess.call(["p4c","--target","bmv2","--arch","v1model","./src/p4src.p4"])
     get_lines(["simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"])
-    t2=time.time()
-    
-    return t2-t1
-"""
-if __name__=='__main__':
-    data=[]
-    for _ in range(100):
-        data.append(program())
-        time.sleep(3)
-        print("slept")
-    print("min/avg/max:{}/{}/{}".format(min(data),sum(data)/len(data),max(data)))
-"""
