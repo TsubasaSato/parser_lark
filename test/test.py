@@ -1,5 +1,5 @@
 import subprocess,time
-command="hping3 -I enp1s0f0 -c {0} -s 22222 -a 10.0.1.7 -i u{1} -S -p 11111 10.0.1.5"
+command="hping3 -I enp1s0f0 -q -c {0} -s 22222 -a 10.0.1.7 -i u{1} -S -p 11111 10.0.1.5"
 data=[]
 
 pps=100
