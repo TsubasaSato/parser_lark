@@ -29,7 +29,7 @@ for x in range(10):
     us=int(1000000/pps)
     count=pps*5
 
-    data.append(run_and_capture(command.format(count,us))))
+    data.append(run_and_capture(command.format(count,us)))
 
 print(data)
 with open(r"./zikken.txt"."w") as f:
