@@ -33,6 +33,6 @@ for x in range(10):
 
 print(data)
 with open(r"./zikken.txt","w") as f:
-    f.write(data)
+    f.write(str(data))
 
 
