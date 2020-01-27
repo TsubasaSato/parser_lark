@@ -13,7 +13,7 @@ def run_and_capture(cmd):
     :return: 標準出力.
     '''
     # ここでプロセスが (非同期に) 開始する.
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    proc = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     buf = []
     a=[b'Calling target program-options parser\n', b'Adding interface enp1s0f0 as port 1\n', b'Adding interface enp1s0f1 as port 2\n']
 
