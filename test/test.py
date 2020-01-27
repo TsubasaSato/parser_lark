@@ -5,7 +5,7 @@ data=[]
 pps=100
 us=int(1000000/pps)
 count=pps*5
-"""
+
 def run_and_capture(cmd):
     '''
     :param cmd: str 実行するコマンド.
@@ -23,13 +23,13 @@ def run_and_capture(cmd):
         print(line)
         # バッファが空 + プロセス終了.
         if a == line:
-            
+            break
     proc.terminate()
-    return buf[-2]"""
+    return buf[-2]
+
 for _ in range(1):
-    proc = subprocess.run(command.format(count,us),shell=True,stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-    print(proc.stdout.decode("utf8"))
-    #print(run_and_capture(command.format(count,us)))
+    
+    print(run_and_capture(command.format(count,us)))
     
 
 
