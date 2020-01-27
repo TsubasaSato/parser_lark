@@ -7,7 +7,7 @@ us=int(1000000/pps)
 count=pps*5
 
 for _ in range(1):
-    out=subprocess.check_output(command.format(count,us),shell=True)
-    #print(out)
+    out=subprocess.check_output(command.format(count,us),shell=True,stdout=subprocess.PIPE)
+    print(out.stdout)
 
 
