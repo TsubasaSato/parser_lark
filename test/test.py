@@ -24,10 +24,10 @@ def run_and_capture(cmd):
     proc.terminate()
     return buf
 
-for x in range(10):
+for x in range(35):
     pps=200*(int(x)+1)
     us=int(1000000/pps)
-    count=pps*5
+    count=pps*50
 
     data.append(run_and_capture(command.format(count,us)))
 
