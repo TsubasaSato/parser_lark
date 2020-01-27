@@ -16,26 +16,20 @@ def run_and_capture(cmd):
     proc = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     proc.wait()
     buf = []
-    a=[b'Calling target program-options parser\n', b'Adding interface enp1s0f0 as port 1\n', b'Adding interface enp1s0f1 as port 2\n']
-    print(proc.stdout.readlines())
-    print(proc)
-    
-    print(b'--- 10.0.1.5 hping statistic ---\n' in proc.stdout.readlines())
-    
-    """
+    a=b'round-trip min/avg/max = 3.1/13.2/1007.7 ms'
+
     while True:
         # バッファから1行読み込む.
         line = proc.stdout.readline()
         buf.append(line)
-        print(buf)
 
         # バッファが空 + プロセス終了.
-        if buf==a:
+        if a in buf:
             break
     proc.terminate()
-"""
+    return buf[-2]
 for _ in range(1):
-    run_and_capture(command.format(count,us))
+    print(run_and_capture(command.format(count,us)))
     
 
 
