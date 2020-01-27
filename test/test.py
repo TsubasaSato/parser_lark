@@ -14,22 +14,22 @@ def run_and_capture(cmd):
     '''
     # ここでプロセスが (非同期に) 開始する.
     proc = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    proc.wait()
     buf = []
-    a=b'round-trip min/avg/max = 3.1/13.2/1007.7 ms'
+    a=b'--- 10.0.1.5 hping statistic ---\n'
 
     while True:
         # バッファから1行読み込む.
         line = proc.stdout.readline()
-        buf.append(line)
-
+        print(line)
         # バッファが空 + プロセス終了.
-        if a in buf:
-            break
+        if a == line:
+            
     proc.terminate()
     return buf[-2]
 for _ in range(1):
-    print(run_and_capture(command.format(count,us)))
+    proc = subprocess.run(command.format(count,us),shell=True,stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+    print(proc.stdout.decode("utf8"))
+    #print(run_and_capture(command.format(count,us)))
     
 
 
