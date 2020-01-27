@@ -14,9 +14,13 @@ def run_and_capture(cmd):
     '''
     # ここでプロセスが (非同期に) 開始する.
     proc = subprocess.Popen(cmd,shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    proc.wait()
     buf = []
     a=[b'Calling target program-options parser\n', b'Adding interface enp1s0f0 as port 1\n', b'Adding interface enp1s0f1 as port 2\n']
-
+    print(proc.stdout.readlines())
+    print(b'--- 10.0.1.5 hping statistic ---\n' in proc.stdout.readlines())
+    
+    """
     while True:
         # バッファから1行読み込む.
         line = proc.stdout.readline()
@@ -27,7 +31,7 @@ def run_and_capture(cmd):
         if buf==a:
             break
     proc.terminate()
-
+"""
 for _ in range(1):
     run_and_capture(command.format(count,us))
     
