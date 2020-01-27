@@ -18,6 +18,8 @@ def run_and_capture(cmd):
     buf = []
     a=[b'Calling target program-options parser\n', b'Adding interface enp1s0f0 as port 1\n', b'Adding interface enp1s0f1 as port 2\n']
     print(proc.stdout.readlines())
+    print(proc)
+    
     print(b'--- 10.0.1.5 hping statistic ---\n' in proc.stdout.readlines())
     
     """
