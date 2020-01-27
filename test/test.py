@@ -6,7 +6,7 @@ pps=100
 us=int(1000000/pps)
 count=pps*5
 
-for _ in range(100):
+for _ in range(1):
     out=subprocess.check_output(command.format(count,us),shell=True)
     print(out)
 
