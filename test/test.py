@@ -32,7 +32,7 @@ for x in range(10):
     data.append(run_and_capture(command.format(count,us)))
 
 print(data)
-with open(r"./zikken.txt"."w") as f:
+with open(r"./zikken.txt","w") as f:
     f.write(data)
 
 
