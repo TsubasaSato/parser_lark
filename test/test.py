@@ -2,9 +2,6 @@ import subprocess,time
 command="hping3 -I enp1s0f0 -q -c {0} -s 22222 -a 10.0.1.7 -i u{1} -S -p 11111 10.0.1.5"
 data=[]
 
-pps=200
-us=int(1000000/pps)
-count=pps*5
 
 def run_and_capture(cmd):
     '''
@@ -27,7 +24,11 @@ def run_and_capture(cmd):
     proc.terminate()
     return buf
 
-for x in range(70):
+for x in range(10):
+    pps=200*(int(x)+1)
+    us=int(1000000/pps)
+    count=pps*5
+
     data.append(run_and_capture(command.format(count,us))))
 
 print(data)
