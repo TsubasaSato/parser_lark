@@ -20,12 +20,12 @@ def run_and_capture(cmd):
     while True:
         # バッファから1行読み込む.
         line = proc.stdout.readline()
-        print(line)
+        buf.append(line)
         # バッファが空 + プロセス終了.
-        if a == line:
+        if len(buf) >2:
             break
     proc.terminate()
-    return buf[-2]
+    return buf
 
 for _ in range(1):
     
