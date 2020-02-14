@@ -69,4 +69,4 @@ if __name__=='__main__':
     with open(r"./src/p4src.p4","w") as f:
         f.write(p4src % code)
     subprocess.call(["p4c","--target","bmv2","--arch","v1model","./src/p4src.p4"])
-    run_and_capture(["simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"])
+    subprocess.call(["simple_switch","--log-file","p4src-log","-i","1@enp1s0f0","-i","2@enp1s0f1","p4src.json"])
