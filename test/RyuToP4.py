@@ -122,6 +122,10 @@ def get_p4src_pktout(_vars,actions,data):
     flags={
         "TCP_SYN":"hdr.tcp.syn = 1",
         "TCP_ACK":"hdr.tcp.ack = 1",
+        "TCP_URG":"hdr.tcp.urg = 1",
+        "TCP_PSH":"hdr.tcp.psh = 1",
+        "TCP_RST":"hdr.tcp.rst = 1",
+        "TCP_FIN":"hdr.tcp.fin = 1",
         }
     tcp={
         "src_port":"hdr.tcp.srcPort",
